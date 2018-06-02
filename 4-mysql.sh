@@ -7,6 +7,7 @@
 ##################
 
 
+
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
 gpg -a --export CD2EFD2A | sudo apt-key add -
 
@@ -23,7 +24,14 @@ apt-get install percona-server-server-5.5 -y --allow-unauthenticated
 
 apt-get install percona-server-client-5.5 -y --allow-unauthenticated
 
-apt-get install dovecot-mysql -y
+
+
+echo "" >> /etc/mysql/conf.d/mysqld.cnf
+echo "[mysqld]" >> /etc/mysql/conf.d/mysqld.cnf
+echo "skip_name_resolve" >> /etc/mysql/conf.d/mysqld.cnf
+echo "log-warning = 2" >> /etc/mysql/conf.d/mysqld.cnf
+echo "log-error=/var/log/mysqld.log" >> /etc/mysql/conf.d/mysqld.cnf
+echo "" >> /etc/mysql/conf.d/mysqld.cnf
 
 service mysql restart
 

@@ -108,7 +108,48 @@ echo "ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;" >> snakeoil.c
 
 
 
-
+echo "#user  nobody;" > /etc/nginx/nginx.conf
+echo "worker_processes  10;" >> /etc/nginx/nginx.conf
+echo "load_module /etc/nginx/modules/ngx_http_modsecurity_module.so;" >> /etc/nginx/nginx.conf
+echo "error_log  /var/log/nginx/error.log warn;" >> /etc/nginx/nginx.conf
+echo "#error_log  logs/error.log  notice;" >> /etc/nginx/nginx.conf
+echo "#error_log  logs/error.log  info;" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+echo "pid        /var/run/nginx.pid;" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+echo "events {" >> /etc/nginx/nginx.conf
+    echo "worker_connections  1024;" >> /etc/nginx/nginx.conf
+echo "}" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+echo "http {" >> /etc/nginx/nginx.conf
+    echo "include       mime.types;" >> /etc/nginx/nginx.conf
+    echo "default_type  application/octet-stream;" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+    echo "log_format  main  '\$remote_addr - \$remote_user [\$time_local] \"\$request\" '" >> /etc/nginx/nginx.conf
+                      echo "'\$status \$body_bytes_sent \"\$http_referer\" '" >> /etc/nginx/nginx.conf
+                      echo "'\"\$http_user_agent\" \"\$http_x_forwarded_for\"';" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+            echo "access_log  /var/log/nginx/access.log  main;" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+" echo ">> /etc/nginx/nginx.conf
+    echo "sendfile        on;" >> /etc/nginx/nginx.conf
+    echo "#tcp_nopush     on;" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+echo "client_body_buffer_size 10M;" >> /etc/nginx/nginx.conf
+echo "client_max_body_size 10M;" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+    echo "#keepalive_timeout  0;" >> /etc/nginx/nginx.conf
+    echo "keepalive_timeout  65;" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+    echo "gzip  on;" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+        echo "include /etc/nginx/sites-enabled/*;" >> /etc/nginx/nginx.conf
+echo "}" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
 
 
 
