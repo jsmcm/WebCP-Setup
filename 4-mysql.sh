@@ -29,6 +29,7 @@ apt-get install percona-server-client-5.5 -y --allow-unauthenticated
 echo "" >> /etc/mysql/conf.d/mysqld.cnf
 echo "[mysqld]" >> /etc/mysql/conf.d/mysqld.cnf
 echo "skip_name_resolve" >> /etc/mysql/conf.d/mysqld.cnf
+echo "max_allowed_packet=10M" >> /etc/mysql/conf.d/mysqld.cnf
 echo "log-warning = 2" >> /etc/mysql/conf.d/mysqld.cnf
 echo "log-error=/var/log/mysqld.log" >> /etc/mysql/conf.d/mysqld.cnf
 echo "" >> /etc/mysql/conf.d/mysqld.cnf
