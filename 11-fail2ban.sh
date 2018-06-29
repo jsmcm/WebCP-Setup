@@ -14,6 +14,42 @@ apt-get install fail2ban -y
 #fail2ban-client set <JAIL-NAME> banip <IP-ADDRESS>
 
 
+echo "# Fail2Ban filter Dovecot authentication and pop3/imap server" > /etc/fail2ban/filter.d/dovecot.conf
+echo "#" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "[INCLUDES]" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "before = common.conf" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "[Definition]" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "_daemon = (auth|dovecot(-auth)?|auth-worker)" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "failregex = ^%(__prefix_line)s(%(__pam_auth)s(\\(dovecot:auth\\))?:)?\\s+authentication failure; logname=\\S* uid=\\S* euid=\\S* tty=dovecot ruser=\\S* rhost=<HOST>(\\s+user=\\S*)?\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "	^%(__prefix_line)s(pop3|imap)-login: (Info: )?(Aborted login|Disconnected)(: Inactivity)? \\(((auth failed, \\d+ attempts)( in \\d+ secs)?|tried to use (disabled|disallowed) \\S+ auth)\\):( user=<\\S*>,)?( method=\\S+,)? rip=<HOST>(, lip=(\\d{1,3}\\.){3}\\d{1,3})?(, TLS( handshaking(: SSL_accept\\(\\) failed: error:[\\dA-F]+:SSL routines:[TLS\\d]+_GET_CLIENT_HELLO:unknown protocol)?)?(: Disconnected)?)?(, session=<\\S+>)?\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "	^%(__prefix_line)s(Info|dovecot: auth\\(default\\)|auth-worker\\(\\d+\\)): pam\\(\\S+,<HOST>\\): pam_authenticate\\(\\) failed: (User not known to the underlying authentication module: \\d+ Time\\(s\\)|Authentication failure \\(password mismatch\\?\\))\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "	^%(__prefix_line)s(auth|auth-worker\\(\\d+\\)): (pam|passwd-file)\\(\\S+,<HOST>\\): unknown user\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "	^%(__prefix_line)sauth: Info: passwd-file\\((\\S+),<HOST>,(\\S+)\\): Password mismatch\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "	^%(__prefix_line)sauth: Error: passwd-file\\((\\S+),<HOST>,(\\S+)\\): stat\\((\\S+)\\) failed: No such file or directory\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "ignoreregex =" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "[Init]" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "journalmatch = _SYSTEMD_UNIT=dovecot.service" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "# DEV Notes:" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "# * the first regex is essentially a copy of pam-generic.conf" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "# * Probably doesn't do dovecot sql/ldap backends properly" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "# * Removed the 'no auth attempts' log lines from the matches because produces" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "#    lots of false positives on misconfigured MTAs making regexp unusable" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "#" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "# Author: Martin Waschbuesch" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "#         Daniel Black (rewrote with begin and end anchors)" >> /etc/fail2ban/filter.d/dovecot.conf
+
+
 
 
 
@@ -83,12 +119,12 @@ echo "" >> /etc/fail2ban/filter.d/wordpress-hard.conf
 echo "_daemon = (?:wordpress|wp)" >> /etc/fail2ban/filter.d/wordpress-hard.conf
 echo "" >> /etc/fail2ban/filter.d/wordpress-hard.conf
 echo "failregex = ^%(__prefix_line)sAuthentication attempt for unknown user .* from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
-            echo "^%(__prefix_line)sBlocked user enumeration attempt from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
-            echo "^%(__prefix_line)sBlocked authentication attempt for .* from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
-            echo "^%(__prefix_line)sPingback error .* generated from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
-            echo "^%(__prefix_line)sSpam comment \\d+ from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
-            echo "^%(__prefix_line)sXML-RPC authentication attempt for unknown user .* from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
-            echo "^%(__prefix_line)sXML-RPC multicall authentication failure from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
+echo "	^%(__prefix_line)sBlocked user enumeration attempt from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
+echo "	^%(__prefix_line)sBlocked authentication attempt for .* from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
+echo "	^%(__prefix_line)sPingback error .* generated from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
+echo "	^%(__prefix_line)sSpam comment \\d+ from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
+echo "	^%(__prefix_line)sXML-RPC authentication attempt for unknown user .* from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
+echo "	^%(__prefix_line)sXML-RPC multicall authentication failure from <HOST>\$" >> /etc/fail2ban/filter.d/wordpress-hard.conf
 echo "" >> /etc/fail2ban/filter.d/wordpress-hard.conf
 echo "ignoreregex =" >> /etc/fail2ban/filter.d/wordpress-hard.conf
 echo "" >> /etc/fail2ban/filter.d/wordpress-hard.conf
@@ -100,7 +136,7 @@ echo "# Author: Charles Lecklider" >> /etc/fail2ban/filter.d/wordpress-hard.conf
 echo "" >> /etc/fail2ban/filter.d/wordpress-hard.conf
 
 
-echo "# Fail2Ban filter for exim" >> /etc/fail2ban/filter.d/exim.conf
+echo "# Fail2Ban filter for exim" > /etc/fail2ban/filter.d/exim.conf
 echo "#" >> /etc/fail2ban/filter.d/exim.conf
 echo "# This includes the rejection messages of exim. For spam and filter" >> /etc/fail2ban/filter.d/exim.conf
 echo "# related bans use the exim-spam.conf" >> /etc/fail2ban/filter.d/exim.conf
@@ -116,11 +152,16 @@ echo "" >> /etc/fail2ban/filter.d/exim.conf
 echo "[Definition]" >> /etc/fail2ban/filter.d/exim.conf
 echo "" >> /etc/fail2ban/filter.d/exim.conf
 echo "failregex = ^%(pid)s %(host_info)ssender verify fail for <\\S+>: (?:Unknown user|Unrouteable address|all relevant MX records point to non-existent hosts)\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
-             echo "^%(pid)s \\w+ authenticator failed for (\\S+ )?\\(\\S+\\) \\[<HOST>\\](:\\d+)?( I=\\[\\S+\\](:\\d+)?)?: 535 Incorrect authentication data( \\(set_id=.*\\)|: \\d+ Time\\(s\\))?\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
-             echo "^%(pid)s %(host_info)sF=(<>|[^@]+@\\S+) rejected RCPT [^@]+@\\S+: (relay not permitted|Sender verify failed|Unknown user)\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
-             echo "^%(pid)s SMTP protocol synchronization error \\([^)]*\\): rejected (connection from|\"\\S+\") %(host_info)s(next )?input=\".*\"\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
-             echo "^%(pid)s SMTP call from \\S+ \\[<HOST>\\](:\\d+)? (I=\\[\\S+\\](:\\d+)? )?dropped: too many nonmail commands \\(last was \"\\S+\"\\)\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
-             echo "^%(pid)s SMTP protocol error in \"AUTH LOGIN\" %(host_info)sAUTH command used when not advertised\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
+echo "	^%(pid)s \\w+ authenticator failed for (\\S+ )?\\(\\S+\\) \\[<HOST>\\](:\\d+)?( I=\\[\\S+\\](:\\d+)?)?: 535 Incorrect authentication data( \\(set_id=.*\\)|: \\d+ Time\\(s\\))?\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
+echo "	^%(pid)s %(host_info)sF=(<>|[^@]+@\\S+) rejected RCPT [^@]+@\\S+: (relay not permitted|Sender verify failed|Unknown user)\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
+echo "	^%(pid)s SMTP protocol synchronization error \\([^)]*\\): rejected (connection from|\"\\S+\") %(host_info)s(next )?input=\".*\"\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
+echo "	^%(pid)s SMTP call from \\S+ \\[<HOST>\\](:\\d+)? (I=\\[\\S+\\](:\\d+)? )?dropped: too many nonmail commands \\(last was \"\\S+\"\\)\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
+
+echo "	^%(pid)s SMTP protocol error in \"(?:AUTH LOGIN|auth login)\" %(host_info)sAUTH command used when not advertised\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
+echo "	^%(pid)s \\w+ authenticator failed for (\\S+ )?\\(\\S+\\) \\[<HOST>\\](:\\d+)?( I=\\[\\S+\\](:\\d+)?)?: 435 Unable to authenticate at present: failed to open (\\S+) for linear search. No such file or directory\\s*\$" >> /etc/fail2ban/filter.d/exim.conf
+
+
+
 echo "" >> /etc/fail2ban/filter.d/exim.conf
 echo "ignoreregex =" >> /etc/fail2ban/filter.d/exim.conf
 echo "" >> /etc/fail2ban/filter.d/exim.conf
@@ -200,7 +241,7 @@ echo "port    = http,https" >> /etc/fail2ban/jail.local
 echo "logpath = %(nginx_access_log)s" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[drupal-auth]" >> /etc/fail2ban/jail.local
-echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "enabled = false" >> /etc/fail2ban/jail.local
 echo "port     = http,https" >> /etc/fail2ban/jail.local
 echo "logpath  = %(syslog_daemon)s" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
