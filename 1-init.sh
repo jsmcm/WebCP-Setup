@@ -201,4 +201,28 @@ apt-get update -y
 useradd -m -p "$(openssl passwd -1 $Password)" $UserName
 
 
+ufw default deny incoming
+ufw default allow outgoing
+
+ufw allow 80/tcp
+ufw allow 443/tcp
+
+ufw allow 7533/tcp
+ufw allow 21/tcp
+
+ufw allow 25/tcp
+ufw allow 587/tcp
+ufw allow 110/tcp
+ufw allow 143/tcp
+ufw allow 995/tcp
+ufw allow 993/tcp
+
+ufw allow 3306/tcp
+
+ufw enable
+
+
+
+
+
 

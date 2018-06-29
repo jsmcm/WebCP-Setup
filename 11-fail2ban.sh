@@ -15,6 +15,62 @@ apt-get install fail2ban -y
 
 
 
+
+
+echo "# Fail2Ban RAINLOOP configuration file" > /etc/fail2ban/filter.d/rainloop.conf
+echo "#" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "# Author: eRVee Moskovic" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "#" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "# \$Revision\$" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "#" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "[Definition]" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "# Option: failregex" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "# Notes.: regex to match the password failures messages in the logfile. The" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "#          host must be matched by a group named \"host\". The tag \"<HOST>\" can" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "#          be used for standard IP/hostname matching." >> /etc/fail2ban/filter.d/rainloop.conf
+echo "# Values: TEXT" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "#" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "failregex = Auth failed: ip=<HOST> user=.* host=.* port=.*" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "# Option:  ignoreregex" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "# Notes.:  regex to ignore. If this regex matches, the line is ignored." >> /etc/fail2ban/filter.d/rainloop.conf
+echo "# Values:  TEXT" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "#" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "ignoreregex =" >> /etc/fail2ban/filter.d/rainloop.conf
+echo "" >> /etc/fail2ban/filter.d/rainloop.conf
+
+
+
+
+echo "# Fail2Ban PHPMYADMIN configuration file" > /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "#" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "# Author: John McMurrray (john@softsmart.co.za)" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "#" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "# \$Revision\$" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "#" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "[Definition]" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "# Option: failregex" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "# Notes.: regex to match the password failures messages in the logfile. The" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "#          host must be matched by a group named \"host\". The tag \"<HOST>\" can" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "#          be used for standard IP/hostname matching." >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "# Values: TEXT" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "#" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "failregex = user denied: .* from <HOST>" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "# Option:  ignoreregex" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "# Notes.:  regex to ignore. If this regex matches, the line is ignored." >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "# Values:  TEXT" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "#" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "ignoreregex =" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+echo "" >> /etc/fail2ban/filter.d/phpmyadmin.conf
+
+
+
 echo "# Fail2Ban filter for WordPress hard failures" > /etc/fail2ban/filter.d/wordpress-hard.conf
 echo "#" >> /etc/fail2ban/filter.d/wordpress-hard.conf
 echo "" >> /etc/fail2ban/filter.d/wordpress-hard.conf
@@ -85,6 +141,153 @@ echo "#         Daniel Black (rewrote with strong regexs)" >> /etc/fail2ban/filt
 
 
 
+
+
+echo "[DEFAULT]" > /etc/fail2ban/jail.local
+echo "ignoreip = 127.0.0.1/8" >> /etc/fail2ban/jail.local
+echo "ignorecommand =" >> /etc/fail2ban/jail.local
+echo "bantime  = 600" >> /etc/fail2ban/jail.local
+echo "findtime  = 600" >> /etc/fail2ban/jail.local
+echo "maxretry = 3" >> /etc/fail2ban/jail.local
+echo "backend = auto" >> /etc/fail2ban/jail.local
+echo "usedns = warn" >> /etc/fail2ban/jail.local
+echo "logencoding = auto" >> /etc/fail2ban/jail.local
+echo "enabled = false" >> /etc/fail2ban/jail.local
+echo "filter = %(__name__)s" >> /etc/fail2ban/jail.local
+echo "destemail = root@localhost" >> /etc/fail2ban/jail.local
+echo "sender = root@localhost" >> /etc/fail2ban/jail.local
+echo "mta = sendmail" >> /etc/fail2ban/jail.local
+echo "protocol = tcp" >> /etc/fail2ban/jail.local
+echo "chain = INPUT" >> /etc/fail2ban/jail.local
+echo "port = 0:65535" >> /etc/fail2ban/jail.local
+echo "banaction = iptables-multiport" >> /etc/fail2ban/jail.local
+echo "action_ = %(banaction)s[name=%(__name__)s, bantime=\"%(bantime)s\", port=\"%(port)s\", protocol=\"%(protocol)s\", chain=\"%(chain)s\"]" >> /etc/fail2ban/jail.local
+echo "action_mw = %(banaction)s[name=%(__name__)s, bantime=\"%(bantime)s\", port=\"%(port)s\", protocol=\"%(protocol)s\", chain=\"%(chain)s\"]" >> /etc/fail2ban/jail.local
+echo "            %(mta)s-whois[name=%(__name__)s, dest=\"%(destemail)s\", protocol=\"%(protocol)s\", chain=\"%(chain)s\"]" >> /etc/fail2ban/jail.local
+echo "action_mwl = %(banaction)s[name=%(__name__)s, bantime=\"%(bantime)s\", port=\"%(port)s\", protocol=\"%(protocol)s\", chain=\"%(chain)s\"]" >> /etc/fail2ban/jail.local
+echo "             %(mta)s-whois-lines[name=%(__name__)s, dest=\"%(destemail)s\", logpath=%(logpath)s, chain=\"%(chain)s\"]" >> /etc/fail2ban/jail.local
+echo "action_xarf = %(banaction)s[name=%(__name__)s, bantime=\"%(bantime)s\", port=\"%(port)s\", protocol=\"%(protocol)s\", chain=\"%(chain)s\"]" >> /etc/fail2ban/jail.local
+echo "             xarf-login-attack[service=%(__name__)s, sender=\"%(sender)s\", logpath=%(logpath)s, port=\"%(port)s\"]" >> /etc/fail2ban/jail.local
+echo "action_cf_mwl = cloudflare[cfuser=\"%(cfemail)s\", cftoken=\"%(cfapikey)s\"]" >> /etc/fail2ban/jail.local
+echo "                %(mta)s-whois-lines[name=%(__name__)s, dest=\"%(destemail)s\", logpath=%(logpath)s, chain=\"%(chain)s\"]" >> /etc/fail2ban/jail.local
+echo "action_blocklist_de  = blocklist_de[email=\"%(sender)s\", service=%(filter)s, apikey=\"%(blocklist_de_apikey)s\"]" >> /etc/fail2ban/jail.local
+echo "action_badips = badips.py[category=\"%(name)s\", banaction=\"%(banaction)s\"]" >> /etc/fail2ban/jail.local
+echo "action = %(action_)s" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[sshd]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "port    = 7533" >> /etc/fail2ban/jail.local
+echo "logpath = %(sshd_log)s" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[sshd-ddos]" >> /etc/fail2ban/jail.local
+echo "port    = 7533" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "logpath = %(sshd_log)s" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[nginx-http-auth]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "port    = http,https" >> /etc/fail2ban/jail.local
+echo "logpath = %(nginx_error_log)s" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[nginx-botsearch]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "port     = http,https" >> /etc/fail2ban/jail.local
+echo "logpath  = %(nginx_error_log)s" >> /etc/fail2ban/jail.local
+echo "maxretry = 2" >> /etc/fail2ban/jail.local
+echo "[php-url-fopen]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "port    = http,https" >> /etc/fail2ban/jail.local
+echo "logpath = %(nginx_access_log)s" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[drupal-auth]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "port     = http,https" >> /etc/fail2ban/jail.local
+echo "logpath  = %(syslog_daemon)s" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[wordpress-hard]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "filter = wordpress-hard" >> /etc/fail2ban/jail.local
+echo "logpath = /var/log/auth.log" >> /etc/fail2ban/jail.local
+echo "maxretry = 3" >> /etc/fail2ban/jail.local
+echo "port = http,https" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[rainloop]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "filter = rainloop" >> /etc/fail2ban/jail.local
+echo "port = http,https" >> /etc/fail2ban/jail.local
+echo "maxretry = 3" >> /etc/fail2ban/jail.local
+echo "logpath = /var/www/html/rainloop/data/_data_/_default_/logs/fail2ban/auth.log" >> /etc/fail2ban/jail.local
+echo "findtime = 14400" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[phpmyadmin]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "filter = phpmyadmin" >> /etc/fail2ban/jail.local
+echo "port = 81" >> /etc/fail2ban/jail.local
+echo "maxretry = 3" >> /etc/fail2ban/jail.local
+echo "logpath = /var/log/phpmyadmin.log" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[monit]" >> /etc/fail2ban/jail.local
+echo "filter   = monit" >> /etc/fail2ban/jail.local
+echo "port = 2812" >> /etc/fail2ban/jail.local
+echo "logpath  = /var/log/monit" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[pure-ftpd]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "port     = ftp,ftp-data,ftps,ftps-data" >> /etc/fail2ban/jail.local
+echo "logpath  = %(pureftpd_log)s" >> /etc/fail2ban/jail.local
+echo "maxretry = 6" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[dovecot]" >> /etc/fail2ban/jail.local
+echo "port    = pop3,pop3s,imap,imaps,submission,465,sieve" >> /etc/fail2ban/jail.local
+echo "logpath = /var/log/dovecot/main.log" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "[sieve]" >> /etc/fail2ban/jail.local
+echo "port   = smtp,465,submission" >> /etc/fail2ban/jail.local
+echo "logpath = %(dovecot_log)s" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[exim]" >> /etc/fail2ban/jail.local
+echo "port   = smtp,465,submission" >> /etc/fail2ban/jail.local
+echo "logpath = %(exim_main_log)s" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[exim-spam]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "port   = smtp,465,submission" >> /etc/fail2ban/jail.local
+echo "logpath = %(exim_main_log)s" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[named-refused]" >> /etc/fail2ban/jail.local
+echo "port     = domain,953" >> /etc/fail2ban/jail.local
+echo "logpath  = /var/log/named/security.log" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[mysqld-auth]" >> /etc/fail2ban/jail.local
+echo "port     = 3306" >> /etc/fail2ban/jail.local
+echo "logpath  = /var/log/mysqld.log" >> /etc/fail2ban/jail.local
+echo "maxretry = 5" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[recidive]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "logpath  = /var/log/fail2ban.log" >> /etc/fail2ban/jail.local
+echo "banaction = iptables-allports" >> /etc/fail2ban/jail.local
+echo "bantime  = 604800  ; 1 week" >> /etc/fail2ban/jail.local
+echo "findtime = 86400   ; 1 day" >> /etc/fail2ban/jail.local
+echo "maxretry = 5" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[pam-generic]" >> /etc/fail2ban/jail.local
+echo "banaction = iptables-allports" >> /etc/fail2ban/jail.local
+echo "logpath  = %(syslog_authpriv)s" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[xinetd-fail]" >> /etc/fail2ban/jail.local
+echo "banaction = iptables-multiport-log" >> /etc/fail2ban/jail.local
+echo "logpath   = %(syslog_daemon)s" >> /etc/fail2ban/jail.local
+echo "maxretry  = 2" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+echo "[nagios]" >> /etc/fail2ban/jail.local
+echo "enabled  = false" >> /etc/fail2ban/jail.local
+echo "logpath  = %(syslog_daemon)s     ; nrpe.cfg may define a different log_facility" >> /etc/fail2ban/jail.local
+echo "maxretry = 1" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
 
 systemctl enable fail2ban
 service fail2ban start

@@ -1,6 +1,13 @@
 #!/bin/bash
 
-password="ffxefc1e"
+
+PASSWORD=$1
+
+if [ "$PASSWORD" == "" ]
+then
+        echo "ERROR: Please supply the Rainloop admin password!!!"
+        exit
+fi
 
 mkdir -p /var/www/html/rainloop/
 cd /var/www/html/rainloop
@@ -24,7 +31,7 @@ else
 fi
 
 appSalt=`echo -n ${salt}_default_${salt} | md5sum | awk '{print $1}'`
-md5Password=`echo -n $appSalt$password$appSalt | md5sum | awk '{print $1}'`
+md5Password=`echo -n $appSalt$PASSWORD$appSalt | md5sum | awk '{print $1}'`
 
 
 echo "; RainLoop Webmail configuration file" > /var/www/html/rainloop/data/_data_/_default_/configs/application.ini
