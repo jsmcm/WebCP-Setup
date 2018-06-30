@@ -25,12 +25,14 @@ echo "[Definition]" >> /etc/fail2ban/filter.d/dovecot.conf
 echo "" >> /etc/fail2ban/filter.d/dovecot.conf
 echo "_daemon = (auth|dovecot(-auth)?|auth-worker)" >> /etc/fail2ban/filter.d/dovecot.conf
 echo "" >> /etc/fail2ban/filter.d/dovecot.conf
-echo "failregex = ^%(__prefix_line)s(%(__pam_auth)s(\\(dovecot:auth\\))?:)?\\s+authentication failure; logname=\\S* uid=\\S* euid=\\S* tty=dovecot ruser=\\S* rhost=<HOST>(\\s+user=\\S*)?\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
-echo "	^%(__prefix_line)s(pop3|imap)-login: (Info: )?(Aborted login|Disconnected)(: Inactivity)? \\(((auth failed, \\d+ attempts)( in \\d+ secs)?|tried to use (disabled|disallowed) \\S+ auth)\\):( user=<\\S*>,)?( method=\\S+,)? rip=<HOST>(, lip=(\\d{1,3}\\.){3}\\d{1,3})?(, TLS( handshaking(: SSL_accept\\(\\) failed: error:[\\dA-F]+:SSL routines:[TLS\\d]+_GET_CLIENT_HELLO:unknown protocol)?)?(: Disconnected)?)?(, session=<\\S+>)?\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
-echo "	^%(__prefix_line)s(Info|dovecot: auth\\(default\\)|auth-worker\\(\\d+\\)): pam\\(\\S+,<HOST>\\): pam_authenticate\\(\\) failed: (User not known to the underlying authentication module: \\d+ Time\\(s\\)|Authentication failure \\(password mismatch\\?\\))\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
-echo "	^%(__prefix_line)s(auth|auth-worker\\(\\d+\\)): (pam|passwd-file)\\(\\S+,<HOST>\\): unknown user\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
-echo "	^%(__prefix_line)sauth: Info: passwd-file\\((\\S+),<HOST>,(\\S+)\\): Password mismatch\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
-echo "	^%(__prefix_line)sauth: Error: passwd-file\\((\\S+),<HOST>,(\\S+)\\): stat\\((\\S+)\\) failed: No such file or directory\\s*\\$" >> /etc/fail2ban/filter.d/dovecot.conf
+
+echo "failregex = ^%(__prefix_line)s(%(__pam_auth)s(\\(dovecot:auth\\))?:)?\\s+authentication failure; logname=\\S* uid=\\S* euid=\\S* tty=dovecot ruser=\\S* rhost=<HOST>(\\s+user=\\S*)?\\s*\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "	^%(__prefix_line)s(pop3|imap)-login: (Info: )?(Aborted login|Disconnected)(: Inactivity)? \\(((auth failed, \\d+ attempts)( in \\d+ secs)?|tried to use (disabled|disallowed) \\S+ auth)\\):( user=<\\S*>,)?( method=\\S+,)? rip=<HOST>(, lip=(\\d{1,3}\\.){3}\\d{1,3})?(, TLS( handshaking(: SSL_accept\\(\\) failed: error:[\\dA-F]+:SSL routines:[TLS\\d]+_GET_CLIENT_HELLO:unknown protocol)?)?(: Disconnected)?)?(, session=<\\S+>)?\\s*\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "	^%(__prefix_line)s(Info|dovecot: auth\\(default\\)|auth-worker\\(\\d+\\)): pam\\(\\S+,<HOST>\\): pam_authenticate\\(\\) failed: (User not known to the underlying authentication module: \\d+ Time\\(s\\)|Authentication failure \\(password mismatch\\?\\))\\s*\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "	^%(__prefix_line)s(auth|auth-worker\\(\\d+\\)): (pam|passwd-file)\\(\\S+,<HOST>\\): unknown user\\s*\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "	^%(__prefix_line)sauth: Info: passwd-file\\(\\S+,<HOST>,<\\S+>\\): Password mismatch\\s*\$" >> /etc/fail2ban/filter.d/dovecot.conf
+echo "	^%(__prefix_line)sauth: Error: passwd-file\\(\\S+,<HOST>,<\\S+>\\): stat\\(\\S+\\) failed: No such file or directory\\s*\$" >> /etc/fail2ban/filter.d/dovecot.conf
+
 echo "" >> /etc/fail2ban/filter.d/dovecot.conf
 echo "" >> /etc/fail2ban/filter.d/dovecot.conf
 echo "" >> /etc/fail2ban/filter.d/dovecot.conf
