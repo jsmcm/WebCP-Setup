@@ -289,6 +289,8 @@ echo "port   = smtp,465,submission" >> /etc/fail2ban/jail.local
 echo "logpath = %(dovecot_log)s" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[exim]" >> /etc/fail2ban/jail.local
+echo "findtime  = 600" >> /etc/fail2ban/jail.local
+echo "maxretry = 3" >> /etc/fail2ban/jail.local
 echo "port   = smtp,465,submission" >> /etc/fail2ban/jail.local
 echo "logpath = %(exim_main_log)s" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
