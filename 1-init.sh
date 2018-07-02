@@ -126,8 +126,8 @@ apt-get update -y
 apt-get install gcc make -y
 apt-get install wget net-tools unzip zip tar -y
 
-wget -O /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
-chmod 755 /usr/local/bin/jq
+#wget -O /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+#chmod 755 /usr/local/bin/jq
 
 apt-get install mcrypt -y
 
@@ -206,10 +206,17 @@ useradd -m -p "$(openssl passwd -1 $Password)" $UserName
 ufw default deny incoming
 ufw default allow outgoing
 
+ufw allow 53/udp
 ufw allow 80/tcp
 ufw allow 443/tcp
 
 ufw allow 7533/tcp
+
+ufw allow 10025/tcp
+ufw allow 10030/tcp
+ufw allow 10035/tcp
+ufw allow 20010/tcp
+
 ufw allow 21/tcp
 
 ufw allow 25/tcp

@@ -86,18 +86,23 @@ echo "?>" >> /var/www/html/webcp/includes/Variables.inc.php
 
 cd /etc/
 rm -fr crontab
-/usr/bin/wget http://webcp.pw/api/downloads/2.0.0/crontab
+/usr/bin/wget https://api.webcp.pw/downloads/2.0.0/crontab
 
+cd /var/www/html
+/usr/bin/wget https://api/webcp.pw/downloads/2.0.0/editor.zip
+unzip editor.zip
+chown www-data.www-data /var/www/html/editor -R
+rm -fr /var/www/html/editor.zip
 
 cd /etc/skel
-/usr/bin/wget http://webcp.pw/api/downloads/2.0.0/skel.zip
+/usr/bin/wget https://api.webcp.pw/downloads/2.0.0/skel.zip
 unzip skel.zip
 rm -fr skel.zip
 
 cd /usr
 mkdir webcp
 cd /usr/webcp
-/usr/bin/wget http://webcp.pw/api/downloads/2.0.0/scripts.zip
+/usr/bin/wget https://api.webcp.pw/downloads/2.0.0/scripts.zip
 unzip scripts.zip
 rm -fr scripts.zip
 

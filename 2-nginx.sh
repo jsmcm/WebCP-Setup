@@ -174,6 +174,7 @@ echo "WantedBy=multi-user.target" >> /etc/systemd/system/nginx.service
 
 
 mkdir -p /etc/nginx/sites-enabled
+mkdir -p /etc/nginx/sites-suspended
 mkdir -p /etc/nginx/modules
 
 rm -fr /tmp/nginx-1.13.9*
