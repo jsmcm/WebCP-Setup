@@ -10,24 +10,30 @@ PASSWORD=$1
 
 if [ "$PASSWORD" == "" ]
 then
-        echo "ERROR: Please supply the MySQL password!!!"
-        exit
+	echo "ERROR: Please supply the MySQL password!!!"
+	exit
 fi
 
 ufw allow 3306/tcp
 
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
+gpg -a --export CD2EFD2A | sudo apt-key add -
+
+
+echo "deb http://repo.percona.com/apt precise main" > /etc/apt/sources.list.d/percona.repo.list
+echo "deb-src http://repo.percona.com/apt precise main" >> /etc/apt/sources.list.d/percona.repo.list
+
 
 apt-get update -y
 
-
-One="mysql-server mysql-server/root_password password $PASSWORD"
-Two="mysql-server mysql-server/root_password_again password $PASSWORD"
+One="percona-server-server-5.5 percona-server-server/root_password password $PASSWORD"
+Two="percona-server-server-5.5 percona-server-server/root_password_again password $PASSWORD"
 
 debconf-set-selections <<< $One
 debconf-set-selections <<< $Two
 
-
-sudo apt-get -y install mysql-server
+apt-get install percona-server-server-5.5 -y --allow-unauthenticated
+apt-get install percona-server-client-5.5 -y --allow-unauthenticated
 
 
 
