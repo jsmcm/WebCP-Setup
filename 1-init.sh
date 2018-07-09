@@ -123,8 +123,9 @@ rm -fr /etc/httpd
 rm -fr /etc/apache2
 
 apt-get update -y
-apt-get install gcc make -y
 apt-get install wget net-tools unzip zip tar -y
+apt-get install gcc make -y
+apt-get install git -y
 
 #wget -O /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
 #chmod 755 /usr/local/bin/jq
@@ -143,8 +144,7 @@ apt-get install db4 db4-devel db4-utils compat-db43 -y
 apt-get install pam pam-devel rpm-build compat-db -y
 apt-get install openldap openldap-clients openldap-devel compat-openldap -y
 
-apt-get install git -y
-apt-get curl -y
+apt-get install curl -y
 
 make-ssl-cert generate-default-snakeoil
 
@@ -180,6 +180,7 @@ perl -MCPAN -e 'install Net::Ident'
 perl -MCPAN -e 'install Net::DNS'
 perl -MCPAN -e 'install Net::DNS::Resolver'
 perl -MCPAN -e 'install Net::DNS::Resolver::Programmable'
+perl -MCPAN -e 'install Archive::Tar'
 
 
 apt-get install openssl openssl-devel -y
@@ -190,7 +191,7 @@ apt-get install libxml2 libxml2-devel curl-devel -y
 apt-get install mlocate -y
 apt-get install quota -y
 apt-get install man -y
-apt-get install bind.x86_64 bind-libs.x86_64 bind-utils -y
+#apt-get install bind.x86_64 bind-libs.x86_64 bind-utils -y
 apt-get install mutt -y
 
 
