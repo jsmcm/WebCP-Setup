@@ -1,10 +1,19 @@
 #!/bin/bash
 
+DatabasePassword=$1
+
+if [ "$DatabasePassword" == "" ]
+then
+	echo "Give password!!!"
+	exit
+fi
+
+
+
 apt-get install pure-ftpd -y
 
-
 cd /etc/pure-ftpd
-rm -fr *
+rm -fr /etc/pure-ftpd/*
 
 
 echo "MYSQLSocket     /var/lib/mysql/mysql.sock" >> /etc/pure-ftpd/pureftpd-mysql.conf
