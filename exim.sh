@@ -15,7 +15,7 @@ perl -MCPAN -e 'install Mail::SPF::Test'
 perl -MCPAN -e 'install Mail::SPF::Query'
 
 
-apt-get install exim4-daemon-heavy
+apt-get install exim4-daemon-heavy -y
 
 cd /etc/exim4
 
@@ -31,6 +31,11 @@ rm -fr /etc/exim4/conf.d
 
 
 openssl req -batch -nodes -x509 -newkey rsa:2048 -keyout privkey.key -out certificate.crt -days 365
+
+chown root.Debian-exim /etc/exim4/certificate.crt
+chown root.Debian-exim /etc/exim4/privkey.key
+chmod 644 /etc/exim4/certificate.crt
+chmod 644 /etc/exim4/privkey.key
 
 
 cd /etc

@@ -2,86 +2,101 @@
 
 apt-get install wget -y
 
-wget http://api.webcp.pw/downloads/2.0.0/1-init.sh
-chmod 755 /tmp/1-init.sh
-/tmp/1-init.sh
-rm -fr /tmp/1-init.sh
-
-wget http://api.webcp.pw/downloads/2.0.0/2-nginx.sh
-chmod 755 /tmp/2-nginx.sh
-/tmp/2-nginx.sh
-rm -fr /tmp/2-nginx.sh
-
-wget http://api.webcp.pw/downloads/2.0.0/3-php.sh
-chmod 755 /tmp/3-php.sh
-/tmp/3-php.sh
-rm -fr /tmp/3-php.sh
-
-wget http://api.webcp.pw/downloads/2.0.0/4-mysql.sh
-chmod 755 /tmp/4-mysql.sh
-/tmp/4-mysql.sh
-rm -fr /tmp/4-mysql.sh
-
-wget http://api.webcp.pw/downloads/2.0.0/5-sshd.sh
-chmod 755 /tmp/5-sshd.sh
-/tmp/5-sshd.sh
-rm -fr /tmp/5-sshd.sh
-
-wget http://api.webcp.pw/downloads/2.0.0/6-exim.sh   
-chmod 755 /tmp/6-exim.sh   
-/tmp/6-exim.sh   
-rm -fr /tmp/6-exim.sh   
-
-wget http://api.webcp.pw/downloads/2.0.0/7-dovecot.sh  
-chmod 755 /tmp/7-dovecot.sh  
-/tmp/7-dovecot.sh  
-rm -fr /tmp/7-dovecot.sh  
-
-wget http://api.webcp.pw/downloads/2.0.0/8-clam.sh     
-chmod 755 /tmp/8-clam.sh     
-/tmp/8-clam.sh     
-rm -fr /tmp/8-clam.sh     
-
-wget http://api.webcp.pw/downloads/2.0.0/9-spamassassin.sh
-chmod 755 /tmp/9-spamassassin.sh
-/tmp/9-spamassassin.sh
-rm -fr /tmp/9-spamassassin.sh
-
-wget http://api.webcp.pw/downloads/2.0.0/10-ftp.sh
-chmod 755 /tmp/10-ftp.sh
-/tmp/10-ftp.sh
-rm -fr /tmp/10-ftp.sh
+wget http://api.webcp.pw/downloads/2.0.0/setup/init.sh
+chmod 755 /tmp/init.sh
+/tmp/init.sh
+rm -fr /tmp/init.sh
 
 
+wget http://api.webcp.pw/downloads/2.0.0/setup/webcp-scripts.sh
+chmod 755 /tmp/webcp-scripts.sh
+/tmp/webcp-scripts.sh
+rm -fr /tmp/webcp-scripts.sh
 
-wget http://api.webcp.pw/downloads/2.0.0/11-fail2ban.sh
-chmod 755 /tmp/11-fail2ban.sh
-/tmp/11-fail2ban.sh
-rm -fr /tmp/11-fail2ban.sh
+Password=`/usr/webcp/get_password.sh`
 
-wget http://api.webcp.pw/downloads/2.0.0/12-bind.sh
-chmod 755 /tmp/12-bind.sh
-/tmp/12-bind.sh
-rm -fr /tmp/12-bind.sh
+wget http://api.webcp.pw/downloads/2.0.0/setup/nginx.sh
+chmod 755 /tmp/nginx.sh
+/tmp/nginx.sh
+rm -fr /tmp/nginx.sh
 
-wget http://api.webcp.pw/downloads/2.0.0/13-phpmyadmin.sh
-chmod 755 /tmp/13-phpmyadmin.sh
-/tmp/13-phpmyadmin.sh
-rm -fr /tmp/13-phpmyadmin.sh
+wget http://api.webcp.pw/downloads/2.0.0/setup/php.sh
+chmod 755 /tmp/php.sh
+/tmp/php.sh
+rm -fr /tmp/php.sh
 
-wget http://api.webcp.pw/downloads/2.0.0/14-rainloop.sh 
-chmod 755 /tmp/14-rainloop.sh 
-/tmp/14-rainloop.sh 
-rm -fr /tmp/14-rainloop.sh
+wget http://api.webcp.pw/downloads/2.0.0/setup/mysql.sh
+chmod 755 /tmp/mysql.sh
+/tmp/mysql.sh $Password
+rm -fr /tmp/mysql.sh
 
-wget http://api.webcp.pw/downloads/2.0.0/15-quota.sh  
-chmod 755 /tmp/15-quota.sh    
-/tmp/15-quota.sh    
-rm -fr /tmp/15-quota.sh      
+wget http://api.webcp.pw/downloads/2.0.0/setup/sshd.sh
+chmod 755 /tmp/sshd.sh
+/tmp/sshd.sh
+rm -fr /tmp/sshd.sh
 
-wget http://api.webcp.pw/downloads/2.0.0/16-final.sh   
-chmod 755 /tmp/16-final.sh   
-/tmp/16-final.sh   
-rm -fr /tmp/16-final.sh   
+wget http://api.webcp.pw/downloads/2.0.0/setup/exim.sh   
+chmod 755 /tmp/exim.sh   
+/tmp/exim.sh   
+rm -fr /tmp/exim.sh   
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/dovecot.sh  
+chmod 755 /tmp/dovecot.sh  
+/tmp/dovecot.sh  
+rm -fr /tmp/dovecot.sh  
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/clam.sh     
+chmod 755 /tmp/clam.sh     
+/tmp/clam.sh     
+rm -fr /tmp/clam.sh     
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/spamassassin.sh
+chmod 755 /tmp/spamassassin.sh
+/tmp/spamassassin.sh
+rm -fr /tmp/spamassassin.sh
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/ftp.sh
+chmod 755 /tmp/ftp.sh
+/tmp/ftp.sh $Password
+rm -fr /tmp/ftp.sh
+
+
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/fail2ban.sh
+chmod 755 /tmp/fail2ban.sh
+/tmp/fail2ban.sh
+rm -fr /tmp/fail2ban.sh
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/bind.sh
+chmod 755 /tmp/bind.sh
+/tmp/bind.sh
+rm -fr /tmp/bind.sh
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/phpmyadmin.sh
+chmod 755 /tmp/phpmyadmin.sh
+/tmp/phpmyadmin.sh
+rm -fr /tmp/phpmyadmin.sh
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/rainloop.sh 
+chmod 755 /tmp/rainloop.sh 
+/tmp/rainloop.sh $Password
+rm -fr /tmp/rainloop.sh
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/quota.sh  
+chmod 755 /tmp/quota.sh    
+/tmp/quota.sh    
+rm -fr /tmp/quota.sh      
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/final.sh   
+chmod 755 /tmp/final.sh   
+/tmp/final.sh   
+rm -fr /tmp/final.sh   
+
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/webcp-www.sh   
+chmod 755 /tmp/webcp-www.sh   
+/tmp/webcp-www.sh   
+rm -fr /tmp/webcp-www.sh   
+
 
 rm -fr /tmp/installer.sh

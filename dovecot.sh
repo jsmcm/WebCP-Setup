@@ -1,11 +1,9 @@
 #!/bin/bash
 
-##  john:{plain-md5}5553f4a29d810a122010c4b76673252351:1007:1007::/home/pete::userdb_mail=maildir:~/mail/pete.co.za/john
+apt-get install dovecot-core dovecot-imapd dovecot-pop3d -y
 
-#apt-get install dovecot-core dovecot-imapd dovecot-pop3d -y
-
-#cd /usr/share/dovecot
-#./mkcert.sh
+cd /usr/share/dovecot
+./mkcert.sh
 
 
 if [ ! -d /var/log/dovecot ] 
@@ -13,12 +11,6 @@ then
 	mkdir /var/log/dovecot
 	chown dovecot.dovecot /var/log/dovecot -R
 	chmod 755 /var/log/dovecot -R
-fi
-
-
-if [ ! -d /etc/dovecot/users ] 
-then
-	mkdir /dovecot/users
 fi
 
 

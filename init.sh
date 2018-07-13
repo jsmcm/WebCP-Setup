@@ -15,7 +15,7 @@ then
 fi
 
 
-MYSQL_PASSWORD=`date +%s | sha256sum | base64 | head -c 10 ; echo`
+#MYSQL_PASSWORD=`date +%s | sha256sum | base64 | head -c 10 ; echo`
 
 
 echo "		****************************************************************		"
@@ -200,6 +200,15 @@ apt-get install mutt -y
 apt-get update -y
 
 
+mkdir -p /var/www/html/
+
+echo "DATABASE_NAME=\"cpadmin\"" > /var/www/html/config.php
+echo "DATABASE_HOST=\"localhost\"" >> /var/www/html/config.php
+echo "DATABASE_USER=\"root\"" >> /var/www/html/config.php
+echo "DATABASE_PASSWORD=\"$Password\"" >> /var/www/html/config.php
+          
+
+
 
 useradd -m -p "$(openssl passwd -1 $Password)" $UserName
 
@@ -229,7 +238,6 @@ ufw allow 993/tcp
 
 ufw allow 3306/tcp
 
-ufw enable
 
 
 
