@@ -202,6 +202,35 @@ cd /tmp
 git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git
 
 
+cd /tmp
+wget http://nginx.org/download/nginx-1.13.9.tar.gz
+tar zxvf nginx-1.13.9.tar.gz
+
+cd nginx-1.13.9
+./configure --with-compat --add-dynamic-module=../ModSecurity-nginx
+make modules
+mkdir /etc/nginx/modules/
+cp /tmp/nginx-1.13.9/objs/ngx_http_modsecurity_module.so /etc/nginx/modules/
+
+
+
+
+mkdir /etc/nginx/modsec
+cd /etc/nginx/modsec
+wget https://raw.githubusercontent.com/SpiderLabs/ModSecurity/v3/master/modsecurity.conf-recommended
+cp modsecurity.conf-recommended modsecurity.conf
+sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/nginx/modsec/modsecurity.conf
+
+
+
+# rules
+git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
+cd owasp-modsecurity-crs/
+
+cp crs-setup.conf.example crs-setup.conf
+
+
+
 
 
 
