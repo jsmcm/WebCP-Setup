@@ -48,4 +48,31 @@ echo "ssl_cert = </etc/dovecot/dovecot.pem" >> /etc/dovecot/conf.d/10-ssl.conf
 echo "ssl_key = </etc/dovecot/private/dovecot.pem" >> /etc/dovecot/conf.d/10-ssl.conf
 
 
+echo "namespace inbox {" > /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    mailbox Drafts {" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        auto = create" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        special_use = \Drafts" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    }" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    mailbox Junk {" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        auto = create" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        special_use = \Junk" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    }" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    mailbox Trash {" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        auto = create" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        special_use = \Trash" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    }" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    mailbox Archive {" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        auto = create" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        special_use = \Archive" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    }" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    mailbox Sent {" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        auto = create" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        special_use = \Sent" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    }" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    mailbox \"Sent Messages\" {" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        auto = create" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        special_use = \Sent" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    }" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "}" >> /etc/dovecot/conf.d/15-mailboxes.conf
+
 
