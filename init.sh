@@ -111,6 +111,46 @@ echo "		************************************************************************
 sleep 2
 
 
+echo "$HostName" > /etc/hostname
+
+
+#making this for the nginx script here so I don't need to pass
+#through the hostname
+mkdir -p /etc/nginx/sites-enabled
+
+echo "server {" > /etc/nginx/sites-enabled/$HostName.conf
+    echo "listen 80;" >> /etc/nginx/sites-enabled/$HostName.conf
+    echo "server_name \$server_addr;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+    echo "return 301 http://${HostName}\$request_uri;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "listen 10025;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "listen [::]:10025;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "root /var/www/html/webcp;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "index index.php index.html index.htm index.nginx-debian.html;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "location / {" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "try_files \$uri \$uri/ /index.php?\$args;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "location ~ \.php\$ {" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "include snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "fastcgi_pass unix:/run/php/php7.0-fpm.sock;" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "fastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "fastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "location ~ /\.ht {" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "deny all;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
+
+
 
 apt-get remove httpd-devel httpd -y
 apt-get remove apache2 -y
@@ -209,8 +249,7 @@ echo "DATABASE_PASSWORD=\"$Password\"" >> /var/www/html/config.php
           
 
 
-
-useradd -m -p "$(openssl passwd -1 $Password)" $UserName
+useradd -m -s /bin/bash -p "$(openssl passwd -1 $Password)" $UserName
 
 
 ufw default deny incoming

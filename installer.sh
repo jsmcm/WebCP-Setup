@@ -87,16 +87,19 @@ chmod 755 /tmp/quota.sh
 /tmp/quota.sh    
 rm -fr /tmp/quota.sh      
 
-wget http://api.webcp.pw/downloads/2.0.0/setup/final.sh   
-chmod 755 /tmp/final.sh   
-/tmp/final.sh   
-rm -fr /tmp/final.sh   
-
 
 wget http://api.webcp.pw/downloads/2.0.0/setup/webcp-www.sh   
 chmod 755 /tmp/webcp-www.sh   
 /tmp/webcp-www.sh   
 rm -fr /tmp/webcp-www.sh   
 
+wget http://api.webcp.pw/downloads/2.0.0/setup/final.sh   
+chmod 755 /tmp/final.sh   
+/tmp/final.sh   
+rm -fr /tmp/final.sh   
+
 
 rm -fr /tmp/installer.sh
+
+reboot now
+

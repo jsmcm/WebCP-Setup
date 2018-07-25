@@ -384,7 +384,7 @@ echo "action = webcp[name=named-refused, bantime=600]" >> /etc/fail2ban/jail.loc
 echo "" >> /etc/fail2ban/jail.local
 echo "[mysqld-auth]" >> /etc/fail2ban/jail.local
 echo "port     = 3306" >> /etc/fail2ban/jail.local
-echo "logpath  = /var/log/mysqld.log" >> /etc/fail2ban/jail.local
+echo "logpath  = /var/log/mysql/mysqld.log" >> /etc/fail2ban/jail.local
 echo "maxretry = 5" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=mysql-auth, bantime=600]" >> /etc/fail2ban/jail.local

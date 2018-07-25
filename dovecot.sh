@@ -15,12 +15,12 @@ fi
 
 
 echo "passdb {" > /etc/dovecot/conf.d/auth-passwdfile.conf.ext
-echo "    args = scheme=plain-md5 username_format=%n /var/www/html/domains/%d/dovecot-passwd" >> /etc/dovecot/conf.d/auth-passwdfile.conf.ext
+echo "    args = scheme=plain-md5 username_format=%n /var/www/html/mail/domains/%d/dovecot-passwd" >> /etc/dovecot/conf.d/auth-passwdfile.conf.ext
 echo "    driver = passwd-file" >> /etc/dovecot/conf.d/auth-passwdfile.conf.ext
 echo "}" >> /etc/dovecot/conf.d/auth-passwdfile.conf.ext
 echo "" >> /etc/dovecot/conf.d/auth-passwdfile.conf.ext
 echo "userdb {" >> /etc/dovecot/conf.d/auth-passwdfile.conf.ext
-echo "    args =  username_format=%n /var/www/html/domains/%d/dovecot-passwd" >> /etc/dovecot/conf.d/auth-passwdfile.conf.ext
+echo "    args =  username_format=%n /var/www/html/mail/domains/%d/dovecot-passwd" >> /etc/dovecot/conf.d/auth-passwdfile.conf.ext
 echo "    driver = passwd-file" >> /etc/dovecot/conf.d/auth-passwdfile.conf.ext
 echo "}" >> /etc/dovecot/conf.d/auth-passwdfile.conf.ext
 
