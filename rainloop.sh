@@ -16,6 +16,8 @@ curl -sL https://repository.rainloop.net/installer.php | php
 
 mkdir -p /var/www/html/rainloop/data/_data_/_default_/configs 
 mkdir -p /var/www/html/rainloop/data/_data_/_default_/domains
+mkdir -p /var/www/html/rainloop/data/_data_/_default_/logs/fail2ban
+touch /var/www/html/rainloop/data/_data_/_default_/logs/fail2ban/auth.log
 
 date1=`date +%N | md5sum  | awk '{print $1}'`
 date2=`date +%N | md5sum  | awk '{print $1}'`
