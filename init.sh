@@ -127,6 +127,10 @@ echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 
 
 
+echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "        listen 80;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
+
 echo "        location /webcp {" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "                return 301 http://$HostName:10025;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
@@ -141,6 +145,7 @@ echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        location /webmail {" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "                return 301 http://$HostName:10030;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 
 
 echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
@@ -150,6 +155,7 @@ echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        location /phpmyadmin {" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "                return 301 http://$HostName:10035;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 
 
 
