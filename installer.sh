@@ -101,5 +101,33 @@ rm -fr /tmp/final.sh
 
 rm -fr /tmp/installer.sh
 
+
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+
+echo "          *************************************************************************"
+echo "          *                                                                       *"      
+echo "          *       INSTALLATION COMPLETE!                                          *"      
+echo "          *                                                                       *"      
+echo "          *************************************************************************"      
+echo "          *                                                                       *"
+echo "          *       You can now go to http://YOUR_IP/webcp and login with           *"
+echo "          *       username 'admin@admin.admin' and password 'adminadmin'          *"
+echo "          *                                                                       *"
+echo "          *                                                                       *"
+echo "          *                                                                       *"
+echo "          *       ssh login must be on port 7533 and root cannot login.           *"
+echo "          *                                                                       *"
+echo "          *                                                                       *"
+echo "          *************************************************************************"
+
+
 reboot now
 
