@@ -1,0 +1,523 @@
+# These values can be overridden by editing ~/.spamassassin/user_prefs.cf 
+# (see spamassassin(1) for details)
+
+# These should be safe assumptions and allow for simple visual sifting
+# without risking lost emails.
+
+required_hits 5
+report_safe 0
+rewrite_header Subject [SPAM]
+
+pyzor_path /usr/bin/pyzor
+pyzor_timeout 15
+pyzor_options --homedir /etc/mail/spamassassin/.pyzor
+
+use_razor2 1
+
+
+score HTML_IMAGE_RATIO_02 0.2
+score T_FREEMAIL_DOC_PDF 0.5
+
+score URI_NOVOWEL 0.0
+score MSGID_MULTIPLE_AT 0.0
+score AC_BR_BONANZA 2.1
+score ADVANCE_FEE_3_NEW 2.5
+score BAYES_00 0.0
+score RCVD_IN_SORBS_SPAM 1.0
+score RP_MATCHES_RCVD 0.1
+score LOTS_OF_MONEY	2.1
+score MISSING_MID 2.5
+score RDNS_NONE 3.5
+score MISSING_HEADERS 2.0
+score REPLYTO_WITHOUT_TO_CC 2.5
+score MIME_HTML_ONLY 2.0
+score T_OBFU_HTML_ATTACH 4.5
+score DATE_IN_PAST_03_06 4.5
+score DATE_IN_PAST_06_12 4.5
+score DATE_IN_FUTURE_03_06 4.5
+score DATE_IN_FUTURE_06_12 4.5
+score FREEMAIL_FROM	1.0
+score FREEMAIL_ENVFROM_END_DIGIT 1.0
+score T_WON_NBDY_ATTACH 1.0
+score T_END_FUTURE_EMAILS 1.0
+score INVALID_MSGID 5.0
+score TO_IN_SUBJ 3.0
+score FROM_MISSP_MSFT 2.5
+score HTML_IMAGE_ONLY_04 2.5
+score HTML_IMAGE_ONLY_08 2.5
+score HTML_IMAGE_ONLY_12 2.5
+score HTML_IMAGE_ONLY_16 2.5
+score HTML_IMAGE_ONLY_20 2.0
+score HTML_IMAGE_ONLY_24 1.5
+score HTML_IMAGE_ONLY_28 2.0
+score HTML_IMAGE_ONLY_32 0.5
+score MPART_ALT_DIFF 1.0
+score FREEMAIL_REPLYTO_END_DIGIT 1.0
+score TVD_PH_SEC 1.0
+score HTML_COMMENT_SAVED_URL 1.0
+score FROM_EXCESS_BASE64 1.0
+
+
+header IB_PRECEDENCE	Precedence =~ /^bulk/i
+describe IB_PRECEDENCE	Bulk precedence
+score IB_PRECEDENCE	1.0
+
+
+header IB_LOCAL_HOST           	Received =~ /^from (?:localhost|127\.0\.0\.1)/i
+describe IB_LOCAL_HOST		Received from localhost or 127.0.0.1
+score IB_LOCAL_HOST          	0.1
+
+
+header IB_SPAMMY_HELO           Received =~ /^from (?:furthermoreincsales.co.za|productsales.co.za|propertyandme.co.za|163.com|boldhorizons.net|t-online.de|soundest.email)/i
+describe IB_SPAMMY_HELO         Contains a spammy Received from (helo)...
+score IB_SPAMMY_HELO            5.0
+
+body IBTRP_LOAN_PERSONAL_RULE   /get a personal loan/i
+score IBTRP_LOAN_PERSONAL_RULE 3.5
+describe IBTRP_LOAN_PERSONAL_RULE       Uses phrase "get a personal loan"
+
+body IB_UNSUBSCRIBE  /unsub-scribe/i
+score IB_UNSUBSCRIBE 3.5
+describe IB_UNSUBSCRIBE      Spammy unsub-scribe link
+
+
+body IBTRP_LOAN_NEED_RULE   /do you need a loan/i
+score IBTRP_LOAN_NEED_RULE 1.5						#should be 1.5
+describe IBTRP_LOAN_NEED_RULE       Uses phrase "do you need a loan"
+
+body IBTRP_GOOGLETRADER_RULE   /googletrader/i
+score IBTRP_GOOGLETRADER_RULE 7.5			
+describe IBTRP_GOOGLETRADER_RULE       Uses phrase "googletrader"
+
+body IBTRP_LOAN_URGENT_RULE   /urgent loan/i
+score IBTRP_LOAN_URGENT_RULE 1.0					#should be 1.0
+describe IBTRP_LOAN_URGENT_RULE       Uses phrase "urgent loan"
+
+
+body IBTRP_LOAN_THREE_RULE   /loans at 3%/i
+score IBTRP_LOAN_THREE_RULE 1.0                                #should be 1.0
+describe IBTRP_LOAN_THREE_RULE       Uses phrase "loans at 3%"
+
+body IBTRP_LOAN_WE_OFFER_RULE   /we offer a loan/i
+score IBTRP_LOAN_WE_OFFER_RULE 1.0                              #should be 1.0
+describe IBTRP_LOAN_WE_OFFER_RULE       Uses phrase "we offer a loan"
+
+body IBTRP_LOAN_INSTANT_CASH_RULE   /instant cash/i
+score IBTRP_LOAN_INSTANT_CASH_RULE 1.0                             #should be 1.0
+describe IBTRP_LOAN_INSTANT_CASH_RULE       Uses phrase "instant cash"
+
+body IBTRP_LOAN_LOAN_SERVICES_RULE   /loan services/i
+score IBTRP_LOAN_LOAN_SERVICES_RULE 1.0                              #should be 1.0
+describe IBTRP_LOAN_LOAN_SERVICES_RULE       Uses phrase "loan services"
+
+
+body IBTRP_LOAN_EXTRACASH_RULE   /Do you need extra cash?/i
+score IBTRP_LOAN_EXTRACASH_RULE 1.0                             #should be 1.0
+describe IBTRP_LOAN_EXTRACASH_RULE       Uses phrase "Do you need extra cash?"
+
+body IBTRP_LOAN_OFFER_RULE   /Loan Offer/i
+score IBTRP_LOAN_OFFER_RULE 1.0                                 #should be 1.0
+describe IBTRP_LOAN_OFFER_RULE       Uses phrase "Loan Offer"
+
+body IBTRP_LOAN_LENDER_RULE   /a private lender offering/i
+score IBTRP_LOAN_LENDER_RULE 1.0                                #should be 1.0
+describe IBTRP_LOAN_LENDER_RULE       Uses phrase "a private lender offering"
+
+body IBTRP_LOAN_AMAZON_RULE   /amazon loan/i
+score IBTRP_LOAN_AMAZON_RULE 5.0                                #should be 5.0
+describe IBTRP_LOAN_AMAZON_RULE       Uses phrase "amazon loan"
+
+body IBTRP_LOAN_RCS_RULE   /rcs loan/i
+score IBTRP_LOAN_RCS_RULE 5.0                                   #should be 5.0
+describe IBTRP_LOAN_RCS_RULE       Uses phrase "rcs loan"
+
+
+
+
+body IBTRP_PORN_AFF1_RULE   /pzdwgvujdotirfu6sdmjao6w/i  
+score IBTRP_PORN_AFF1_RULE 5.0								#should be 5
+describe IBTRP_PORN_AFF1_RULE       Uses known porn affliate link
+
+body IBTRP_PORN_HORNY_RULE   /my horny requirements/i  
+score IBTRP_PORN_HORNY_RULE 1.0								#should be 1
+describe IBTRP_PORN_HORNY_RULE       Uses phrase "my horny requirements"
+
+body IBTRP_PORN_STRINGS_RULE   /no strings attached/i  
+score IBTRP_PORN_STRINGS_RULE 1.0							#should be 1
+describe IBTRP_PORN_STRINGS_RULE       Uses phrase "no strings attached"
+
+body IBTRP_PORN_PROFILE_RULE   /I came across your profile/i  
+score IBTRP_PORN_PROFILE_RULE 0.5
+describe IBTRP_PORN_PROFILE_RULE       Uses phrase "I came across your profile"
+
+body IBTRP_PORN_PICTURES_RULE   /i will give you my pictures/i  
+score IBTRP_PORN_PICTURES_RULE 0.5
+describe IBTRP_PORN_PICTURES_RULE       Uses phrase "i will give you my pictures"
+
+body IBTRP_PORN_BORED_RULE   /bored out of her mind/i  
+score IBTRP_PORN_BORED_RULE 0.5
+describe IBTRP_PORN_BORED_RULE       Uses phrase "bored out of her mind"
+
+body IBTRP_PORN_DIRTY_RULE   /dirty photos/i  
+score IBTRP_PORN_DIRTY_RULE 0.5
+describe IBTRP_PORN_DIRTY_RULE       Uses phrase "dirty photos"
+
+
+body IBTRP_CASINO_YEBO1_RULE   /yebo casino/i
+score IBTRP_CASINO_YEBO1_RULE 5.0                                   #should be 3.0
+describe IBTRP_CASINO_YEBO1_RULE       Uses phrase "yebo casino"
+
+body IBTRP_CASINO_YEBO2_RULE   /yebocasino/i
+score IBTRP_CASINO_YEBO2_RULE 5.0                                   #should be 3.0
+describe IBTRP_CASINO_YEBO2_RULE       Uses phrase "yebocasino"
+
+body IBTRP_CASINO_MIDAS_RULE   /casinomidas/i
+score IBTRP_CASINO_MIDAS_RULE 5.0                                   #should be 3.0
+describe IBTRP_CASINO_MIDAS_RULE       Uses phrase "casinomidas"
+
+
+body IBTRP_CASINO_SL0T_RULE   /sl0t/i
+score IBTRP_CASINO_SL0T_RULE 5.0                                   #should be 5.0
+describe IBTRP_CASINO_SL0T_RULE       misspelling to sl0t[s]
+
+body IBTRP_CASINO_NDR_RULE   /no deposit required/i
+score IBTRP_CASINO_NDR_RULE 4.5                               
+describe IBTRP_CASINO_NDR_RULE       Uses phrase "no deposit required"
+
+body IBTRP_CASINO_NDN_RULE   /no deposit needed/i
+score IBTRP_CASINO_NDN_RULE 4.5                               
+describe IBTRP_CASINO_NDN_RULE       Uses phrase "no deposit needed"
+
+body IB_FUCK	   	           /\b(?:f[5*]ck|f[\$2]ck)/i
+describe IB_FUCK     body contains misspelling of fuck
+score IB_FUCK        5.0				
+
+header IB_FUCK_SUBJECT       Subject =~ /\b(?:f[5*]ck|f[\$2]ck)/i
+describe IB_FUCK_SUBJECT     Subject contains misspelling of fuck
+score IB_FUCK_SUBJECT        5.0					# should be 3.5
+
+body IB_PUSSY        /\b.*p[u\#][s\$][\$s]y.*\b/i
+describe IB_PUSSY     body contains misspelling of pussy
+score IB_PUSSY        5.0					# should be 3.5
+
+header IB_PUSSY_SUBJECT       Subject =~ /\bp[\#u][s\$][\$s]y\b/i
+describe IB_PUSSY_SUBJECT     Subject contains misspelling of pussy
+score IB_PUSSY_SUBJECT        5.0					# should be 3.5
+
+body IB_COCK        /\b(?:c[0o]ck|[a\@][s\$][s\$]|[\@a]n[\@a][l1])\b/i
+describe IB_COCK     body contains misspelling of cock or ass
+score IB_COCK        5.0			# should be 3.5
+
+header IB_COCK_SUBJECT       Subject =~ /\b(?:c[0o]ck|[a\@][s\$][s\$]|[\@a]n[\@a][l1])\b/i
+describe IB_COCK_SUBJECT     Subject contains misspelling of cock or ass
+score IB_COCK_SUBJECT        5.0					# should be 3.5
+
+body IB_VIAGRA_MENTIONED       /\b.*v[i!]agr[4a].*\b/i
+describe IB_VIAGRA_MENTIONED   Viagra text within e-mail
+score IB_VIAGRA_MENTIONED      3.0				# should be 3.0
+
+header IB_VIAGRA_SUBJECT       Subject =~ /\bv[i!]agr[4a]\b/i
+describe IB_VIAGRA_SUBJECT     Subject contents Viagra
+score IB_VIAGRA_SUBJECT        3.5					# should be 3.5
+
+body IB_HOOKUP       /\b.*h[0o][0o]kup.*\b/i
+describe IB_HOOKUP   Misspelling of hookup
+score IB_HOOKUP	      3.5				# should be 3.5
+
+header IB_HOOKUP_SUBJECT       Subject =~ /\bh[0o][0o]kup\b/i
+describe IB_HOOKUP_SUBJECT     Subject contains misspelling of hookup
+score IB_HOOKUP_SUBJECT        3.5					# should be 3.5
+
+body IB_SEXY       /\b.*[s\$][xe]x[y]?.*\b/i
+describe IB_SEXY   Misspelling of sexy
+score IB_SEXY      2.5
+
+header IB_SEXY_SUBJECT       Subject =~ /\b(?:[s\$][xe]x[y]?)\b/i
+describe IB_SEXY_SUBJECT     Subject contains misspelling of sexy
+score IB_SEXY_SUBJECT        2.5					# should be 3.5
+
+
+body IB_CASINO_LOTTO           /\b(?:j[a4]ckpot[s]?|cas[1i]no|lott[0o])/i
+describe IB_CASINO_LOTTO       Typical winning notification e-mails
+score IB_CASINO_LOTTO          2.5					# should be 2.0
+
+header IB_CIALIS_SUBJECT       Subject =~ /\bc[i!]alis\b/i
+describe IB_CIALIS_SUBJECT     Subject contents Cialis
+score IB_CIALIS_SUBJECT        3.5					# should be 3.5
+
+header IB_DIVERS_SUBJECT       Subject =~ /\b(?:[e]?s[ ]?ex[x]?[u]?[a]?[l1]?[l1]?[y]?|impotence|pen[1i]s|lev[i]?[t]?r[i]?[t]?a|c[\@a]sin[0o]|w[o0]nga|l[0o]an[s]?)\b/i
+describe IB_DIVERS_SUBJECT     Subject contents one of the words
+score IB_DIVERS_SUBJECT        3.5					# should be 2.0
+
+body IB_DIVERS_BODY            /\b(?:sex[x]?[u]?[a]?[l1]?[l1]?[y]?|er[r]?ection[s]?|impotence|pen[1i]s|lev[i]?[t]?r[i]?[t]?a|c[\@a]sin[0o]|w[0o]nga|l[0o]an[s]?)\b/i
+describe IB_DIVERS_BODY        Mail contents one of the words
+score IB_DIVERS_BODY           2.0					# should be 2.0
+
+header IB_ERECT_SUBJECT        Subject =~ /\b(?:er[r]?ection[s]?|erect[i]?[l]?[e]?)\b/i
+describe IB_ERECT_SUBJECT      Subject contents one of the words
+score IB_ERECT_SUBJECT         4.0					# should be 1.0
+
+header IB_MEDICAL_SUBJECT      Subject =~ /\b(?:pill[s]?|plils|mediicnes|meidcaitions|cilais)\b/i
+describe IB_MEDICAL_SUBJECT    Subject contents one of the words
+score IB_MEDICAL_SUBJECT       4.0					# should be 2.0
+
+body IB_MEDICAL_BODY           /\b(?:p[!i]lls|plils|mediicnes|levrita|v[i!][a4]gr[a4]|c[i!][4a]l[i!]s)\b/i
+describe IB_MEDICAL_BODY       Mail contents one of the words
+score IB_MEDICAL_BODY          4.0					# should be 2.0
+
+
+body IB_BULK_MAILER         /(?:sharpspringmail.org|marketingautomation.services)/i
+describe IB_BULK_MAILER     sharpspringmail.org | marketingautomation.services
+score IB_BULK_MAILER        4
+
+
+body IB_BEST_MENTIONED         /\bbest (?:offer[s]?|penis|casino[s]?)/i
+describe IB_BEST_MENTIONED     Normally spam (best ..)
+score IB_BEST_MENTIONED        2.0					# should be 2.0
+
+body IB_CASINO_AFFILIATE         /(?:casino.com|iaffiliates.com|theinvestopedia.net|aotraders.com)/i
+describe IB_CASINO_AFFILIATE     casino.com|iaffiliates.com|theinvestopedia.net|aotraders.com
+score IB_CASINO_AFFILIATE        5.5
+
+body IB_ONLINE_MENTIONED       /\bonline (?:casino|pharmacy|drug[s]?)/i
+describe IB_ONLINE_MENTIONED   Normally spam (online pharmacy ..)
+score IB_ONLINE_MENTIONED      2.0					# should be 2.0
+
+body IB_FREE_MENTIONED         /\bfree (?:casino|pharmacy|drug[s]?|sex|lotto|pri[cz]e[s])/i
+describe IB_FREE_MENTIONED     Normally spam (free lotto ..)
+score IB_FREE_MENTIONED        2.0					# should be 2.0
+
+
+body IB_INTERNET_CONNECT       /\bYou need to be connected to the Internet to view and follow link\b/i
+describe IB_INTERNET_CONNECT   Spam-Mail which adivces to connect to internet (lots of spams in September 2009)
+score IB_INTERNET_CONNECT      3.0					# should be 3.0
+
+body IB_COMMON_AFF_LINK       	/(?:link.php|unsubscribe.php)/i
+describe IB_COMMON_AFF_LINK   	Common spam affiliate link.php style
+score IB_COMMON_AFF_LINK     	5.0					# should be 5.0
+
+
+header IB_DOMAIN_LISTING	Subject =~ /\bThis is your Final Notice of Domain Listing/i
+describe IB_DOMAIN_LISTING	Company which wants to charge to list your domain
+score IB_DOMAIN_LISTING		5.0					# should be 5.0
+
+header IB_SPAM_ADDRESS         Reply-To =~ /\b(?:terra.com|thehillinstitute.com|theinvestopedia.net|webcrayons.us)\b/i
+describe IB_SPAM_ADDRESS       Possible spam domains
+score IB_SPAM_ADDRESS         5.0
+
+header IB_FAXTOEMAIL_SUBJECT       Subject =~ /\bfax to email\b/i
+describe IB_FAXTOEMAIL_SUBJECT     Subject contents "fax to email"
+score IB_FAXTOEMAIL_SUBJECT        5.5		
+
+header IB_FREESPINS_SUBJECT       Subject =~ /\bfree spin[sz]\b/i
+describe IB_FREESPINS_SUBJECT     Subject contents "free spins"
+score IB_FREESPINS_SUBJECT        5.5		
+
+header IB_FREESPINS1_SUBJECT       Subject =~ /\bfreespin[sz]\b/i
+describe IB_FREESPINS1_SUBJECT     Subject contents "freespins"
+score IB_FREESPINS1_SUBJECT       5.5			
+
+
+header IB_FREECHIP_SUBJECT       Subject =~ /\bfreechip[sz]\b/i
+describe IB_FREECHIP_SUBJECT     Subject contents "freechips"
+score IB_FREECHIP_SUBJECT        5.5	
+
+
+header IB_FREECHIP1_SUBJECT       Subject =~ /\bfree chip[sz]\b/i
+describe IB_FREECHIP1_SUBJECT     Subject contents "free chips"
+score IB_FREECHIP1_SUBJECT        5.5
+
+
+header IB_ML00_FROM       From =~ /ml00\.net/i
+describe IB_ML00_FROM     from ml00.net
+score IB_ML00_FROM         0.5
+
+header IB_ONEDEALADAY_FROM       From =~ /onedealaday\.com/i
+describe IB_ONEDEALADAY_FROM     from onedealaday.com
+score IB_ONEDEALADAY_FROM     	  5.0
+
+
+header IB_SNATCHER_FROM       From =~ /snatcher\.co\.za/i
+describe IB_SNATCHER_FROM     from snatcher.co.za
+score IB_SNATCHER_FROM     	  5.0
+
+header IB_WINTERGREEN_SUBJECT       Subject =~ /\bwinter green\b/i
+describe IB_WINTERGREEN_SUBJECT     Subject contents "winter green"
+score IB_WINTERGREEN_SUBJECT     	  8.0
+
+body IB_DOMAIN_SEO1       /\bfailure to complete your seo domain name\b/i
+describe IB_DOMAIN_SEO1   Domain SEO scam
+score IB_DOMAIN_SEO1      4.0    
+
+body IB_DOMAIN_SEO2       /\bdomain seo registration\b/i
+describe IB_DOMAIN_SEO2  Domain SEO scam
+score IB_DOMAIN_SEO2      4.0    
+
+body IB_DOMAIN_SEO3       /\bmay make it difficult for customers to find\b/i
+describe IB_DOMAIN_SEO3   Domain SEO scam
+score IB_DOMAIN_SEO3      4.0    
+
+body IB_THE_BITCOIN_CODE           	/\b(?:the bitcoin code)/i
+describe IB_THE_BITCOIN_CODE       	body has THE BITCOIN CODE
+score IB_THE_BITCOIN_CODE          	5.0          
+
+header IB_THE_BITCOIN_CODE_SUBJECT       	Subject =~ /\bthe bitcoin code\b/i
+describe IB_THE_BITCOIN_CODE_SUBJECT     	Subject contents THE BITCOIN CODE
+score IB_THE_BITCOIN_CODE_SUBJECT        	5.0                                    # should be 3.5
+
+rawbody IB_THE_BITCOIN_REVOLUTION       	/(?:bitcoin revolution|financial revolution)/i
+describe IB_THE_BITCOIN_REVOLUTION   	body has THE BITCOIN REVOLUTION
+score IB_THE_BITCOIN_REVOLUTION          1.0          
+
+header IB_THE_BITCOIN_REVOLUTION_SUBJECT       Subject =~ /\bthe bitcoin revolution\b/i
+describe IB_THE_BITCOIN_REVOLUTION_SUBJECT     Subject contents THE BITCOIN REVOLUTION
+score IB_THE_BITCOIN_REVOLUTION_SUBJECT        5.0                                      # should be 3.5
+
+
+body IB_THE_BITCOIN_MILLIONAIRE      	/\b(?:bitcoin millionaire)/i
+describe IB_THE_BITCOIN_MILLIONAIRE   	body has THE BITCOIN MILLIONAIRE
+score IB_THE_BITCOIN_MILLIONAIRE          2.5           
+
+header IB_THE_BITCOIN_MILLIONAIRE_SUBJECT       Subject =~ /\bbitcoin millionaire\b/i
+describe IB_THE_BITCOIN_MILLIONAIRE_SUBJECT     Subject contents THE BITCOIN MILLIONAIRE
+score IB_THE_BITCOIN_MILLIONAIRE_SUBJECT        2.5
+
+
+header IB_DEAN_PHILIPS_FROM       From =~ /dean philips/i
+describe IB_DEAN_PHILIPS_FROM     from DEAN PHILIPS
+score IB_DEAN_PHILIPS_FROM         3.5
+
+header IB_CONTROL_WS_FROM       From =~ /control.ws/i
+describe IB_CONTROL_WS_FROM     from control.ws (dean philips lawns)
+score IB_CONTROL_WS_FROM         3.5
+
+
+header IB_CONTROL_WS_RETURN_PATH       Return-path =~ /control.ws/i
+describe IB_CONTROL_WS_RETURN_PATH     RETURN_PATH control.ws (dean philips lawns)
+score IB_CONTROL_WS_RETURN_PATH         3.5
+
+body IB_CONTROL_WS      	/\b(?:control.ws)/i
+describe IB_CONTROL_WS   	body has control.ws
+score IB_CONTROL_WS          3.5
+
+
+body IB_WEBHOSTAPP_COM      	/\b(?:webhostapp\.com)/i
+describe IB_WEBHOSTAPP_COM   	body has webhostapp which is a free hosting provider which generates spam and phishing
+score IB_WEBHOSTAPP_COM          3.5
+
+body IB_PRICE_GOING_UP     	/\b(?:pric[eÃ©] is going up in)/i
+describe IB_PRICE_GOING_UP   	body has price is going up
+score IB_PRICE_GOING_UP          0.1
+
+
+body IB_COST_GOING_UP     	/\b(?:c[o0]st is going up in)/i
+describe IB_COST_GOING_UP   	body has cost is going up
+score IB_COST_GOING_UP          0.1
+
+
+
+header IB_FLIGHT_SIMULATOR_SUBJECT       Subject =~ /\bflight simulator\b/i
+describe IB_FLIGHT_SIMULATOR_SUBJECT     Subject contents flight simulator
+score IB_FLIGHT_SIMULATOR_SUBJECT        1.5
+
+
+body IB_FLIGHT_SIMULATOR    /\b(?:flightsimulator|flight simulator)/i
+describe IB_FLIGHT_SIMULATOR     Flight Simulator Game spam
+score IB_FLIGHT_SIMULATOR	2.5					# should be 2.0
+
+
+header IB_GITSMAILERS_COM_RETURN_PATH       Return-to =~ /gitsmailers.com/i
+describe IB_GITSMAILERS_COM_RETURN_PATH     RETURN-TO gitsmailers.com
+score IB_GITSMAILERS_COM_RETURN_PATH         0.1
+
+
+header IB_WA_MAILCHAN       Received =~ /webafrica|dotnetwork.co.za|dotnetwork2.co.za|mailchannnels.com|mailchannels.net/i
+describe IB_WA_MAILCHAN       web africa / dotnetwork /  mailchannels don't take their outgoing spam overly seriously
+score IB_WA_MAILCHAN	      1.2
+
+
+
+header IB_DELIVERMAIL_COZA_JUNK       Received =~ /delivermail\.co\.za/i
+describe IB_DELIVERMAIL_COZA_JUNK       delivermail.co.za spam servers
+score IB_DELIVERMAIL_COZA_JUNK	      0.5
+
+
+header IB_MCTS_JUNK       Received =~ /mcts\d*.com/i
+describe IB_MCTS_JUNK       MCTSxxx.com spam servers
+score IB_MCTS_JUNK	      8.1
+
+
+header IB_SPAM_DOMAINS2        From =~ /\b(?:\.eu|\.win|\.us|\.top|\.info)\b/i
+describe IB_SPAM_DOMAINS2       Possible spam domains
+score IB_SPAM_DOMAINS2      2.0
+
+
+
+
+header IB_SPAM_DOMAINS3        From =~ /\b(?:\.trade|\.club|\.date|\.bid)\b/i
+describe IB_SPAM_DOMAINS3       Possible spam domains
+score IB_SPAM_DOMAINS3	      4.5
+
+
+header IB_IN_SORBS	       X-WebCP-Sorbs =~ /YES/i
+describe IB_IN_SORBS	    In SORBS
+score IB_IN_SORBS         1.5
+
+header IB_BESTTIME2U_FROM       From =~ /gitsmailers.com|we-cover.co.za/i
+describe IB_BESTTIME2U_FROM     FROM BESTTIME2U.FROM
+score IB_BESTTIME2U_FROM        10.0
+
+
+header IB_OUTLOOK_FROM       From =~ /outlook.com/i
+describe IB_OUTLOOK_FROM     FROM OUTLOOK
+score IB_OUTLOOK_FROM         1.5
+
+
+header IB_HELO_WARNING      exists:X-HELO-Warning
+describe IB_HELO_WARNING    HELO WARNING, Server presented itself as something its not!
+score IB_HELO_WARNING       1.5
+
+
+header IB_FB_HELO_WARNING      Received =~ /helo=mx-out.facebook.com/i
+describe IB_FB_HELO_WARNING    FB always triggers fake helo warning, offsetting that here...
+score IB_FB_HELO_WARNING       -1.5
+
+header IB_DKIM_INVALID       X-WebCP-DKIM-Status =~ /invalid/i
+describe IB_DKIM_INVALID    DKIM INVALID
+score IB_DKIM_INVALID       5.0
+
+header IB_DKIM_NONE       X-WebCP-DKIM-Status =~ /none/i
+describe IB_DKIM_NONE    DKIM NONE
+score IB_DKIM_NONE             1.0
+
+header IB_DKIM_FAIL       X-WebCP-DKIM-Status =~ /fail/i
+describe IB_DKIM_FAIL    DKIM FAIL
+score IB_DKIM_FAIL            3.0
+
+header IB_SPF_FAIL       X-WebCP-SPF =~ /\bfail/i
+describe IB_SPF_FAIL    SPF FAIL
+score IB_SPF_FAIL            3.0
+
+header IB_SPF_SOFTFAIL       X-WebCP-SPF =~ /softfail/i
+describe IB_SPF_SOFTFAIL    SPF SOFT FAIL
+score IB_SPF_SOFTFAIL           0.5
+
+header IB_SPF_NONE       X-WebCP-SPF =~ /none/
+describe IB_SPF_NONE    SPF NONE
+score IB_SPF_NONE           0.5
+
+body IB_TRAINING                       /\b(?:red cherry|strawberry training)/i
+describe IB_TRAINING     body contains red cherry training spam
+score IB_TRAINING        10.0
+
+
+loadplugin FromNotReplyTo /etc/mail/spamassassin/FromNotReplyTo.pm
+header FROM_NOT_REPLYTO eval:check_for_from_not_reply_to()
+score FROM_NOT_REPLYTO 1.5
+describe FROM_NOT_REPLYTO From: does not match Reply-To:
+
+
+
+score SPF_PASS -0.1
+score SPF_FAIL 1.5
+
