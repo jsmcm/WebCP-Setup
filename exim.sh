@@ -219,7 +219,7 @@ echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "  	accept " >> /etc/exim4/exim4.conf
 echo "		senders = : +sender_whitelist" >> /etc/exim4/exim4.conf
-echo "        	control = submission" >> /etc/exim4/exim4.conf
+echo "         	control       = submission/sender_retain/domain=" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "	drop " >> /etc/exim4/exim4.conf
@@ -261,12 +261,12 @@ echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "  	accept  " >> /etc/exim4/exim4.conf
 echo "		hosts         = : +relay_from_hosts" >> /etc/exim4/exim4.conf
-echo "           	control       = submission" >> /etc/exim4/exim4.conf
+echo "         	control       = submission/sender_retain/domain=" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "  	accept  " >> /etc/exim4/exim4.conf
 echo "		authenticated = *" >> /etc/exim4/exim4.conf
-echo "          	control       = submission/sender_retain/domain=" >> /etc/exim4/exim4.conf
+echo "         	control       = submission/sender_retain/domain=" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "  	require " >> /etc/exim4/exim4.conf
