@@ -219,7 +219,7 @@ echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "  	accept " >> /etc/exim4/exim4.conf
 echo "		senders = : +sender_whitelist" >> /etc/exim4/exim4.conf
-echo "         	control       = submission/sender_retain/domain=" >> /etc/exim4/exim4.conf
+echo "         	control       = submission/domain=" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "	drop " >> /etc/exim4/exim4.conf
@@ -261,7 +261,7 @@ echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "  	accept  " >> /etc/exim4/exim4.conf
 echo "		hosts         = : +relay_from_hosts" >> /etc/exim4/exim4.conf
-echo "         	control       = submission/sender_retain/domain=" >> /etc/exim4/exim4.conf
+echo "         	control       = submission/domain=" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "  	accept  " >> /etc/exim4/exim4.conf
@@ -272,7 +272,7 @@ echo "" >> /etc/exim4/exim4.conf
 echo "  	require " >> /etc/exim4/exim4.conf
 echo "		message = relay not permitted" >> /etc/exim4/exim4.conf
 echo "		log_message = relay not permitted" >> /etc/exim4/exim4.conf
-echo "          	domains = +local_domains : +relay_to_domains" >> /etc/exim4/exim4.conf
+echo "         	domains = +local_domains : +relay_to_domains" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo " 	require " >> /etc/exim4/exim4.conf
