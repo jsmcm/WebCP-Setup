@@ -153,7 +153,7 @@ echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
         echo "listen 10025;" >> /etc/nginx/sites-enabled/$HostName.conf
         echo "listen [::]:10025;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "server_name $HostName localhost;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
         echo "root /var/www/html/webcp;" >> /etc/nginx/sites-enabled/$HostName.conf
         echo "index index.php index.html index.htm index.nginx-debian.html;" >> /etc/nginx/sites-enabled/$HostName.conf
