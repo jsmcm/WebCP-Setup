@@ -6,9 +6,9 @@ git clone http://api.webcp.pw/downloads/2.0.0/git/webcp.git ./
 chown www-data.www-data /var/www/html/webcp -R
 
 
-cd /var/www/html/
-wget http://api.webcp.pw/downloads/2.0.0/editor.zip
-unzip editor.zip
+mkdir -p /var/www/html/editor
+cd /var/www/html/editor
+git clone http://api.webcp.pw/downloads/2.0.0/git/editor.git ./
 chown www-data.www-data /var/www/html/editor -R
 
 rm -fr /var/www/html/editor.zip
