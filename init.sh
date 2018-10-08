@@ -417,6 +417,7 @@ ufw default deny incoming
 ufw default allow outgoing
 
 ufw allow 53/udp
+ufw allow 53/tcp
 ufw allow 80/tcp
 ufw allow 443/tcp
 
