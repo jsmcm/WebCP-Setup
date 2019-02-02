@@ -2,13 +2,13 @@
 
 mkdir -p /var/www/html/webcp
 cd /var/www/html/webcp
-git clone http://api.webcp.pw/downloads/2.0.0/git/webcp.git ./
+git clone https://bitbucket.org/webcp/webcp.git ./
 chown www-data.www-data /var/www/html/webcp -R
 
 
 mkdir -p /var/www/html/editor
 cd /var/www/html/editor
-git clone http://api.webcp.pw/downloads/2.0.0/git/editor.git ./
+git clone https://bitbucket.org/webcp/editor.git ./
 chown www-data.www-data /var/www/html/editor -R
 
 rm -fr /var/www/html/editor.zip
