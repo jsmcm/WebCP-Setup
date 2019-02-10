@@ -23,7 +23,6 @@ gpg -a --export CD2EFD2A | sudo apt-key add -
 echo "deb http://repo.percona.com/apt precise main" > /etc/apt/sources.list.d/percona.repo.list
 echo "deb-src http://repo.percona.com/apt precise main" >> /etc/apt/sources.list.d/percona.repo.list
 
-
 apt-get update -y
 
 One="percona-server-server-5.5 percona-server-server/root_password password $PASSWORD"
