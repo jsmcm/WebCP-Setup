@@ -6,7 +6,6 @@
 #
 ##################
 
-
 cd /etc/ssh/
 cp sshd_config bck.sshd_config
 
