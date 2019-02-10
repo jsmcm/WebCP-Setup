@@ -9,7 +9,6 @@ then
 fi
 
 
-
 apt-get install pure-ftpd-mysql -y
 
 
