@@ -178,29 +178,29 @@ mkdir -p /etc/nginx/sites-suspended
 mkdir -p /etc/nginx/modules
 
 echo "server {" > /etc/nginx/sites-enabled/000.conf
-echo "\tlisten 80 default_server;" >> /etc/nginx/sites-enabled/000.conf
-echo "\tserver_name _;" >> /etc/nginx/sites-enabled/000.conf
-echo "\tindex index.php;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlisten 80 default_server;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tserver_name _;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tindex index.php;" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
-echo "\tserver_name_in_redirect off;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tserver_name_in_redirect off;" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
-echo "\troot /var/www/html/webcp/default;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\troot /var/www/html/webcp/default;" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
-echo "\tlocation ~* ^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf|css|js)$ {" >> /etc/nginx/sites-enabled/000.conf
-echo "\t\texpires max;" >> /etc/nginx/sites-enabled/000.conf
-echo "\t}" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlocation ~* ^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf|css|js)$ {" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\texpires max;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t}" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
-echo "\tlocation / {" >> /etc/nginx/sites-enabled/000.conf
-echo "\t\ttry_files $uri $uri/ /index.php?$args;" >> /etc/nginx/sites-enabled/000.conf
-echo "\t}" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlocation / {" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\ttry_files $uri $uri/ /index.php?$args;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t}" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
-echo "\tlocation ~ \.php$ {" >> /etc/nginx/sites-enabled/000.conf
-echo "\t\tinclude snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlocation ~ \.php$ {" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\tinclude snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
-echo "\t\tfastcgi_pass unix:/run/php/php7.0-fpm.sock;" >> /etc/nginx/sites-enabled/000.conf
-echo "\t\tfastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/000.conf
-echo "\t\tfastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/000.conf
-echo "\t}" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\tfastcgi_pass unix:/run/php/php7.0-fpm.sock;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\tfastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\tfastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t}" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
 echo "}" >> /etc/nginx/sites-enabled/000.conf
 
