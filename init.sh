@@ -114,204 +114,6 @@ sleep 2
 echo "$HostName" > /etc/hostname
 
 
-#making this for the nginx script here so I don't need to pass
-#through the hostname
-mkdir -p /etc/nginx/sites-enabled
-
-echo "server {" > /etc/nginx/sites-enabled/$HostName.conf
-    echo "listen 80;" >> /etc/nginx/sites-enabled/$HostName.conf
-    echo "server_name \$server_addr;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-    echo "return 301 http://${HostName}\$request_uri;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-
-
-
-echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen 80;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
-
-echo "        location /webcp {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                return 301 http://$HostName:10025;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-
-
-echo "        location /webmail {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                return 301 http://$HostName:10030;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-
-echo "        location /phpmyadmin {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                return 301 http://$HostName:10035;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-
-
-
-
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "listen 10025;" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "listen [::]:10025;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "server_name $HostName localhost;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "root /var/www/html/webcp;" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "index index.php index.html index.htm index.nginx-debian.html;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "location / {" >> /etc/nginx/sites-enabled/$HostName.conf
-                echo "try_files \$uri \$uri/ /index.php?\$args;" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "location ~ \.php\$ {" >> /etc/nginx/sites-enabled/$HostName.conf
-                echo "include snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/$HostName.conf
-                echo "fastcgi_pass unix:/run/php/php7.0-fpm.sock;" >> /etc/nginx/sites-enabled/$HostName.conf
-                echo "fastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-                echo "fastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "location ~ /\.ht {" >> /etc/nginx/sites-enabled/$HostName.conf
-                echo "deny all;" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-
-
-echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen 20010;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen [::]:20010;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        root /home/$UserName/.editor;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "	index index.php index.html index.htm;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location / {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                try_files \$uri \$uri/ /index.php?\$args;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location ~ \.php\$ {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                include snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_pass unix:/run/php/php7.0-fpm-$UserName.sock;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location ~ /\.ht {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                deny all;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen 20001;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen [::]:20001;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        root /home/$UserName/.passwd;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "	index index.php index.html index.htm;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location / {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                try_files \$uri \$uri/ /index.php?\$args;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location ~ \.php\$ {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                include snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_pass unix:/run/php/php7.0-fpm-$UserName.sock;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location ~ /\.ht {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                deny all;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen 20020;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen [::]:20020;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        root /home/$UserName/.cron;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "	index index.php index.html index.htm;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location / {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                try_files \$uri \$uri/ /index.php?\$args;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location ~ \.php\$ {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                include snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_pass unix:/run/php/php7.0-fpm-$UserName.sock;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location ~ /\.ht {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                deny all;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen 10030;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen [::]:10030;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        root /var/www/html/rainloop;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "	index index.php;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location / {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                try_files \$uri \$uri/ /index.php?\$args;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location ~ \.php\$ {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                include snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_pass unix:/run/php/php7.0-fpm.sock;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location ~ /\.ht {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                deny all;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen 10035;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen [::]:10035;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        root /var/www/html/phpmyadmin;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "	index index.php;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location / {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                try_files \$uri \$uri/ /index.php?\$args;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location ~ \.php\$ {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                include snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_pass unix:/run/php/php7.0-fpm.sock;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                fastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        location ~ /\.ht {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                deny all;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "" >> /etc/nginx/sites-enabled/$HostName.conf
-
-
-
-
 apt-get remove httpd-devel httpd -y
 apt-get remove apache2 -y
 apt-get remove mod_suphp php php-cli php-common php-gd gd php-mbstring php-mcrypt php-xml php-xmlrpc php-soap -y
@@ -348,14 +150,15 @@ apt-get install curl -y
 
 make-ssl-cert generate-default-snakeoil
 
-cd /tmp
-git clone https://github.com/openssl/openssl.git
-cd openssl
-./config
-make
-make install
-echo "/usr/local/lib" >> /etc/ld.so.conf
-ldconfig
+apt-get install openssl -y
+#cd /tmp
+#git clone https://github.com/openssl/openssl.git
+#cd openssl
+#./config
+#make
+#make install
+#echo "/usr/local/lib" >> /etc/ld.so.conf
+#ldconfig
 
 
 
@@ -399,6 +202,7 @@ apt-get install mutt -y
 
 apt-get update -y
 
+apt-get install composer -y
 apt-get install ufw -y
 
 mkdir -p /var/www/html/

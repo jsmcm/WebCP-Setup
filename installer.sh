@@ -15,15 +15,15 @@ rm -fr /tmp/webcp-scripts.sh
 
 Password=`/usr/webcp/get_password.sh`
 
-wget http://api.webcp.pw/downloads/2.0.0/setup/nginx.sh
-chmod 755 /tmp/nginx.sh
-/tmp/nginx.sh
-rm -fr /tmp/nginx.sh
-
 wget http://api.webcp.pw/downloads/2.0.0/setup/php.sh
 chmod 755 /tmp/php.sh
 /tmp/php.sh
 rm -fr /tmp/php.sh
+
+wget http://api.webcp.pw/downloads/2.0.0/setup/nginx.sh
+chmod 755 /tmp/nginx.sh
+/tmp/nginx.sh
+rm -fr /tmp/nginx.sh
 
 wget http://api.webcp.pw/downloads/2.0.0/setup/mysql.sh
 chmod 755 /tmp/mysql.sh
