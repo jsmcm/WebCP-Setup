@@ -40,8 +40,7 @@ chmod 644 /etc/exim4/privkey.key
 
 cd /etc
 rm -fr aliases
-/usr/bin/wget http://webcp.pw/api/downloads/aliases
-
+/usr/bin/wget https://api.webcp.io/downloads/aliases
 
 
 echo "# primary_hostname =" > /etc/exim4/exim4.conf

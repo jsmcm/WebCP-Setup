@@ -44,8 +44,16 @@ echo "!include /etc/dovecot/conf.d/*.conf" >> /etc/dovecot/dovecot.conf
 
 
 echo "ssl = yes" > /etc/dovecot/conf.d/10-ssl.conf
-echo "ssl_cert = </etc/dovecot/dovecot.pem" >> /etc/dovecot/conf.d/10-ssl.conf
-echo "ssl_key = </etc/dovecot/private/dovecot.pem" >> /etc/dovecot/conf.d/10-ssl.conf
+
+if [ -f "/etc/dovecot/dovecot.pem" ]
+then
+	echo "ssl_cert = </etc/dovecot/dovecot.pem" >> /etc/dovecot/conf.d/10-ssl.conf
+	echo "ssl_key = </etc/dovecot/private/dovecot.pem" >> /etc/dovecot/conf.d/10-ssl.conf
+elif [ -f "/etc/dovecot/dovecot.key" ]
+then
+	echo "ssl_cert = </etc/dovecot/private/dovecot.pem" >> /etc/dovecot/conf.d/10-ssl.conf
+	echo "ssl_key = </etc/dovecot/private/dovecot.key" >> /etc/dovecot/conf.d/10-ssl.conf
+fi
 
 
 echo "namespace inbox {" > /etc/dovecot/conf.d/15-mailboxes.conf
