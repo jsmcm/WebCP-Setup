@@ -53,7 +53,7 @@ $(mysql -u root -p$PASSWORD -se "DELETE FROM mysql.user WHERE User='root' AND Ho
 $(mysql -u root -p$PASSWORD -se "DELETE FROM mysql.user WHERE User='';")
 
 cd /tmp
-/usr/bin/wget http://webcp.pw/api/downloads/2.0.0/cpadmin.sql
+/usr/bin/wget https://api.webcp.io/downloads/2.0.0/cpadmin.sql
 
 
 mysql -u root -p$PASSWORD < cpadmin.sql
