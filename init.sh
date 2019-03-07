@@ -128,6 +128,7 @@ apt-get update -y
 apt-get install wget net-tools unzip zip tar -y
 apt-get install gcc make -y
 apt-get install git -y
+apt-get install git-flow -y
 
 #wget -O /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
 #chmod 755 /usr/local/bin/jq
