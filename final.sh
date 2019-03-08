@@ -2,6 +2,12 @@
 
 echo "* * * * * /usr/webcp/director.sh > /dev/null 2>&1" | crontab
 
+if [ ! -d "/var/log/webcp" ]
+then
+	mkdir /var/log/webcp
+	chown www-data.www-data /var/log/webcp
+fi
+
 cd /var/www/html/webcp
 composer install
 
