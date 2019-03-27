@@ -11,9 +11,10 @@ phpVersion=`php -v | grep PHP\ 7 | cut -d ' ' -f 2 | cut -d '.' -f1,2`
 
 cd /tmp
 
-git clone https://github.com/openssl/openssl.git
-cd openssl
-git checkout OpenSSL_1_1_1-stable
+#git clone https://github.com/openssl/openssl.git
+#cd openssl
+#git checkout OpenSSL_1_1_1-stable
+apt-get install libssl-dev -y
 
 mkdir webcp
 chown www-data.www-data webcp
@@ -70,8 +71,7 @@ cd nginx-1.15.8
 	    --with-stream_ssl_preread_module \
             --with-debug \
 	    --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
-            --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie' \
-	    --with-openssl=/tmp/openssl
+            --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie'
         
 
 make
