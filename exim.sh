@@ -72,8 +72,10 @@ echo "" >> /etc/exim4/exim4.conf
 echo "tls_advertise_hosts = *" >> /etc/exim4/exim4.conf
 echo "#tls_require_ciphers = ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:-LOW:-SSLv2:-EXP" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
-echo "tls_certificate = /etc/exim4/certificate.crt" >> /etc/exim4/exim4.conf
-echo "tls_privatekey = /etc/exim4/privkey.key" >> /etc/exim4/exim4.conf
+
+echo "tls_certificate = ${if exists{/etc/letsencrypt/live/${tls_sni}/cert.pem}{/etc/letsencrypt/live/${tls_sni}/cert.pem }{/etc/dovecot/ssl/dovecot.pem}}" >> /etc/exim4/exim4.conf
+echo "tls_privatekey = ${if exists{/etc/letsencrypt/live/${tls_sni}/privkey.pem}{/etc/letsencrypt/live/${tls_sni}/privkey.pem }{/etc/dovecot/ssl/dovecot.key}}" >> /etc/exim4/exim4.conf
+
 echo "" >> /etc/exim4/exim4.conf
 echo "daemon_smtp_ports = 25 : 465 : 587" >> /etc/exim4/exim4.conf
 echo "tls_on_connect_ports = 465" >> /etc/exim4/exim4.conf
