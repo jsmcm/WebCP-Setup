@@ -73,7 +73,7 @@ echo "tls_advertise_hosts = *" >> /etc/exim4/exim4.conf
 echo "#tls_require_ciphers = ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:-LOW:-SSLv2:-EXP" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 
-echo "tls_certificate = ${if exists{/etc/letsencrypt/live/${tls_sni}/cert.pem}{/etc/letsencrypt/live/${tls_sni}/cert.pem }{/etc/exim4/certificate.crt}}" >> /etc/exim4/exim4.conf
+echo "tls_certificate = ${if exists{/etc/letsencrypt/live/${tls_sni}/fullchain.pem}{/etc/letsencrypt/live/${tls_sni}/fullchain.pem }{/etc/exim4/certificate.crt}}" >> /etc/exim4/exim4.conf
 echo "tls_privatekey = ${if exists{/etc/letsencrypt/live/${tls_sni}/privkey.pem}{/etc/letsencrypt/live/${tls_sni}/privkey.pem }{/etc/exim4/privkey.key}}" >> /etc/exim4/exim4.conf
 
 echo "" >> /etc/exim4/exim4.conf
