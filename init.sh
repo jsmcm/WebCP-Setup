@@ -185,6 +185,7 @@ perl -MCPAN -e 'install Net::DNS'
 perl -MCPAN -e 'install Net::DNS::Resolver'
 perl -MCPAN -e 'install Net::DNS::Resolver::Programmable'
 perl -MCPAN -e 'install Archive::Tar'
+perl -MCPAN -e 'DBI'
 
 
 apt-get install openssl openssl-devel -y

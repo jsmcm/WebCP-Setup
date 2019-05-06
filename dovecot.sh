@@ -2,6 +2,9 @@
 
 apt-get install dovecot-core dovecot-imapd dovecot-pop3d -y
 
+mkdir /etc/dovecot/ssl
+chown dovecot.dovecot /etc/dovecot/ssl
+
 cd /usr/share/dovecot
 ./mkcert.sh
 
@@ -53,10 +56,15 @@ elif [ -f "/etc/dovecot/dovecot.key" ]
 then
 	echo "ssl_cert = </etc/dovecot/private/dovecot.pem" >> /etc/dovecot/conf.d/10-ssl.conf
 	echo "ssl_key = </etc/dovecot/private/dovecot.key" >> /etc/dovecot/conf.d/10-ssl.conf
+elif [ -f "/etc/dovecot/ssl/dovecot.pem" ] && [ -f "/etc/dovecot/ssl/dovecot.key" ]
+then
+	echo "ssl_cert = </etc/dovecot/ssl/dovecot.pem" >> /etc/dovecot/conf.d/10-ssl.conf
+	echo "ssl_key = </etc/dovecot/ssl/dovecot.key" >> /etc/dovecot/conf.d/10-ssl.conf
 fi
 
 
 echo "namespace inbox {" > /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    inbox = yes" > /etc/dovecot/conf.d/15-mailboxes.conf
 echo "    mailbox Drafts {" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "        auto = create" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "        special_use = \Drafts" >> /etc/dovecot/conf.d/15-mailboxes.conf
