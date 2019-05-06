@@ -202,6 +202,10 @@ echo -e "\tlocation / {" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\t\ttry_files \$uri \$uri/ /index.php?\$args;" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\t}" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlocation /webcp {" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\treturn 301 http://\$server_addr:10025;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t}" >> /etc/nginx/sites-enabled/000.conf
+echo "" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\tlocation ~ \.php\$ {" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\t\tinclude snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
