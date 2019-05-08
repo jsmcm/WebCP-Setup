@@ -9,7 +9,29 @@
 
 phpVersion=`php -v | grep PHP\ 7 | cut -d ' ' -f 2 | cut -d '.' -f1,2`
 
+apt-get install build-essential zlib1g-dev libpcre3 libpcre3-dev unzip -y
+
+mkdir -p /etc/nginx/
+cd /etc/nginx/
+
+NPS_VERSION=1.13.35.2-stable
+wget https://github.com/apache/incubator-pagespeed-ngx/archive/v${NPS_VERSION}.zip
+unzip v${NPS_VERSION}.zip
+nps_dir=$(find . -name "*pagespeed-ngx-${NPS_VERSION}" -type d)
+cd "$nps_dir"
+NPS_RELEASE_NUMBER=${NPS_VERSION/beta/}
+NPS_RELEASE_NUMBER=${NPS_VERSION/stable/}
+psol_url=https://dl.google.com/dl/page-speed/psol/${NPS_RELEASE_NUMBER}.tar.gz
+[ -e scripts/format_binary_url.sh ] && psol_url=$(scripts/format_binary_url.sh PSOL_BINARY_URL)
+wget ${psol_url}
+tar -xzvf $(basename ${psol_url})  # extracts to psol/
+cd ../
+mv -f $nps_dir /etc/nginx/pagespeed
+rm -fr /etc/nginx/v${NPS_VERSION}.zip
+rm -fr /etc/nginx/pagespeed/*.tar.gz
+
 cd /tmp
+
 
 #git clone https://github.com/openssl/openssl.git
 #cd openssl
@@ -69,10 +91,10 @@ cd nginx-1.15.8
 	    --with-stream_realip_module  \
 	    --with-stream_ssl_module  \
 	    --with-stream_ssl_preread_module \
-            --with-debug \
+            #--with-debug \
 	    --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
             --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie'
-        
+            --add-module=/etc/nginx/pagespeed ${PS_NGX_EXTRA_FLAGS}
 
 make
 
@@ -155,6 +177,34 @@ echo "" >> /etc/nginx/nginx.conf
 echo "" >> /etc/nginx/nginx.conf
     echo "gzip  on;" >> /etc/nginx/nginx.conf
 echo "" >> /etc/nginx/nginx.conf
+
+    echo "pagespeed on;" >> /etc/nginx/nginx.conf
+    echo "pagespeed FileCachePath /var/cache/ngx_pagespeed_cache;" >> /etc/nginx/nginx.conf
+
+
+echo "pagespeed EnableFilters rewrite_css;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters collapse_whitespace,remove_comments;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters flatten_css_imports;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters combine_css;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters combine_javascript;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters defer_javascript;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters extend_cache;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters pedantic;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters inline_google_font_css;" >> /etc/nginx/nginx.conf
+echo "pagespeed FetchHttps enable;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters inline_css,move_css_above_scripts;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters inline_javascript;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters inline_import_to_link;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters lazyload_images;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters insert_dns_prefetch;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters inline_preview_images;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters resize_mobile_images;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters rewrite_images;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters responsive_images,resize_images;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters responsive_images_zoom;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters rewrite_javascript;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters rewrite_style_attributes,convert_meta_tags;" >> /etc/nginx/nginx.conf
+
         echo "include /etc/nginx/sites-enabled/*;" >> /etc/nginx/nginx.conf
 echo "}" >> /etc/nginx/nginx.conf
 echo "" >> /etc/nginx/nginx.conf
