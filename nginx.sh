@@ -10,9 +10,10 @@
 phpVersion=`php -v | grep PHP\ 7 | cut -d ' ' -f 2 | cut -d '.' -f1,2`
 
 apt-get install build-essential zlib1g-dev libpcre3 libpcre3-dev unzip -y
+apt-get install uuid-dev uuid -y
 
-mkdir -p /etc/nginx/
-cd /etc/nginx/
+mkdir -p /etc/nginx/pagespeed
+cd /etc/nginx/pagespeed
 
 NPS_VERSION=1.13.35.2-stable
 wget https://github.com/apache/incubator-pagespeed-ngx/archive/v${NPS_VERSION}.zip
@@ -25,10 +26,7 @@ psol_url=https://dl.google.com/dl/page-speed/psol/${NPS_RELEASE_NUMBER}.tar.gz
 [ -e scripts/format_binary_url.sh ] && psol_url=$(scripts/format_binary_url.sh PSOL_BINARY_URL)
 wget ${psol_url}
 tar -xzvf $(basename ${psol_url})  # extracts to psol/
-cd ../
-mv -f $nps_dir /etc/nginx/pagespeed
-rm -fr /etc/nginx/v${NPS_VERSION}.zip
-rm -fr /etc/nginx/pagespeed/*.tar.gz
+
 
 cd /tmp
 
@@ -93,8 +91,9 @@ cd nginx-1.15.8
 	    --with-stream_ssl_preread_module \
             #--with-debug \
 	    --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
-            --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie'
-            --add-module=/etc/nginx/pagespeed ${PS_NGX_EXTRA_FLAGS}
+            --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie' \
+	    --add-module=/etc/nginx/pagespeed/incubator-pagespeed-ngx-${NPS_VERSION}/ ${PS_NGX_EXTRA_FLAGS}
+
 
 make
 
