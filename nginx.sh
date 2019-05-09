@@ -9,7 +9,7 @@
 
 phpVersion=`php -v | grep PHP\ 7 | cut -d ' ' -f 2 | cut -d '.' -f1,2`
 
-apt-get install build-essential zlib1g-dev libpcre3 libpcre3-dev unzip -y
+apt-get install dpkg-dev build-essential zlib1g-dev libpcre3 libpcre3-dev unzip -y
 apt-get install uuid-dev uuid -y
 
 mkdir -p /etc/nginx/pagespeed
@@ -27,6 +27,10 @@ psol_url=https://dl.google.com/dl/page-speed/psol/${NPS_RELEASE_NUMBER}.tar.gz
 wget ${psol_url}
 tar -xzvf $(basename ${psol_url})  # extracts to psol/
 
+
+
+cd /usr/local/src
+git clone --recursive https://github.com/google/ngx_brotli.git
 
 cd /tmp
 
@@ -89,11 +93,10 @@ cd nginx-1.15.8
 	    --with-stream_realip_module  \
 	    --with-stream_ssl_module  \
 	    --with-stream_ssl_preread_module \
-            #--with-debug \
 	    --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
             --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie' \
-	    --add-module=/etc/nginx/pagespeed/incubator-pagespeed-ngx-${NPS_VERSION}/ ${PS_NGX_EXTRA_FLAGS}
-
+	    --add-module=/etc/nginx/pagespeed/incubator-pagespeed-ngx-${NPS_VERSION}/ ${PS_NGX_EXTRA_FLAGS} \
+	    --add-module=/usr/local/src/ngx_brotli
 
 make
 
@@ -103,6 +106,7 @@ make install
 mkdir -p /var/lib/nginx 
 mkdir -p /var/cache/nginx/client_temp
 
+mkdir -p /var/cache/ngx_pagespeed_cache
 
 
 cd /etc/nginx
@@ -173,14 +177,66 @@ echo "" >> /etc/nginx/nginx.conf
 echo "" >> /etc/nginx/nginx.conf
     echo "#keepalive_timeout  0;" >> /etc/nginx/nginx.conf
     echo "keepalive_timeout  65;" >> /etc/nginx/nginx.conf
+
+    echo "" >> /etc/nginx/nginx.conf
+echo "" >> /etc/nginx/nginx.conf
+echo "brotli on;" >> /etc/nginx/nginx.conf
+echo "brotli_comp_level 6;" >> /etc/nginx/nginx.conf
+echo "brotli_static on;" >> /etc/nginx/nginx.conf
+echo "brotli_types" >> /etc/nginx/nginx.conf
+echo "	text/plain" >> /etc/nginx/nginx.conf
+echo "	text/css" >> /etc/nginx/nginx.conf
+echo "	application/javascript" >> /etc/nginx/nginx.conf
+echo "	application/x-javascript" >> /etc/nginx/nginx.conf
+echo "	text/xml" >> /etc/nginx/nginx.conf
+echo "	application/xml" >> /etc/nginx/nginx.conf
+echo "	application/xml+rss" >> /etc/nginx/nginx.conf
+echo "	text/javascript" >> /etc/nginx/nginx.conf
+echo "	image/x-icon" >> /etc/nginx/nginx.conf
+echo "	image/vnd.microsoft.icon" >> /etc/nginx/nginx.conf
+echo "	image/bmp" >> /etc/nginx/nginx.conf
+echo "	image/svg+xml;" >> /etc/nginx/nginx.conf
+echo "	" >> /etc/nginx/nginx.conf
+echo "	" >> /etc/nginx/nginx.conf
+
 echo "" >> /etc/nginx/nginx.conf
     echo "gzip  on;" >> /etc/nginx/nginx.conf
+    echo "gzip_comp_level    5;" >> /etc/nginx/nginx.conf
+echo "gzip_min_length    256;" >> /etc/nginx/nginx.conf
+echo "gzip_proxied       any;" >> /etc/nginx/nginx.conf
+echo "gzip_vary          on;" >> /etc/nginx/nginx.conf
+echo "gzip_types" >> /etc/nginx/nginx.conf
+echo "application/atom+xml" >> /etc/nginx/nginx.conf
+echo "application/javascript" >> /etc/nginx/nginx.conf
+echo "application/json" >> /etc/nginx/nginx.conf
+echo "application/ld+json" >> /etc/nginx/nginx.conf
+echo "application/manifest+json" >> /etc/nginx/nginx.conf
+echo "application/rss+xml" >> /etc/nginx/nginx.conf
+echo "application/vnd.geo+json" >> /etc/nginx/nginx.conf
+echo "application/vnd.ms-fontobject" >> /etc/nginx/nginx.conf
+echo "application/x-font-ttf" >> /etc/nginx/nginx.conf
+echo "application/x-web-app-manifest+json" >> /etc/nginx/nginx.conf
+echo "application/xhtml+xml" >> /etc/nginx/nginx.conf
+echo "application/xml" >> /etc/nginx/nginx.conf
+echo "font/opentype" >> /etc/nginx/nginx.conf
+echo "image/bmp" >> /etc/nginx/nginx.conf
+echo "image/svg+xml" >> /etc/nginx/nginx.conf
+echo "image/x-icon" >> /etc/nginx/nginx.conf
+echo "text/cache-manifest" >> /etc/nginx/nginx.conf
+echo "text/css" >> /etc/nginx/nginx.conf
+echo "text/plain" >> /etc/nginx/nginx.conf
+echo "text/vcard" >> /etc/nginx/nginx.conf
+echo "text/vnd.rim.location.xloc" >> /etc/nginx/nginx.conf
+echo "text/vtt" >> /etc/nginx/nginx.conf
+echo "text/x-component" >> /etc/nginx/nginx.conf
+echo "text/x-cross-domain-policy;" >> /etc/nginx/nginx.conf
+
 echo "" >> /etc/nginx/nginx.conf
 
     echo "pagespeed on;" >> /etc/nginx/nginx.conf
     echo "pagespeed FileCachePath /var/cache/ngx_pagespeed_cache;" >> /etc/nginx/nginx.conf
 
-
+echo "pagespeed ModifyCachingHeaders off;" >> /etc/nginx.conf
 echo "pagespeed EnableFilters rewrite_css;" >> /etc/nginx/nginx.conf
 echo "pagespeed EnableFilters collapse_whitespace,remove_comments;" >> /etc/nginx/nginx.conf
 echo "pagespeed EnableFilters flatten_css_imports;" >> /etc/nginx/nginx.conf
@@ -203,8 +259,16 @@ echo "pagespeed EnableFilters responsive_images,resize_images;" >> /etc/nginx/ng
 echo "pagespeed EnableFilters responsive_images_zoom;" >> /etc/nginx/nginx.conf
 echo "pagespeed EnableFilters rewrite_javascript;" >> /etc/nginx/nginx.conf
 echo "pagespeed EnableFilters rewrite_style_attributes,convert_meta_tags;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters inline_images;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters recompress_images;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters jpeg_subsampling;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters convert_png_to_jpeg;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters resize_images;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters convert_jpeg_to_webp;" >> /etc/nginx/nginx.conf
+echo "pagespeed EnableFilters convert_to_webp_lossless;" >> /etc/nginx/nginx.conf
 
-        echo "include /etc/nginx/sites-enabled/*;" >> /etc/nginx/nginx.conf
+
+echo "include /etc/nginx/sites-enabled/*;" >> /etc/nginx/nginx.conf
 echo "}" >> /etc/nginx/nginx.conf
 echo "" >> /etc/nginx/nginx.conf
 
@@ -524,6 +588,8 @@ echo "                deny all;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+
+chown www-data.www-data /var/cache/ngx_pagespeed_cache
 
 systemctl enable nginx.service
 systemctl start nginx.service

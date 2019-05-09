@@ -1,0 +1,5 @@
+* 2.1.0 *
+ - Implements pagespeed
+ - Enhances gzip settings
+ - Implements hsts
+ - implements brotli compression
