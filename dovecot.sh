@@ -64,7 +64,7 @@ fi
 
 
 echo "namespace inbox {" > /etc/dovecot/conf.d/15-mailboxes.conf
-echo "    inbox = yes" > /etc/dovecot/conf.d/15-mailboxes.conf
+echo "    inbox = yes" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "    mailbox Drafts {" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "        auto = create" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "        special_use = \Drafts" >> /etc/dovecot/conf.d/15-mailboxes.conf
