@@ -2,4 +2,5 @@
  - Added this readme
  - Changed server ports to work with cloudflare
  - Turned off pagespeed in server services blocks
+ - Fix in dovecot setup script which didn't write first line in 15-mailboxes.conf which in turn caused dovecot to never start
 
