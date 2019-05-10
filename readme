@@ -1,0 +1,5 @@
+* 2.1.0 *
+ - Added this readme
+ - Changed server ports to work with cloudflare
+ - Turned off pagespeed in server services blocks
+

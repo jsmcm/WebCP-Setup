@@ -369,6 +369,8 @@ echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
         echo "listen 10025;" >> /etc/nginx/sites-enabled/$HostName.conf
         echo "listen [::]:10025;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "		pagespeed off;" >> /etc/nginx/sites-enabled/$DomainName.conf
+echo "" >> /etc/nginx/sites-enabled/$DomainName.conf
         echo "server_name $HostName localhost;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
         echo "root /var/www/html/webcp;" >> /etc/nginx/sites-enabled/$HostName.conf
@@ -392,9 +394,11 @@ echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 
 
 echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen 20010;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen [::]:20010;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "        listen 10050;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "        listen [::]:10050;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "		pagespeed off;" >> /etc/nginx/sites-enabled/$DomainName.conf
+echo "" >> /etc/nginx/sites-enabled/$DomainName.conf
 echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        root /home/$UserName/.editor;" >> /etc/nginx/sites-enabled/$HostName.conf
@@ -421,6 +425,8 @@ echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        listen 20001;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        listen [::]:20001;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "		pagespeed off;" >> /etc/nginx/sites-enabled/$DomainName.conf
+echo "" >> /etc/nginx/sites-enabled/$DomainName.conf
 echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        root /home/$UserName/.passwd;" >> /etc/nginx/sites-enabled/$HostName.conf
@@ -444,9 +450,11 @@ echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen 20020;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen [::]:20020;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "        listen 10060;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "        listen [::]:10060;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "		pagespeed off;" >> /etc/nginx/sites-enabled/$DomainName.conf
+echo "" >> /etc/nginx/sites-enabled/$DomainName.conf
 echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        root /home/$UserName/.cron;" >> /etc/nginx/sites-enabled/$HostName.conf
@@ -474,6 +482,8 @@ echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        listen 10030;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        listen [::]:10030;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "		pagespeed off;" >> /etc/nginx/sites-enabled/$DomainName.conf
+echo "" >> /etc/nginx/sites-enabled/$DomainName.conf
 echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        root /var/www/html/rainloop;" >> /etc/nginx/sites-enabled/$HostName.conf
@@ -502,6 +512,8 @@ echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        listen 10035;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        listen [::]:10035;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "		pagespeed off;" >> /etc/nginx/sites-enabled/$DomainName.conf
+echo "" >> /etc/nginx/sites-enabled/$DomainName.conf
 echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        root /var/www/html/phpmyadmin;" >> /etc/nginx/sites-enabled/$HostName.conf
