@@ -1,10 +1,8 @@
-<<<<<<< HEAD
-* 2.1.0 *
- - Implements pagespeed
- - Enhances gzip settings
- - Implements hsts
- - implements brotli compression
-=======
+*2.1.2 *
+= released: 2019-05-10 =
+ - Fixed cloudflare service ports
+ - Added SSL to service ports
+
 * 2.1.1 *
 = released: 2019-05-10 =
  - Added this readme
@@ -12,4 +10,8 @@
  - Turned off pagespeed in server services blocks
  - Fix in dovecot setup script which didn't write first line in 15-mailboxes.conf which in turn caused dovecot to never start
 
->>>>>>> release/2.1.1
+* 2.1.0 *
+ - Implements pagespeed
+ - Enhances gzip settings
+ - Implements hsts
+ - implements brotli compression
