@@ -329,6 +329,35 @@ echo -e "\t}" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
 echo "}" >> /etc/nginx/sites-enabled/000.conf
 
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "server {" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlisten 10025;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlisten [::]:10025;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tpagespeed off;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tserver_name localhost;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\troot /var/www/html/webcp;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tindex index.php;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlocation / {" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\ttry_files $uri $uri/ /index.php?$args;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t}" >> /etc/nginx/sites-enabled/000.conf
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlocation ~ \.php$ {" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\tinclude snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\tfastcgi_pass unix:/run/php/php7.2-fpm.sock;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\tfastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\tfastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t}" >> /etc/nginx/sites-enabled/000.conf
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+echo -e "}" >> /etc/nginx/sites-enabled/000.conf
+echo -e "" >> /etc/nginx/sites-enabled/000.conf
+
 
 
 
