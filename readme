@@ -1,6 +1,7 @@
 * 2.1.4 *
 = released: 
  - Updated webcp port to 8880/8443 for cloudflare
+ - Adds initial self signed cert to allow https to webcp
 
 * 2.1.3 *
 = released: 2019-05-13 =
