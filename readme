@@ -1,8 +1,12 @@
-*2.1.3 *
+* 2.1.4 *
+= released: 
+ - Updated webcp port to 8880/8443 for cloudflare
+
+* 2.1.3 *
 = released: 2019-05-13 =
  - Added localhost location to default nginx conf so that services running locally and calling localhost can work
 
-*2.1.2 *
+* 2.1.2 *
 = released: 2019-05-10 =
  - Fixed cloudflare service ports
  - Added SSL to service ports
