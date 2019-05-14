@@ -1,7 +1,8 @@
 * 2.1.4 *
-= released: 
+= released: 2019-05-14 =
  - Updated webcp port to 8880/8443 for cloudflare
  - Adds initial self signed cert to allow https to webcp
+ - Updated spamassassin to auto accept defaults
 
 * 2.1.3 *
 = released: 2019-05-13 =
