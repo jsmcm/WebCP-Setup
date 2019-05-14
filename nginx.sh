@@ -302,6 +302,7 @@ echo "server {" > /etc/nginx/sites-enabled/000.conf
 echo -e "\tlisten 80 default_server;" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\tserver_name _;" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\tindex index.php;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tpagespeed off;" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\tserver_name_in_redirect off;" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
@@ -433,6 +434,7 @@ echo "server {" > /etc/nginx/sites-enabled/$HostName.conf
     echo "server_name \$server_addr;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
     echo "return 301 http://${HostName}\$request_uri;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo -e "\tpagespeed off;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 
 
@@ -440,6 +442,7 @@ echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        listen 80;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo -e "\tpagespeed off;" >> /etc/nginx/sites-enabled/$HostName.conf
 
 echo "        location /webcp {" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "                return 301 http://$HostName:8880;" >> /etc/nginx/sites-enabled/$HostName.conf

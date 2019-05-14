@@ -1,3 +1,7 @@
+* 2.1.5 *
+= released: =
+ - Disable pagespeed by default
+
 * 2.1.4 *
 = released: 2019-05-14 =
  - Updated webcp port to 8880/8443 for cloudflare
