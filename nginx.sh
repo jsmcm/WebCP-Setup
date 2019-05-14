@@ -316,7 +316,7 @@ echo -e "\t\ttry_files \$uri \$uri/ /index.php?\$args;" >> /etc/nginx/sites-enab
 echo -e "\t}" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\tlocation /webcp {" >> /etc/nginx/sites-enabled/000.conf
-echo -e "\t\treturn 301 http://\$server_addr:10025;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\t\treturn 301 http://\$server_addr:8880;" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\t}" >> /etc/nginx/sites-enabled/000.conf
 echo "" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\tlocation ~ \.php\$ {" >> /etc/nginx/sites-enabled/000.conf
@@ -333,8 +333,8 @@ echo -e "" >> /etc/nginx/sites-enabled/000.conf
 echo -e "" >> /etc/nginx/sites-enabled/000.conf
 echo -e "" >> /etc/nginx/sites-enabled/000.conf
 echo -e "server {" >> /etc/nginx/sites-enabled/000.conf
-echo -e "\tlisten 10025;" >> /etc/nginx/sites-enabled/000.conf
-echo -e "\tlisten [::]:10025;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlisten 8880;" >> /etc/nginx/sites-enabled/000.conf
+echo -e "\tlisten [::]:8880;" >> /etc/nginx/sites-enabled/000.conf
 echo -e "" >> /etc/nginx/sites-enabled/000.conf
 echo -e "\tpagespeed off;" >> /etc/nginx/sites-enabled/000.conf
 echo -e "" >> /etc/nginx/sites-enabled/000.conf
@@ -441,7 +441,7 @@ echo "        listen 80;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
 
 echo "        location /webcp {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "                return 301 http://$HostName:10025;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "                return 301 http://$HostName:8880;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "        }" >> /etc/nginx/sites-enabled/$HostName.conf
 
 
@@ -459,12 +459,12 @@ echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "listen 10025;" >> /etc/nginx/sites-enabled/$HostName.conf
-        echo "listen [::]:10025;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "listen 8880;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "listen [::]:8880;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "		pagespeed off;" >> /etc/nginx/sites-enabled/$DomainName.conf
 echo "" >> /etc/nginx/sites-enabled/$DomainName.conf
-        echo "server_name $HostName localhost;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
         echo "root /var/www/html/webcp;" >> /etc/nginx/sites-enabled/$HostName.conf
         echo "index index.php index.html index.htm index.nginx-debian.html;" >> /etc/nginx/sites-enabled/$HostName.conf
@@ -484,6 +484,38 @@ echo "" >> /etc/nginx/sites-enabled/$HostName.conf
                 echo "deny all;" >> /etc/nginx/sites-enabled/$HostName.conf
         echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
+
+
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "listen 8443 ssl;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "listen [::]:8443 ssl;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "		pagespeed off;" >> /etc/nginx/sites-enabled/$DomainName.conf
+echo "		include /etc/nginx/snippets/snakeoil.conf;" >> /etc/nginx/sites-enabled/$DomainName.conf
+echo "" >> /etc/nginx/sites-enabled/$DomainName.conf
+        echo "server_name $HostName;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "root /var/www/html/webcp;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "index index.php index.html index.htm index.nginx-debian.html;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "location / {" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "try_files \$uri \$uri/ /index.php?\$args;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "location ~ \.php\$ {" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "include snippets/fastcgi-php.conf;" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "fastcgi_pass unix:/run/php/php$phpVersion-fpm.sock;" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "fastcgi_send_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "fastcgi_read_timeout 300;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "location ~ /\.ht {" >> /etc/nginx/sites-enabled/$HostName.conf
+                echo "deny all;" >> /etc/nginx/sites-enabled/$HostName.conf
+        echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
+
+
 
 
 echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf

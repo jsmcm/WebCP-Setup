@@ -35,7 +35,7 @@ sub custom_line {
 
 
 	if (($lgfile eq $config{CUSTOM1_LOG}) and ($line =~ /^\S+\s+\S+\s-\sFailed Login Attempt - IP Address = (\S+)/)) {
-		return ("Failed WebCP login from",$1,"webcp","5","10025","900");
+		return ("Failed WebCP login from",$1,"webcp","5","8880","900");
 	}
 
 # If the matches in this file are not syntactically correct for perl then lfd

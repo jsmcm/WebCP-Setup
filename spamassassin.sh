@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export PERL_MM_USE_DEFAULT=1
 perl -MCPAN -e 'install Mail::SpamAssassin'
 perl -MCPAN -e 'install Mail::SpamAssassin::Plugin'
 perl -MCPAN -e 'install Mail::SpamAssassin::Plugin::Shortcircuit'

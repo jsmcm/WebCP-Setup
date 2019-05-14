@@ -229,10 +229,6 @@ ufw allow 443/tcp
 
 ufw allow 7533/tcp
 
-ufw allow 10025/tcp
-ufw allow 10030/tcp
-ufw allow 10035/tcp
-ufw allow 20010/tcp
 
 ufw allow 21/tcp
 
