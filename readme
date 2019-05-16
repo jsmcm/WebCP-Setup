@@ -1,6 +1,7 @@
 * 2.1.5 *
 = released: =
  - Disable pagespeed by default
+ - Updated ufw rules and start ufw in final.sh
 
 * 2.1.4 *
 = released: 2019-05-14 =
