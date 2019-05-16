@@ -1,3 +1,8 @@
+* 2.1.5 *
+= released: 2019-05-16 =
+ - Disable pagespeed by default
+ - Updated ufw rules and start ufw in final.sh
+
 * 2.1.4 *
 = released: 2019-05-14 =
  - Updated webcp port to 8880/8443 for cloudflare

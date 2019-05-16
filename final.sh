@@ -14,3 +14,5 @@ composer install
 mkdir /var/www/html/webcp/nm
 chown www-data.www-data /var/www/html/webcp -R
 touch /var/www/html/webcp/nm/letsencrypt.install
+
+echo "y" | ufw enable

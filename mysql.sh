@@ -14,7 +14,6 @@ then
         exit
 fi
 
-ufw allow 3306/tcp
 
 
 apt-get update -y
