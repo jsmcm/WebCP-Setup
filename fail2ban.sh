@@ -234,7 +234,7 @@ echo "#         Daniel Black (rewrote with strong regexs)" >> /etc/fail2ban/filt
 
 
 
-echo "" >> /etc/fail2ban/jail.local
+echo "" > /etc/fail2ban/jail.local
 echo "[DEFAULT]" >> /etc/fail2ban/jail.local
 echo "ignoreip = 127.0.0.1/8" >> /etc/fail2ban/jail.local
 echo "ignorecommand =" >> /etc/fail2ban/jail.local
