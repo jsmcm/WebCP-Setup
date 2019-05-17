@@ -13,6 +13,15 @@ apt-get install fail2ban -y
 #fail2ban-client set <JAIL-NAME> unbanip <IP-ADDRESS>
 #fail2ban-client set <JAIL-NAME> banip <IP-ADDRESS>
 
+echo "# Fail2Ban filter for webcp" > /etc/fail2ban/filter.d/webcp.conf
+echo "#" >> /etc/fail2ban/filter.d/webcp.conf
+echo"" >> /etc/fail2ban/filter.d/webcp.conf
+echo "[Definition]" >> /etc/fail2ban/filter.d/webcp.conf
+echo"" >> /etc/fail2ban/filter.d/webcp.conf
+echo "failregex = IP Address = <HOST>\\s*\$" >> /etc/fail2ban/filter.d/webcp.conf
+echo"" >> /etc/fail2ban/filter.d/webcp.conf
+echo "ignoreregex =" >> /etc/fail2ban/filter.d/webcp.conf
+
 
 echo "# Fail2Ban filter for spamhause bans in webcp" > /etc/fail2ban/filter.d/webcp-spamhause.conf
 echo "#" >> /etc/fail2ban/filter.d/webcp-spamhause.conf
@@ -270,13 +279,15 @@ echo "[webcp-spamhause]" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "port    = 0:65535" >> /etc/fail2ban/jail.local
 echo "bantime = 604800" >> /etc/fail2ban/jail.local
+echo "action = webcp[name=webcp-spamhause, bantime=604800]" >> /etc/fail2ban/jail.local
+echo "		iptables-multiport[name=webcp-spamhause, port=\"0:65535\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[webcp-manual]" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "port    = \"0:65535\"" >> /etc/fail2ban/jail.local
-echo "bantime = 30" >> /etc/fail2ban/jail.local
-echo "action = webcp[name=webcp-manual, bantime=30]" >> /etc/fail2ban/jail.local
+echo "bantime = 86400" >> /etc/fail2ban/jail.local
+echo "action = webcp[name=webcp-manual, bantime=86400]" >> /etc/fail2ban/jail.local
 echo "		iptables-multiport[name=webcp-manual, port=\"0:65535\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[sshd]" >> /etc/fail2ban/jail.local
@@ -284,19 +295,21 @@ echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "port    = 7533" >> /etc/fail2ban/jail.local
 echo "logpath = %(sshd_log)s" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=sshd, bantime=600]" >> /etc/fail2ban/jail.local
-echo "         iptables-multiport[name=sshd, protocol=tcp]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=sshd, port=7533, protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[sshd-ddos]" >> /etc/fail2ban/jail.local
 echo "port    = 7533" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "logpath = %(sshd_log)s" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=sshd-ddos, bantime=600]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=sshd-ddos, port=7533, protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[nginx-http-auth]" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "port    = http,https" >> /etc/fail2ban/jail.local
 echo "logpath = %(nginx_error_log)s" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=nginx-http-auth, bantime=600]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=nginx-http-auth, port=\"80,443\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[nginx-botsearch]" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
@@ -304,17 +317,21 @@ echo "port     = http,https" >> /etc/fail2ban/jail.local
 echo "logpath  = %(nginx_error_log)s" >> /etc/fail2ban/jail.local
 echo "maxretry = 2" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=nginx-botsearch, bantime=600]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=nginx-botsearch, port=\"80,443\", protocol=tcp]" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
 echo "[php-url-fopen]" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "port    = http,https" >> /etc/fail2ban/jail.local
 echo "logpath = %(nginx_access_log)s" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=php-url-fopen, bantime=600]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=php-url-fopen, port=\"80,443\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[drupal-auth]" >> /etc/fail2ban/jail.local
 echo "enabled = false" >> /etc/fail2ban/jail.local
 echo "port     = http,https" >> /etc/fail2ban/jail.local
 echo "logpath  = %(syslog_daemon)s" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=drupal-auth, bantime=600]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=dripal-auth, port=\"80,443\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[wordpress-hard]" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
@@ -323,7 +340,23 @@ echo "logpath = /var/log/auth.log" >> /etc/fail2ban/jail.local
 echo "maxretry = 3" >> /etc/fail2ban/jail.local
 echo "port = http,https" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=wordpress-hard, bantime=600]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=wordpress-hard, port=\"80,443\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
+
+
+echo "[webcp]" >> /etc/fail2ban/jail.local
+echo "enabled = true" >> /etc/fail2ban/jail.local
+echo "filter = webcp" >> /etc/fail2ban/jail.local
+echo "port = 8443,8880" >> /etc/fail2ban/jail.local
+echo "maxretry = 5" >> /etc/fail2ban/jail.local
+echo "bantime = 900" >> /etc/fail2ban/jail.local
+echo "logpath = /var/log/webcp/failedlog" >> /etc/fail2ban/jail.local
+echo "action = webcp[name=webcp, bantime=900]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=webcp, port=\"8443,8880\", protocol=tcp]" >> /etc/fail2ban/jail.local
+echo "" >> /etc/fail2ban/jail.local
+
+
+
 echo "[rainloop]" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "filter = rainloop" >> /etc/fail2ban/jail.local
@@ -332,7 +365,7 @@ echo "maxretry = 3" >> /etc/fail2ban/jail.local
 echo "logpath = /var/www/html/rainloop/data/_data_/_default_/logs/fail2ban/auth.log" >> /etc/fail2ban/jail.local
 echo "findtime = 14400" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=rainloop, bantime=600]" >> /etc/fail2ban/jail.local
-echo "         iptables-multiport[name=rainloop, protocol=tcp]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=rainloop, port=\"2086,2087\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[phpmyadmin]" >> /etc/fail2ban/jail.local
@@ -342,6 +375,7 @@ echo "port = 2095,2096" >> /etc/fail2ban/jail.local
 echo "maxretry = 3" >> /etc/fail2ban/jail.local
 echo "logpath = /var/log/phpmyadmin.log" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=phpmyadmin, bantime=600]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=phpmyadmin, port=\"2095,2096\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[monit]" >> /etc/fail2ban/jail.local
 echo "filter   = monit" >> /etc/fail2ban/jail.local
@@ -355,18 +389,19 @@ echo "port     = ftp,ftp-data,ftps,ftps-data" >> /etc/fail2ban/jail.local
 echo "logpath  = %(pureftpd_log)s" >> /etc/fail2ban/jail.local
 echo "maxretry = 6" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=pure-ftpd, bantime=600]" >> /etc/fail2ban/jail.local
+echo "         iptables-multiport[name=pure-ftpd, port=\"20,21,989,990\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[dovecot]" >> /etc/fail2ban/jail.local
 echo "port    = pop3,pop3s,imap,imaps,submission,465,sieve" >> /etc/fail2ban/jail.local
 echo "logpath = /var/log/dovecot/main.log" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=dovecot, bantime=600]" >> /etc/fail2ban/jail.local
-echo "		iptables-multiport[name=webcp-dovecot, protocol=tcp]" >> /etc/fail2ban/jail.local
+echo "		iptables-multiport[name=webcp-dovecot, port=\"110, 995 143, 993\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "[sieve]" >> /etc/fail2ban/jail.local
 echo "port   = smtp,465,submission" >> /etc/fail2ban/jail.local
 echo "logpath = %(dovecot_log)s" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=sieve, bantime=600]" >> /etc/fail2ban/jail.local
-echo "		iptables-multiport[name=sieve, protocol=tcp]" >> /etc/fail2ban/jail.local
+echo "		iptables-multiport[name=sieve, port=\"25,465,587\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 
 
@@ -377,13 +412,14 @@ echo "port   = smtp,465,submission" >> /etc/fail2ban/jail.local
 echo "logpath = %(exim_main_log)s" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=exim, bantime=600]" >> /etc/fail2ban/jail.local
-echo "		iptables-multiport[name=exim, protocol=tcp]" >> /etc/fail2ban/jail.local
+echo "		iptables-multiport[name=exim, port=\"25,465,587\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[exim-spam]" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "port   = smtp,465,submission" >> /etc/fail2ban/jail.local
 echo "logpath = %(exim_main_log)s" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=exim-spam, bantime=600]" >> /etc/fail2ban/jail.local
+echo "		iptables-multiport[name=exim-spam, port=\"25,465,587\", protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[named-refused]" >> /etc/fail2ban/jail.local
 echo "port     = domain,953" >> /etc/fail2ban/jail.local
@@ -396,7 +432,7 @@ echo "logpath  = /var/log/mysql/mysqld.log" >> /etc/fail2ban/jail.local
 echo "maxretry = 5" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=mysql-auth, bantime=600]" >> /etc/fail2ban/jail.local
-echo "		iptables-multiport[name=mysql-auth, protocol=tcp]" >> /etc/fail2ban/jail.local
+echo "		iptables-multiport[name=mysql-auth, port=3306, protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 
 
@@ -408,13 +444,14 @@ echo "bantime  = 604800  ; 1 week" >> /etc/fail2ban/jail.local
 echo "findtime = 86400   ; 1 day" >> /etc/fail2ban/jail.local
 echo "maxretry = 5" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=recidive, bantime=604800]" >> /etc/fail2ban/jail.local
-echo "		iptables-multiport[name=recidive, protocol=tcp]" >> /etc/fail2ban/jail.local
+echo "		iptables-allports[name=recidive, protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[pam-generic]" >> /etc/fail2ban/jail.local
 echo "banaction = iptables-allports" >> /etc/fail2ban/jail.local
 echo "logpath  = %(syslog_authpriv)s" >> /etc/fail2ban/jail.local
 echo "enabled = true" >> /etc/fail2ban/jail.local
 echo "action = webcp[name=pam-generic, bantime=600]" >> /etc/fail2ban/jail.local
+echo "		iptables-allports[name=pam-generic, protocol=tcp]" >> /etc/fail2ban/jail.local
 echo "" >> /etc/fail2ban/jail.local
 echo "[xinetd-fail]" >> /etc/fail2ban/jail.local
 echo "banaction = iptables-multiport-log" >> /etc/fail2ban/jail.local
