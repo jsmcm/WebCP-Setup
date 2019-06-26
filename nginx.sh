@@ -233,7 +233,7 @@ echo "text/x-cross-domain-policy;" >> /etc/nginx/nginx.conf
 
 echo "" >> /etc/nginx/nginx.conf
 
-    echo "pagespeed on;" >> /etc/nginx/nginx.conf
+    echo "pagespeed off;" >> /etc/nginx/nginx.conf
     echo "pagespeed FileCachePath /var/cache/ngx_pagespeed_cache;" >> /etc/nginx/nginx.conf
 
 echo "pagespeed ModifyCachingHeaders off;" >> /etc/nginx.conf
