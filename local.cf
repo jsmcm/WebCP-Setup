@@ -3,6 +3,18 @@
 
 # These should be safe assumptions and allow for simple visual sifting
 # without risking lost emails.
+#
+use_bayes 1
+bayes_auto_learn 1
+
+#   Set headers which may provide inappropriate cues to the Bayesian
+#   classifier
+#
+# bayes_ignore_header X-Bogosity
+# bayes_ignore_header X-Spam-Flag
+# bayes_ignore_header X-Spam-Status
+
+
 
 required_hits 5
 report_safe 0
@@ -511,10 +523,10 @@ describe IB_TRAINING     body contains red cherry training spam
 score IB_TRAINING        10.0
 
 
-loadplugin FromNotReplyTo /etc/mail/spamassassin/FromNotReplyTo.pm
-header FROM_NOT_REPLYTO eval:check_for_from_not_reply_to()
-score FROM_NOT_REPLYTO 1.5
-describe FROM_NOT_REPLYTO From: does not match Reply-To:
+#loadplugin FromNotReplyTo /etc/mail/spamassassin/FromNotReplyTo.pm
+#header FROM_NOT_REPLYTO eval:check_for_from_not_reply_to()
+#score FROM_NOT_REPLYTO 1.5
+#describe FROM_NOT_REPLYTO From: does not match Reply-To:
 
 
 

@@ -655,7 +655,7 @@ echo "" >> /etc/exim4/exim4.conf
 echo "remote_smtp:" >> /etc/exim4/exim4.conf
 echo "	driver = smtp" >> /etc/exim4/exim4.conf
 echo "	dkim_domain = \${lc:\${domain:\$h_from:}}" >> /etc/exim4/exim4.conf
-echo "	dkim_private_key = \${if exists{/etc/exim/dkim/\${lc:\${domain:\$h_from:}}}{/etc/exim/dkim.private.key}{0}}" >> /etc/exim4/exim4.conf
+echo "	dkim_private_key = \${if exists{/etc/exim4/dkim/\${lc:\${domain:\$h_from:}}}{/etc/exim4/dkim.private.key}{0}}" >> /etc/exim4/exim4.conf
 echo "	dkim_selector = x" >> /etc/exim4/exim4.conf
 echo "	dkim_canon = relaxed" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
