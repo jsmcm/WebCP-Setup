@@ -73,8 +73,8 @@ echo "tls_advertise_hosts = *" >> /etc/exim4/exim4.conf
 echo "#tls_require_ciphers = ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:-LOW:-SSLv2:-EXP" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 
-echo "tls_certificate = ${if exists{/etc/letsencrypt/live/${tls_sni}/fullchain.pem}{/etc/letsencrypt/live/${tls_sni}/fullchain.pem }{/etc/exim4/certificate.crt}}" >> /etc/exim4/exim4.conf
-echo "tls_privatekey = ${if exists{/etc/letsencrypt/live/${tls_sni}/privkey.pem}{/etc/letsencrypt/live/${tls_sni}/privkey.pem }{/etc/exim4/privkey.key}}" >> /etc/exim4/exim4.conf
+echo "tls_certificate = \${if exists{/etc/letsencrypt/live/\${tls_sni}/fullchain.pem}{/etc/letsencrypt/live/\${tls_sni}/fullchain.pem }{/etc/exim4/certificate.crt}}" >> /etc/exim4/exim4.conf
+echo "tls_privatekey = \${if exists{/etc/letsencrypt/live/\${tls_sni}/privkey.pem}{/etc/letsencrypt/live/\${tls_sni}/privkey.pem }{/etc/exim4/privkey.key}}" >> /etc/exim4/exim4.conf
 
 echo "" >> /etc/exim4/exim4.conf
 echo "daemon_smtp_ports = 25 : 465 : 587" >> /etc/exim4/exim4.conf
@@ -655,7 +655,7 @@ echo "" >> /etc/exim4/exim4.conf
 echo "remote_smtp:" >> /etc/exim4/exim4.conf
 echo "	driver = smtp" >> /etc/exim4/exim4.conf
 echo "	dkim_domain = \${lc:\${domain:\$h_from:}}" >> /etc/exim4/exim4.conf
-echo "	dkim_private_key = \${if exists{/etc/exim/dkim/\${lc:\${domain:\$h_from:}}}{/etc/exim/dkim.private.key}{0}}" >> /etc/exim4/exim4.conf
+echo "	dkim_private_key = \${if exists{/etc/exim4/dkim/\${lc:\${domain:\$h_from:}}}{/etc/exim4/dkim.private.key}{0}}" >> /etc/exim4/exim4.conf
 echo "	dkim_selector = x" >> /etc/exim4/exim4.conf
 echo "	dkim_canon = relaxed" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
