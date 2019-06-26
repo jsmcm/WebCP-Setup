@@ -1,5 +1,5 @@
 * 2.1.6 *
- = released: =
+ = released: 2019-06-26 =
  - Fixed fail2ban
  - Fixed type in exim config which prevented dkim from working
  - Added Spam folder to dovecot config
