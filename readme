@@ -4,6 +4,8 @@
  - Fixed type in exim config which prevented dkim from working
  - Added Spam folder to dovecot config
  - Adds bayes enable to local.cf
+ - Pagespeed off in global nginx.conf
+ - Removed .editor and .passwd nginx blocks from default nginx.conf in sites-enabled because initially this does not exist
 
 * 2.1.5 *
 = released: 2019-05-16 =
