@@ -74,7 +74,7 @@ echo "        auto = create" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "        special_use = \Trash" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "    }" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "    mailbox Spam {" >> /etc/dovecot/conf.d/15-mailboxes.conf
-echo "        auto = create" >> /etc/dovecot/conf.d/15-mailboxes.conf
+echo "        auto = subscribe" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "        special_use = \Junk" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "    }" >> /etc/dovecot/conf.d/15-mailboxes.conf
 echo "    mailbox Archive {" >> /etc/dovecot/conf.d/15-mailboxes.conf

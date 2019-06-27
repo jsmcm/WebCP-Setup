@@ -1,3 +1,8 @@
+* 2.1.7 *
+= Release: =
+- Change dovecot/15-mailboxes.conf to use subscribe for spam folder rather than create
+
+
 * 2.1.6 *
  = released: 2019-06-26 =
  - Fixed fail2ban
