@@ -1,5 +1,8 @@
 #!/bin/bash
 
+phpVersion=`php -v | grep PHP\ 7 | cut -d ' ' -f 2 | cut -d '.' -f1,2`
+
+
 
 ##################
 #
