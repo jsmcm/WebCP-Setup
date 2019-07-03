@@ -1,3 +1,11 @@
+* 2.1.7 *
+= Release: 2019-07-03 =
+- Change dovecot/15-mailboxes.conf to use subscribe for spam folder rather than create
+- Added php version check into nginx_conf.sh
+- Added full path to creating fastcgi and snakeoil confs in nginx
+- Removed ssl (8443) from initial nginx conf on hostname as that makes no sense on a clean install
+- Split certain files (eg, nginx.sh, exim.sh etc) into a install and a separate config portion so that config can be updated on running systems
+
 * 2.1.6 *
  = released: 2019-06-26 =
  - Fixed fail2ban
