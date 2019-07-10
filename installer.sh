@@ -59,6 +59,7 @@ sleep 15
 wget https://api.webcp.io/downloads/2.0.0/setup/nginx.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/nginx_conf.sh
 chmod 755 /tmp/nginx.sh
+chmod 755 /tmp/nginx_conf.sh
 /tmp/nginx.sh
 rm -fr /tmp/nginx.sh
 
@@ -94,12 +95,14 @@ rm -fr /tmp/sshd.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/exim.sh   
 wget https://api.webcp.io/downloads/2.0.0/setup/exim_conf.sh   
 chmod 755 /tmp/exim.sh   
+chmod 755 /tmp/exim_conf.sh   
 /tmp/exim.sh   
 rm -fr /tmp/exim.sh   
 
 wget https://api.webcp.io/downloads/2.0.0/setup/dovecot.sh  
 wget https://api.webcp.io/downloads/2.0.0/setup/dovecot_conf.sh  
 chmod 755 /tmp/dovecot.sh  
+chmod 755 /tmp/dovecot_conf.sh  
 /tmp/dovecot.sh  
 rm -fr /tmp/dovecot.sh  
 
@@ -123,6 +126,7 @@ rm -fr /tmp/ftp.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/fail2ban.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/fail2ban_conf.sh
 chmod 755 /tmp/fail2ban.sh
+chmod 755 /tmp/fail2ban_conf.sh
 /tmp/fail2ban.sh
 rm -fr /tmp/fail2ban.sh
 
