@@ -319,8 +319,8 @@ echo "}" >> /etc/nginx/sites-enabled/$HostName.conf
 
 
 echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen 2087;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen [::]:2087;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "        listen 2086;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "        listen [::]:2086;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "		pagespeed off;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
@@ -349,8 +349,8 @@ echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "server {" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen 2096;" >> /etc/nginx/sites-enabled/$HostName.conf
-echo "        listen [::]:2096;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "        listen 2095;" >> /etc/nginx/sites-enabled/$HostName.conf
+echo "        listen [::]:2095;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "		pagespeed off;" >> /etc/nginx/sites-enabled/$HostName.conf
 echo "" >> /etc/nginx/sites-enabled/$HostName.conf
