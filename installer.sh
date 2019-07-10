@@ -142,7 +142,7 @@ echo "          *                                                               
 echo "          *                                                                       *"
 echo "          *                                                                       *"
 echo "          *       ssh login must be on port 7533 and root cannot login.           *"
-echo "          *       More info: https://webcp.io/webcp-post-setup                    *"
+echo "          *       More info: https://webcp.io/post-setup                          *"
 echo "          *                                                                       *"
 echo "          *                                                                       *"
 echo "          *************************************************************************"
