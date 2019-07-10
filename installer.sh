@@ -34,11 +34,52 @@ chmod 755 /tmp/php.sh
 /tmp/php.sh
 rm -fr /tmp/php.sh
 
+sleep 15
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+echo "STARTING NGINX";
+sleep 15
 wget https://api.webcp.io/downloads/2.0.0/setup/nginx.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/nginx_conf.sh
 chmod 755 /tmp/nginx.sh
 /tmp/nginx.sh
 rm -fr /tmp/nginx.sh
+
+sleep 15
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+echo "DONE NGINX";
+sleep 15
+
 
 wget https://api.webcp.io/downloads/2.0.0/setup/mysql.sh
 chmod 755 /tmp/mysql.sh
