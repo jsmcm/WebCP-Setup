@@ -1,3 +1,7 @@
+* 2.1.8 *
+= Release: 2019-07-10 =
+ - Fixed ssl port reference bug in default nginx config
+
 * 2.1.7 *
 = Release: 2019-07-03 =
 - Change dovecot/15-mailboxes.conf to use subscribe for spam folder rather than create
