@@ -1,5 +1,19 @@
 #!/bin/bash
 
+IP=`ip addr show | grep "inet " | grep "global" | awk 'NR>0{ sub(/\/.*/,"",$2); print $2 }' `
+
+IPCount=`echo "$IP" | wc -l`
+
+if [ $IPCount -gt 1 ]
+then
+        arr=()
+        while read -r line; do
+                arr+=("$line")
+        done <<< "$IP"
+
+        IP=${arr[0]}
+fi
+
 apt-get install wget -y
 
 wget https://api.webcp.io/downloads/2.0.0/setup/init.sh
@@ -122,12 +136,13 @@ echo "          *       INSTALLATION COMPLETE!                                  
 echo "          *                                                                       *"      
 echo "          *************************************************************************"      
 echo "          *                                                                       *"
-echo "          *       You can now go to http://YOUR_IP/webcp and login with           *"
+echo "          *       You can now go to http://$IP/webcp and login with           *"
 echo "          *       username 'admin@admin.admin' and password 'adminadmin'          *"
 echo "          *                                                                       *"
 echo "          *                                                                       *"
 echo "          *                                                                       *"
 echo "          *       ssh login must be on port 7533 and root cannot login.           *"
+echo "          *       More info: https://webcp.io/webcp-post-setup                    *"
 echo "          *                                                                       *"
 echo "          *                                                                       *"
 echo "          *************************************************************************"

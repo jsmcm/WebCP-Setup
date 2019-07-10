@@ -1,20 +1,5 @@
 #!/bin/bash
 
-IP=`ip addr show | grep "inet " | grep "global" | awk 'NR>0{ sub(/\/.*/,"",$2); print $2 }' `
-
-IPCount=`echo "$IP" | wc -l`
-
-if [ $IPCount -gt 1 ]
-then
-        arr=()
-        while read -r line; do
-                arr+=("$line")
-        done <<< "$IP"
-
-        IP=${arr[0]}
-fi
-
-
 #MYSQL_PASSWORD=`date +%s | sha256sum | base64 | head -c 10 ; echo`
 
 
@@ -37,8 +22,8 @@ then
         # entered nothing, use buffer..
         HostName="$HostNameBuffer"
 fi
+echo "Using HostName: '$HostName'"
 
- 
 
 
 
