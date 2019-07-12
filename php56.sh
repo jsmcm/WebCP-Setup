@@ -8,7 +8,7 @@
 ##################
 
 apt install software-properties-common -y
-add-apt-repository ppa:ondrej/php
+yes | add-apt-repository ppa:ondrej/php
 apt update -y
 
 apt-get install php5.6-fpm php5.6-mysql php5.6-xml php5.6-gd php5.6-zip php5.6-curl php5.6-mbstring  php5.6-xml php5.6-soap php5.6-imap php5.6-opcache -y
