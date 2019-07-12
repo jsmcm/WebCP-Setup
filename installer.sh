@@ -1,5 +1,19 @@
 #!/bin/bash
 
+IP=`ip addr show | grep "inet " | grep "global" | awk 'NR>0{ sub(/\/.*/,"",$2); print $2 }' `
+
+IPCount=`echo "$IP" | wc -l`
+
+if [ $IPCount -gt 1 ]
+then
+        arr=()
+        while read -r line; do
+                arr+=("$line")
+        done <<< "$IP"
+
+        IP=${arr[0]}
+fi
+
 apt-get install wget -y
 
 wget https://api.webcp.io/downloads/2.0.0/setup/init.sh
@@ -30,8 +44,11 @@ rm -fr /tmp/php56.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/nginx.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/nginx_conf.sh
 chmod 755 /tmp/nginx.sh
+chmod 755 /tmp/nginx_conf.sh
 /tmp/nginx.sh
 rm -fr /tmp/nginx.sh
+
+
 
 wget https://api.webcp.io/downloads/2.0.0/setup/mysql.sh
 chmod 755 /tmp/mysql.sh
@@ -46,12 +63,14 @@ rm -fr /tmp/sshd.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/exim.sh   
 wget https://api.webcp.io/downloads/2.0.0/setup/exim_conf.sh   
 chmod 755 /tmp/exim.sh   
+chmod 755 /tmp/exim_conf.sh   
 /tmp/exim.sh   
 rm -fr /tmp/exim.sh   
 
 wget https://api.webcp.io/downloads/2.0.0/setup/dovecot.sh  
 wget https://api.webcp.io/downloads/2.0.0/setup/dovecot_conf.sh  
 chmod 755 /tmp/dovecot.sh  
+chmod 755 /tmp/dovecot_conf.sh  
 /tmp/dovecot.sh  
 rm -fr /tmp/dovecot.sh  
 
@@ -75,6 +94,7 @@ rm -fr /tmp/ftp.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/fail2ban.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/fail2ban_conf.sh
 chmod 755 /tmp/fail2ban.sh
+chmod 755 /tmp/fail2ban_conf.sh
 /tmp/fail2ban.sh
 rm -fr /tmp/fail2ban.sh
 
@@ -129,12 +149,13 @@ echo "          *       INSTALLATION COMPLETE!                                  
 echo "          *                                                                       *"      
 echo "          *************************************************************************"      
 echo "          *                                                                       *"
-echo "          *       You can now go to http://YOUR_IP/webcp and login with           *"
+echo "          *       You can now go to http://$IP/webcp and login with           *"
 echo "          *       username 'admin@admin.admin' and password 'adminadmin'          *"
 echo "          *                                                                       *"
 echo "          *                                                                       *"
 echo "          *                                                                       *"
 echo "          *       ssh login must be on port 7533 and root cannot login.           *"
+echo "          *       More info: https://webcp.io/post-setup                          *"
 echo "          *                                                                       *"
 echo "          *                                                                       *"
 echo "          *************************************************************************"
