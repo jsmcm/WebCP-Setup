@@ -15,10 +15,17 @@ rm -fr /tmp/webcp-scripts.sh
 
 Password=`/usr/webcp/get_password.sh`
 
-wget https://api.webcp.io/downloads/2.0.0/setup/php.sh
-chmod 755 /tmp/php.sh
-/tmp/php.sh
-rm -fr /tmp/php.sh
+
+wget https://api.webcp.io/downloads/2.0.0/setup/php72.sh
+chmod 755 /tmp/php72.sh
+/tmp/php72.sh
+rm -fr /tmp/php72.sh
+
+wget https://api.webcp.io/downloads/2.0.0/setup/php56.sh
+chmod 755 /tmp/php56.sh
+/tmp/php56.sh
+rm -fr /tmp/php56.sh
+
 
 wget https://api.webcp.io/downloads/2.0.0/setup/nginx.sh
 wget https://api.webcp.io/downloads/2.0.0/setup/nginx_conf.sh

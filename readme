@@ -1,3 +1,7 @@
+* 2.2.0 *
+= Release: 
+ - PHP5.6 installer
+
 * 2.1.8 *
 = Release: 2019-07-10 =
  - Fixed ssl port reference bug in default nginx config
