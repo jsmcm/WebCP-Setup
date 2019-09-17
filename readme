@@ -1,6 +1,7 @@
 * 2.2.0 *
-= Release: 
+= Release: 2019-09-17 =
  - PHP5.6 installer
+ - Logrotate for nginx and phperrors
 
 * 2.1.8 *
 = Release: 2019-07-10 =
