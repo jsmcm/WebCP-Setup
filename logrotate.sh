@@ -16,7 +16,7 @@ echo "" >> /etc/logrotate.d/nginx
 echo "}" >> /etc/logrotate.d/nginx
 
 
-echo "home/*/phperrors.log {" > /etc/logrotate.d/phperrors
+echo "/home/*/phperrors.log {" > /etc/logrotate.d/phperrors
 echo "	rotate 12" >> /etc/logrotate.d/phperrors
 echo "	daily" >> /etc/logrotate.d/phperrors
 echo "	size 32M" >> /etc/logrotate.d/phperrors
