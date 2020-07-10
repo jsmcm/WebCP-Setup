@@ -1,5 +1,7 @@
 * 2.2.1 *
 = Release: =
+ - Mysql max limit connection set to 1000
+ - Mysql service config edited to allow open file limit to be increased
  - Logrotate for nginx and phperrors
 
 * 2.2.0 *

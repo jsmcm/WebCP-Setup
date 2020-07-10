@@ -47,13 +47,17 @@ chmod 755 /tmp/nginx.sh
 chmod 755 /tmp/nginx_conf.sh
 /tmp/nginx.sh
 rm -fr /tmp/nginx.sh
+rm -fr /tmp/nginx_conf.sh
 
 
 
 wget https://api.webcp.io/downloads/2.0.0/setup/mysql.sh
+wget https://api.webcp.io/downloads/2.0.0/setup/mysql_conf.sh
 chmod 755 /tmp/mysql.sh
+chmod 755 /tmp/mysql_conf.sh
 /tmp/mysql.sh $Password
 rm -fr /tmp/mysql.sh
+rm -fr /tmp/mysql_conf.sh
 
 wget https://api.webcp.io/downloads/2.0.0/setup/sshd.sh
 chmod 755 /tmp/sshd.sh
@@ -66,6 +70,7 @@ chmod 755 /tmp/exim.sh
 chmod 755 /tmp/exim_conf.sh   
 /tmp/exim.sh   
 rm -fr /tmp/exim.sh   
+rm -fr /tmp/exim_conf.sh   
 
 wget https://api.webcp.io/downloads/2.0.0/setup/dovecot.sh  
 wget https://api.webcp.io/downloads/2.0.0/setup/dovecot_conf.sh  
@@ -73,6 +78,7 @@ chmod 755 /tmp/dovecot.sh
 chmod 755 /tmp/dovecot_conf.sh  
 /tmp/dovecot.sh  
 rm -fr /tmp/dovecot.sh  
+rm -fr /tmp/dovecot_conf.sh  
 
 wget https://api.webcp.io/downloads/2.0.0/setup/clam.sh     
 chmod 755 /tmp/clam.sh     
@@ -97,6 +103,7 @@ chmod 755 /tmp/fail2ban.sh
 chmod 755 /tmp/fail2ban_conf.sh
 /tmp/fail2ban.sh
 rm -fr /tmp/fail2ban.sh
+rm -fr /tmp/fail2ban_conf.sh
 
 wget https://api.webcp.io/downloads/2.0.0/setup/bind.sh
 chmod 755 /tmp/bind.sh
