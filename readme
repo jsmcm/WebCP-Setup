@@ -2,10 +2,11 @@
 = Release: =
  - Mysql max limit connection set to 1000
  - Mysql service config edited to allow open file limit to be increased
+ - Logrotate for nginx and phperrors
 
 * 2.2.0 *
 = Release: 2019-07-12 =
- - PHP5.6 installer
+ - Logrotate for nginx and phperrors
 
 * 2.1.8 *
 = Release: 2019-07-10 =

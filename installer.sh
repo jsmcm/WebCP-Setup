@@ -131,6 +131,11 @@ chmod 755 /tmp/webcp-www.sh
 /tmp/webcp-www.sh   
 rm -fr /tmp/webcp-www.sh   
 
+wget https://api.webcp.io/downloads/2.0.0/setup/logrotate.sh   
+chmod 755 /tmp/logrotate.sh  
+/tmp/logrotate.sh
+rm -fr /tmp/logrotate.sh  
+
 wget https://api.webcp.io/downloads/2.0.0/setup/final.sh   
 chmod 755 /tmp/final.sh   
 /tmp/final.sh   
