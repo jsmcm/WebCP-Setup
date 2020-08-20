@@ -207,33 +207,32 @@ useradd -m -s /bin/bash -p "$(openssl passwd -1 $Password)" $UserName
 ufw default deny incoming
 ufw default allow outgoing
 
+ufw allow 21/tcp
+ufw allow 25/tcp
 ufw allow 53/udp
 ufw allow 53/tcp
 ufw allow 80/tcp
-ufw allow 443/tcp
-
-ufw allow 7533/tcp
-
-ufw allow 21/tcp
-
-ufw allow 25/tcp
-ufw allow 587/tcp
 ufw allow 110/tcp
 ufw allow 143/tcp
+ufw allow 443/tcp
+ufw allow 465/tcp
+
+ufw allow 587/tcp
 ufw allow 995/tcp
 ufw allow 993/tcp
 
-ufw allow 3306/tcp
-
 ufw allow 2052/tcp
+ufw allow 2053/tcp
 ufw allow 2082/tcp
+ufw allow 2083/tcp
 ufw allow 2086/tcp
+ufw allow 2087/tcp
 ufw allow 2095/tcp
+ufw allow 2096/tcp
+
+ufw allow 3306/tcp
+ufw allow 7533/tcp
+ufw allow 8443/tcp
 ufw allow 8880/tcp
 
-ufw allow 2053/tcp
-ufw allow 2083/tcp
-ufw allow 2087/tcp
-ufw allow 2096/tcp
-ufw allow 8443/tcp
 

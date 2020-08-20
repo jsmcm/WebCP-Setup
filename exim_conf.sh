@@ -139,7 +139,7 @@ echo "		set acl_m_catch_all_domain = \${if !eq {\$acl_m_catch_all_email}{}{\$dom
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "		set acl_m_is_forward = \${if exists{/var/www/html/mail/domains/\${lc:\$domain}/forward/\$local_part}{1}{0}}" >> /etc/exim4/exim4.conf
-echo "		set acl_m_mailbox_exists = \${if exists{/home/\${acl_m_domain_user}/mail/\${lc:\$domain}/\$local_part}{1}{0}}" >> /etc/exim4/exim4.conf
+echo "		set acl_m_mailbox_exists = \${if exists{/home/\${acl_m_domain_user}/home/\${acl_m_domain_user}/mail/\${lc:\$domain}/\$local_part}{1}{0}}" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "                set acl_m_global_deny_spam_score = \${if exists{/var/www/html/mail/denyspamscore} {\${readfile{/var/www/html/mail/denyspamscore}{}}}{65}}" >> /etc/exim4/exim4.conf
@@ -492,12 +492,15 @@ echo "" >> /etc/exim4/exim4.conf
 echo "begin routers" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
-echo "send_via_sendgrid:" >> /etc/exim4/exim4.conf
-echo "	driver = manualroute" >> /etc/exim4/exim4.conf
-echo "	senders =  \${if exists{/var/www/html/mail/sendgrid/domains} {\${readfile{/var/www/html/mail/sendgrid/domains}{}}}{}}" >> /etc/exim4/exim4.conf
-echo "	domains = !+local_domains" >> /etc/exim4/exim4.conf
-echo "	transport = sendgrid_smtp" >> /etc/exim4/exim4.conf
-echo "	route_list = * smtp.sendgrid.net ;" >> /etc/exim4/exim4.conf
+
+echo "send_via_transactional:" >> /etc/exim4/exim4.conf
+echo "  driver = manualroute" >> /etc/exim4/exim4.conf
+echo "  senders =  \${if exists{/var/www/html/mail/TransactionalEmail/domains} {\${readfile{/var/www/html/mail/TransactionalEmail/domains}{}}}{}}" >> /etc/exim4/exim4.conf
+echo "  domains = !+local_domains" >> /etc/exim4/exim4.conf
+echo "  transport = transactional_smtp" >> /etc/exim4/exim4.conf
+echo "  route_list = * \${readfile{/var/www/html/mail/TransactionalEmail/hostname}{}} ;" >> /etc/exim4/exim4.conf
+
+
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
@@ -537,7 +540,7 @@ echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "userforward:" >> /etc/exim4/exim4.conf
 echo "  	driver = redirect" >> /etc/exim4/exim4.conf
-echo "  	file = /home/\${readfile{/var/www/html/mail/domains/\${lc:\$domain}/username}{}}/mail/\${domain}/.forward" >> /etc/exim4/exim4.conf
+echo "  	file = /home/\${readfile{/var/www/html/mail/domains/\${lc:\$domain}/username}{}}/home/\${readfile{/var/www/html/mail/domains/\${lc:\$domain}/username}{}}/mail/\${domain}/.forward" >> /etc/exim4/exim4.conf
 echo "  	allow_filter" >> /etc/exim4/exim4.conf
 echo "  	allow_fail" >> /etc/exim4/exim4.conf
 echo "  	no_verify" >> /etc/exim4/exim4.conf
@@ -569,7 +572,7 @@ echo "               }" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "	driver = accept" >> /etc/exim4/exim4.conf
-echo " 	require_files = \${if eq {\$acl_m_is_forward}{0}{/home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/mail/\${domain}/\${local_part}/}{}}" >> /etc/exim4/exim4.conf
+echo " 	require_files = \${if eq {\$acl_m_is_forward}{0}{/home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/mail/\${domain}/\${local_part}/}{}}" >> /etc/exim4/exim4.conf
 echo " " >> /etc/exim4/exim4.conf
 echo "	" >> /etc/exim4/exim4.conf
 echo "	transport = dovecot_delivery" >> /etc/exim4/exim4.conf
@@ -589,19 +592,23 @@ echo "" >> /etc/exim4/exim4.conf
 echo "dovecot_router:" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "	driver = accept" >> /etc/exim4/exim4.conf
-echo " 	require_files = /home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/mail/\${domain}/\${local_part}/" >> /etc/exim4/exim4.conf
+echo " 	require_files = /home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/mail/\${domain}/\${local_part}/" >> /etc/exim4/exim4.conf
 echo "	transport = dovecot_delivery" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "begin transports" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
-echo "sendgrid_smtp:" >> /etc/exim4/exim4.conf
-echo "  	driver = smtp" >> /etc/exim4/exim4.conf
-echo "  	port = 587" >> /etc/exim4/exim4.conf
-echo "	hosts = smtp.sendgrid.net" >> /etc/exim4/exim4.conf
-echo "  	hosts_require_auth = <; \$host_address" >> /etc/exim4/exim4.conf
-echo "  	hosts_require_tls = <; \$host_address" >> /etc/exim4/exim4.conf
+
+echo "transactional_smtp:" >> /etc/exim4/exim4.conf
+echo "          driver = smtp" >> /etc/exim4/exim4.conf
+echo "          port = 587" >> /etc/exim4/exim4.conf
+echo "          hosts = \${if exists{/var/www/html/mail/TransactionalEmail/hostname} {\${readfile{/var/www/html/mail/TransactionalEmail/hostname}{}}}{}}" >> /etc/exim4/exim4.conf
+echo "          hosts_require_auth = <; \$host_address" >> /etc/exim4/exim4.conf
+echo "          hosts_require_tls = <; \$host_address" >> /etc/exim4/exim4.conf
+	
+	
+
 echo "  " >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "vacation_reply:" >> /etc/exim4/exim4.conf
@@ -638,7 +645,7 @@ echo "" >> /etc/exim4/exim4.conf
 echo "dovecot_delivery:" >> /etc/exim4/exim4.conf
 echo "	driver = appendfile" >> /etc/exim4/exim4.conf
 echo "	maildir_format = true" >> /etc/exim4/exim4.conf
-echo "	directory = /home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/mail/\${domain}/\${local_part}/" >> /etc/exim4/exim4.conf
+echo "	directory = /home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/mail/\${domain}/\${local_part}/" >> /etc/exim4/exim4.conf
 echo "	create_directory = true" >> /etc/exim4/exim4.conf
 echo "	directory_mode = 0770" >> /etc/exim4/exim4.conf
 echo "	mode_fail_narrower = false" >> /etc/exim4/exim4.conf
@@ -655,7 +662,7 @@ echo "" >> /etc/exim4/exim4.conf
 echo "local_delivery:" >> /etc/exim4/exim4.conf
 echo "	driver = appendfile" >> /etc/exim4/exim4.conf
 echo "  	maildir_format = true" >> /etc/exim4/exim4.conf
-echo "	directory = /home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/mail/\${domain}/\${local_part}/" >> /etc/exim4/exim4.conf
+echo "	directory = /home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/home/\${readfile{/var/www/html/mail/domains/\${domain}/username}{}}/mail/\${domain}/\${local_part}/" >> /etc/exim4/exim4.conf
 echo "  	create_directory = true" >> /etc/exim4/exim4.conf
 echo " 	directory_mode = 0770" >> /etc/exim4/exim4.conf
 echo "  	delivery_date_add" >> /etc/exim4/exim4.conf
@@ -694,10 +701,13 @@ echo "" >> /etc/exim4/exim4.conf
 echo "begin authenticators" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
-echo "sendgrid_login:" >> /etc/exim4/exim4.conf
-echo "	driver = plaintext" >> /etc/exim4/exim4.conf
-echo "	public_name = LOGIN" >> /etc/exim4/exim4.conf
-echo "	client_send = : \${if exists{/var/www/html/mail/sendgrid/username} {\${readfile{/var/www/html/mail/sendgrid/username}{}}}{}} : \${if exists{/var/www/html/mail/sendgrid/password} {\${readfile{/var/www/html/mail/sendgrid/password}{}}}{}}" >> /etc/exim4/exim4.conf
+
+echo "transactional_login:" >> /etc/exim4/exim4.conf
+echo "  driver = plaintext" >> /etc/exim4/exim4.conf
+echo "  public_name = LOGIN" >> /etc/exim4/exim4.conf
+echo "  client_send = : \${if exists{/var/www/html/mail/TransactionalEmail/username} {\${readfile{/var/www/html/mail/TransactionalEmail/username}{}}}{}} : \${if exists{/var/www/html/mail/TransactionalEmail/password} {\${readfile{/var/www/html/mail/TransactionalEmail/password}{}}}{}}" >> /etc/exim4/exim4.conf
+
+
 echo "" >> /etc/exim4/exim4.conf
 echo "" >> /etc/exim4/exim4.conf
 echo "auth_plain:" >> /etc/exim4/exim4.conf
