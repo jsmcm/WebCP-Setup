@@ -95,7 +95,7 @@ echo "		************************************************************************
 
 sleep 2
 
-
+echo "$UserName" > /tmp/webcp_username
 echo "$HostName" > /etc/hostname
 
 

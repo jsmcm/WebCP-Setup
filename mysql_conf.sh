@@ -28,14 +28,14 @@ echo "max_allowed_packet      = 16M" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo "thread_stack            = 192K" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo "thread_cache_size       = 8" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo "myisam-recover-options  = BACKUP" >> /etc/mysql/mysql.conf.d/mysqld.cnf
-echo "query_cache_limit       = 1M" >> /etc/mysql/mysql.conf.d/mysqld.cnf
-echo "query_cache_size        = 16M" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+echo "#query_cache_limit       = 1M" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+echo "#query_cache_size        = 16M" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo "expire_logs_days        = 10" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo "max_binlog_size   = 100M" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 
 echo "skip_name_resolve" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo "max_allowed_packet=10M" >> /etc/mysql/mysql.conf.d/mysqld.cnf
-echo "log_warnings = 2" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+echo "#log_warnings = 2" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo "log_error=/var/log/mysql/mysqld.log" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 
 echo "character-set-server = utf8mb4" >> /etc/mysql/mysql.conf.d/mysqld.cnf
