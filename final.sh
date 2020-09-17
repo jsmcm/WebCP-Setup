@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm /tmp/webcp_username
+
 echo "* * * * * /usr/webcp/director.sh > /dev/null 2>&1" | crontab
 
 if [ ! -d "/var/log/webcp" ]
