@@ -235,4 +235,5 @@ ufw allow 7533/tcp
 ufw allow 8443/tcp
 ufw allow 8880/tcp
 
+ufw allow from any to any proto tcp port 6000:7000
 
