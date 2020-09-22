@@ -34,8 +34,36 @@ echo "yes" > /etc/pure-ftpd/conf/ChrootEveryone
 echo "yes" > /etc/pure-ftpd/conf/DontResolve
 echo "yes" > /etc/pure-ftpd/conf/CreateHomeDir
 
+echo "ChrootEveryone               yes" > /etc/pure-ftpd/pure-ftpd.conf
+echo "BrokenClientsCompatibility   no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "MaxClientsNumber             50" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "Daemonize                    yes" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "MaxClientsPerIP              8" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "VerboseLog                   no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "DisplayDotFiles              yes" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "AnonymousOnly                no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "NoAnonymous                  no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "SyslogFacility               ftp" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "DontResolve                  yes" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "MaxIdleTime                  15" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "LimitRecursion               10000 8" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "AnonymousCanCreateDirs       no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "MaxLoad                      4" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "PassivePortRange             6000 7000" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "AntiWarez                    yes" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "Umask                        133:022" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "MinUID                       100" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "AllowUserFXP                 no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "AllowAnonymousFXP            no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "ProhibitDotFilesWrite        no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "ProhibitDotFilesRead         no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "AutoRename                   no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "AnonymousCantUpload          no" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "MaxDiskUsage                   99" >> /etc/pure-ftpd/pure-ftpd.conf
+echo "CustomerProof                yes" >> /etc/pure-ftpd/pure-ftpd.conf
 
 
+echo "6000 7000" > /etc/pure-ftpd/conf/PassivePortRange
 
 systemctl enable pure-ftpd-mysql
 service pure-ftpd-mysql start
