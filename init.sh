@@ -191,7 +191,7 @@ apt-get update -y
 
 apt-get install composer -y
 apt-get install ufw -y
-apt-get install virtualenv -y
+#apt-get install virtualenv -y
 
 apt-get install expect -y
 
