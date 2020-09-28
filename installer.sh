@@ -31,10 +31,16 @@ Password=`/usr/webcp/get_password.sh`
 
 
 
-wget https://api.webcp.io/downloads/3.0.0/setup/php74.sh
-chmod 755 /tmp/php74.sh
-/tmp/php74.sh
-rm -fr /tmp/php74.sh
+wget https://api.webcp.io/downloads/3.0.0/setup/php56.sh
+chmod 755 /tmp/php56.sh
+/tmp/php56.sh
+rm -fr /tmp/php56.sh
+
+
+wget https://api.webcp.io/downloads/3.0.0/setup/php71.sh
+chmod 755 /tmp/php71.sh
+/tmp/php71.sh
+rm -fr /tmp/php71.sh
 
 
 wget https://api.webcp.io/downloads/3.0.0/setup/php72.sh
@@ -42,15 +48,11 @@ chmod 755 /tmp/php72.sh
 /tmp/php72.sh
 rm -fr /tmp/php72.sh
 
-wget https://api.webcp.io/downloads/3.0.0/setup/php71.sh
-chmod 755 /tmp/php71.sh
-/tmp/php71.sh
-rm -fr /tmp/php71.sh
 
-wget https://api.webcp.io/downloads/3.0.0/setup/php56.sh
-chmod 755 /tmp/php56.sh
-/tmp/php56.sh
-rm -fr /tmp/php56.sh
+wget https://api.webcp.io/downloads/3.0.0/setup/php74.sh
+chmod 755 /tmp/php74.sh
+/tmp/php74.sh
+rm -fr /tmp/php74.sh
 
 
 wget https://api.webcp.io/downloads/3.0.0/setup/nginx.sh

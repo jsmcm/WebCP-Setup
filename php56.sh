@@ -141,8 +141,8 @@ echo "soap.wsdl_cache_limit = 5" >> /etc/php/5.6/cli/php.ini
 
 
 cd /tmp
-#wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.zip --no-check-certificate
-#unzip ioncube_loaders_lin_x86-64.zip
+wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.zip --no-check-certificate
+unzip ioncube_loaders_lin_x86-64.zip
 cp /tmp/ioncube/ioncube_loader_lin_5.6.so /etc/php/5.6
 
 service php5.6-fpm restart
