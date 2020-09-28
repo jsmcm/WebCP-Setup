@@ -155,6 +155,12 @@ chmod 755 /tmp/final.sh
 /tmp/final.sh   
 rm -fr /tmp/final.sh   
 
+cd /tmp
+wget https://api.webcp.io/downloads/3.0.0/setup/certbot.exp
+chmod 755 /tmp/certbot.exp 
+/tmp/certbot.exp 
+rm -fr /tmp/certbot.exp   
+
 
 rm -fr /tmp/installer.sh
 
