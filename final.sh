@@ -17,6 +17,10 @@ mkdir /var/www/html/webcp/nm
 chown www-data.www-data /var/www/html/webcp -R
 touch /var/www/html/webcp/nm/letsencrypt.install
 
+mkdir /tmp/php
+chmod 777 /tmp/php
+
+
 /usr/webcp/update/update.sh
 
 echo "y" | ufw enable
