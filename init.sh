@@ -30,6 +30,8 @@ echo "Using HostName: '$HostName'"
 Password=""
 Password1="."
 UserName=""
+Email=""
+
 
 while [ -z "$UserName" ]
 do
@@ -45,6 +47,23 @@ do
                 echo "PLEASE ENTER A USERNAME"
         fi
 done
+
+
+while [ -z "$Email" ]
+do
+        echo ""
+        echo ""
+        echo ""
+        echo "Enter your email address to log into WebCP"
+        read Email
+
+        if [ -z "$Email" ]
+        then
+                echo "PLEASE ENTER AN EMAIL"
+        fi
+done
+
+
 
 while [ "$Password" != "$Password1" ]
 do
@@ -95,6 +114,7 @@ echo "		************************************************************************
 
 sleep 2
 
+echo "$Email" > /tmp/email.webcp
 echo "$UserName" > /tmp/webcp_username
 echo "$HostName" > /etc/hostname
 

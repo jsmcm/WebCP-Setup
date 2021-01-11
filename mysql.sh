@@ -14,6 +14,11 @@ then
         exit
 fi
 
+EMAIL=$2
+if [ "$EMAIL" == "" ]
+	echo "ERROR: Please supply your email"
+	exit
+fi
 
 
 apt-get update -y
@@ -41,6 +46,10 @@ $(mysql -u root -p$PASSWORD -se "DELETE FROM mysql.user WHERE User='';")
 
 cd /tmp
 /usr/bin/wget https://api.webcp.io/downloads/3.0.0/cpadmin.sql
+
+cat /tmp/cpadmin.sql | sed "s/admin@admin.admin/$EMAIL/g" > /tmp/temp.cpadmin.sql
+cat /tmp/temp.cpadmin.sql | sed "s/adminadmin/$PASSWORD/g" > /tmp/cpadmin.sql
+rm -fr /tmp/temp.cpadmin.sql
 
 
 mysql -u root -p$PASSWORD < cpadmin.sql

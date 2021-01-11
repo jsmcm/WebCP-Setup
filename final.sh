@@ -20,6 +20,7 @@ touch /var/www/html/webcp/nm/letsencrypt.install
 mkdir /tmp/php
 chmod 777 /tmp/php
 
+rm -fr /tmp/email.webcp
 
 /usr/webcp/update/update.sh
 

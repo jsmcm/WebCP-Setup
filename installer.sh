@@ -28,7 +28,7 @@ chmod 755 /tmp/webcp-scripts.sh
 rm -fr /tmp/webcp-scripts.sh
 
 Password=`/usr/webcp/get_password.sh`
-
+Email=`/tmp/email.webcp`
 
 
 wget https://api.webcp.io/downloads/3.0.0/setup/php56.sh
@@ -69,7 +69,7 @@ wget https://api.webcp.io/downloads/3.0.0/setup/mysql.sh
 wget https://api.webcp.io/downloads/3.0.0/setup/mysql_conf.sh
 chmod 755 /tmp/mysql.sh
 chmod 755 /tmp/mysql_conf.sh
-/tmp/mysql.sh $Password
+/tmp/mysql.sh $Password $Email
 rm -fr /tmp/mysql.sh
 rm -fr /tmp/mysql_conf.sh
 
@@ -184,7 +184,7 @@ echo "          *                                                               
 echo "          *************************************************************************"      
 echo "          *                                                                       *"
 echo "          *       You can now go to http://$IP/webcp and login with           *"
-echo "          *       username 'admin@admin.admin' and password 'adminadmin'          *"
+echo "          *       email '$Email' and password '$Password'                         *"
 echo "          *                                                                       *"
 echo "          *                                                                       *"
 echo "          *                                                                       *"
