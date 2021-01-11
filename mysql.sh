@@ -16,6 +16,7 @@ fi
 
 EMAIL=$2
 if [ "$EMAIL" == "" ]
+then
 	echo "ERROR: Please supply your email"
 	exit
 fi
