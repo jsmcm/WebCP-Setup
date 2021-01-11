@@ -28,7 +28,7 @@ chmod 755 /tmp/webcp-scripts.sh
 rm -fr /tmp/webcp-scripts.sh
 
 Password=`/usr/webcp/get_password.sh`
-Email=`/tmp/email.webcp`
+Email=`cat /tmp/email.webcp`
 
 
 wget https://api.webcp.io/downloads/3.0.0/setup/php56.sh
