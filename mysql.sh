@@ -51,7 +51,7 @@ cd /tmp
 cat /tmp/cpadmin.sql | sed "s/admin@admin.admin/$EMAIL/g" > /tmp/temp.cpadmin.sql
 
 Hashed=`htpasswd -nbBC 10 USER $PASSWORD`
-Hashed=`echo "$Hash" | cut -d":" -f 2`
+Hashed=`echo "$Hashed" | cut -d":" -f 2`
 
 cat /tmp/temp.cpadmin.sql | sed "s/adminadmin/$Hashed/g" > /tmp/cpadmin.sql
 rm -fr /tmp/temp.cpadmin.sql
