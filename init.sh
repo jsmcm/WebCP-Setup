@@ -151,6 +151,7 @@ apt-get install ldb-tools libldb-devel libldb -y
 apt-get install db4 db4-devel db4-utils compat-db43 -y
 apt-get install pam pam-devel rpm-build compat-db -y
 apt-get install openldap openldap-clients openldap-devel compat-openldap -y
+apt-get install apache2-utils -y
 
 apt-get install curl -y
 

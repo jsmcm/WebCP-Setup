@@ -49,7 +49,11 @@ cd /tmp
 /usr/bin/wget https://api.webcp.io/downloads/3.0.0/cpadmin.sql
 
 cat /tmp/cpadmin.sql | sed "s/admin@admin.admin/$EMAIL/g" > /tmp/temp.cpadmin.sql
-cat /tmp/temp.cpadmin.sql | sed "s/adminadmin/$PASSWORD/g" > /tmp/cpadmin.sql
+
+Hashed=`htpasswd -nbBC 10 USER $PASSWORD`
+Hashed=`echo "$Hash" | cut -d":" -f 2`
+
+cat /tmp/temp.cpadmin.sql | sed "s/adminadmin/$Hashed/g" > /tmp/cpadmin.sql
 rm -fr /tmp/temp.cpadmin.sql
 
 
