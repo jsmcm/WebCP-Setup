@@ -11,10 +11,13 @@ echo "		****************************************************************		"
 
 HostNameBuffer=`hostname`
 HostName=""
-echo $HostNameBuffer
+echo ""
+echo ""
+echo "==========================================="
 
 echo "Please enter this server's FQDN: $HostNameBuffer"
 
+echo -n "> "
 read HostName
 
 if [ -z "$HostName" ]
@@ -22,6 +25,9 @@ then
         # entered nothing, use buffer..
         HostName="$HostNameBuffer"
 fi
+echo ""
+echo ""
+echo "==========================================="
 echo "Using HostName: '$HostName'"
 
 
@@ -39,7 +45,11 @@ do
         echo ""
         echo ""
         echo "Please create a new user to log into SSH with..."
+	echo ""
+	echo ""
+	echo "==========================================="
         echo "Enter new username: "
+	echo -n "> "
         read UserName
 
         if [ -z "$UserName" ]
@@ -54,7 +64,11 @@ do
         echo ""
         echo ""
         echo ""
+	echo ""
+	echo ""
+	echo "==========================================="
         echo "Enter your email address to log into WebCP"
+	echo -n "> "
         read Email
 
         if [ -z "$Email" ]
@@ -72,8 +86,12 @@ do
 
         while [ -z "$Password" ]
         do
+		echo ""
+		echo ""
+		echo "==========================================="
                 echo "Password for $UserName: "
 		echo "NOTE: it will also be your MySQL root password, changeable in WebCP"
+		echo -n "> "
 
                 read Password
 
@@ -85,7 +103,11 @@ do
 
         while [ -z "$Password1" ]
         do
+		echo ""
+		echo ""
+		echo "==========================================="
                 echo "Re-enter Password: "
+		echo -n "> "
                 read Password1
 
                 if [ -z "$Password1" ]
