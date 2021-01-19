@@ -2,7 +2,21 @@
 
 #MYSQL_PASSWORD=`date +%s | sha256sum | base64 | head -c 10 ; echo`
 
-
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
 echo "		****************************************************************		"
 echo "		*							       *		"
 echo "		*	FIRST STEPS...					       *		"
@@ -13,9 +27,12 @@ HostNameBuffer=`hostname`
 HostName=""
 echo ""
 echo ""
+echo ""
+echo ""
+echo ""
 echo "==========================================="
 
-echo "Please enter this server's FQDN: $HostNameBuffer"
+echo "Please enter this server's FQDN (press enter if this one is correct): $HostNameBuffer"
 
 echo -n "> "
 read HostName
@@ -28,7 +45,7 @@ fi
 echo ""
 echo ""
 echo "==========================================="
-echo "Using HostName: '$HostName'"
+echo " >>>>> Using HostName: '$HostName'"
 
 
 
@@ -44,9 +61,9 @@ do
         echo ""
         echo ""
         echo ""
+        echo ""
+        echo ""
         echo "Please create a new user to log into SSH with..."
-	echo ""
-	echo ""
 	echo "==========================================="
         echo "Enter new username: "
 	echo -n "> "
@@ -88,9 +105,12 @@ do
         do
 		echo ""
 		echo ""
+		echo ""
+		echo ""
+		echo ""
 		echo "==========================================="
-                echo "Password for $UserName: "
-		echo "NOTE: it will also be your MySQL root password, changeable in WebCP"
+                echo "Password for $UserName/$Email: "
+		echo "NOTE: this password will also be your MySQL root password as well as your WebCP password. It is changeable in WebCP"
 		echo -n "> "
 
                 read Password
@@ -103,6 +123,9 @@ do
 
         while [ -z "$Password1" ]
         do
+		echo ""
+		echo ""
+		echo ""
 		echo ""
 		echo ""
 		echo "==========================================="
@@ -122,6 +145,11 @@ do
         fi
 done
 
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
 echo "		*************************************************************************"
 echo "		*							       		*"	
 echo "		*	INSTALLATION STARTING	  					*"	
@@ -132,7 +160,9 @@ echo "		*	The installation is now starting				*"
 echo "		*	This should be over in a few minutes!				*"
 echo "		*									*"
 echo "		*************************************************************************"
-
+echo ""
+echo ""
+echo ""
 
 sleep 2
 
