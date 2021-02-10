@@ -8,9 +8,27 @@ eval spawn /snap/bin/certbot
 
 
 expect {
-    " (Enter 'c' to cancel):" {
- 	send "c\n"
+
+    "Enter email address (used for urgent renewal and security notices)\r\n (Enter 'c' to cancel):" {
+        send "john@softsmart.co.za\n"
+        exp_continue
      }
+
+
+    "agree in order to register with the ACME server. Do you agree?\r\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\r\n(Y)es/(N)o:" {
+        send "Y\n"
+        exp_continue
+        }
+
+    "Would you be willing, once your first certificate is successfully issued, to\r\nshare your email address with the Electronic Frontier Foundation, a founding\r\npartner of the Let's Encrypt project and the non-profit organization that\r\ndevelops Certbot? We'd like to send you email about our work encrypting the web,\r\nEFF news, campaigns, and ways to support digital freedom.\r\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\r\n(Y)es/(N)o:" {
+        send "N\n"
+        exp_continue
+        }
+
+    "No names were found in your configuration files. Please enter in your domain\r\nname(s) (comma and/or space separated)  (Enter 'c' to cancel):" {
+        send "c\n"
+        }
 }
 
 expect eof
+
