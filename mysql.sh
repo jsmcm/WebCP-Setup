@@ -57,7 +57,7 @@ cat /tmp/temp.cpadmin.sql | sed "s>adminadmin>$Hashed>g" > /tmp/cpadmin.sql
 rm -fr /tmp/temp.cpadmin.sql
 
 
-mysql -u root -p$PASSWORD < cpadmin.sql
+mysql -u root -p"$PASSWORD" < cpadmin.sql
 rm -fr cpadmin.sql
 
 
