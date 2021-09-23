@@ -56,17 +56,17 @@ echo "http {" >> /etc/nginx/nginx.conf
     echo "default_type  application/octet-stream;" >> /etc/nginx/nginx.conf
 echo "" >> /etc/nginx/nginx.conf
     echo "log_format  main  '\$remote_addr - \$remote_user [\$time_local] \"\$request\" '" >> /etc/nginx/nginx.conf
+echo "'\$status \$body_bytes_sent \"\$http_referer\" '" >> /etc/nginx/nginx.conf
+echo "'\"\$http_user_agent\" \"\$http_x_forwarded_for\"';" >> /etc/nginx/nginx.conf
 
 
 
 echo "fastcgi_cache_path /run/nginx/fastcgi_cache levels=1:2 keys_zone=phpcache:100m max_size=10g inactive=60m use_temp_path=off;" >> /etc/nginx/nginx.conf
 
-echo "fastcgi_cache_key "\$scheme\$request_method\$host\$request_uri";" >> /etc/nginx/nginx.conf
+echo "fastcgi_cache_key \"\$scheme\$request_method\$host\$request_uri\";" >> /etc/nginx/nginx.conf
 
 
 
-                      echo "'\$status \$body_bytes_sent \"\$http_referer\" '" >> /etc/nginx/nginx.conf
-                      echo "'\"\$http_user_agent\" \"\$http_x_forwarded_for\"';" >> /etc/nginx/nginx.conf
 echo "" >> /etc/nginx/nginx.conf
             echo "access_log  /var/log/nginx/access.log  main;" >> /etc/nginx/nginx.conf
 echo "" >> /etc/nginx/nginx.conf
