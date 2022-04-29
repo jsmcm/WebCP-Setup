@@ -11,6 +11,7 @@ apt-get install php7.4-fpm php7.4-mysql php7.4-xml php7.4-gd php7.4-zip php7.4-c
 
 apt-get install php7.4-intl php7.4-cli php7.4-common php7.4-curl php7.4-fpm php7.4-gd php7.4-imap php7.4-intl php7.4-json php7.4-mbstring php7.4-mcrypt php7.4-mysql php7.4-opcache php7.4-readline php7.4-soap php7.4-xml php7.4-zip -y
 
+apt-get install php7.4-bcmath -y
 
 pear install Auth_SASL Net_SMTP Net_IDNA2-0.1.1 Mail_mime Mail_mimeDecode
 

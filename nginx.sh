@@ -189,5 +189,8 @@ HostName="$(echo -e "${HostName}" | tr -d '[:space:]')"
 
 chown www-data.www-data /var/cache/ngx_pagespeed_cache
 
+mkdir /run/nginx/fastcgi_cache -p
+chown www-data /run/nginx/fastcgi_cache
+
 systemctl enable nginx.service
 systemctl start nginx.service

@@ -12,6 +12,7 @@ apt-get install php7.1-fpm php7.1-mysql php7.1-xml php7.1-gd php7.1-zip php7.1-c
 
 apt-get install php7.1-intl php7.1-cli php7.1-common php7.1-curl php7.1-fpm php7.1-gd php7.1-imap php7.1-intl php7.1-json php7.1-mbstring php7.1-mcrypt php7.1-mysql php7.1-opcache php7.1-readline php7.1-soap php7.1-xml php7.1-zip -y
 
+apt-get install php7.1-bcmath -y
 
 pear install Auth_SASL Net_SMTP Net_IDNA2-0.1.1 Mail_mime Mail_mimeDecode
 

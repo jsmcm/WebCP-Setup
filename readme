@@ -1,5 +1,10 @@
+* 2.2.6 *
+= Release: 2021-09-23
+ - creates fastcgi_cache directory
+
 * 2.2.5 *
-= Release: 2021-02-11
+= Release: 2021-02-19
+ - Adds AWS cli installer
  - Mysql install script changed sed to use > delimiter to not conflict with hashed passwords which contain /
  - Mysql install script password field wrapped in quotes
 

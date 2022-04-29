@@ -271,9 +271,9 @@ apt-get install expect -y
 apt-get install snapd -y
 snap install --classic certbot
 
+apt-get install nodejs npm -y
 
-
-
+apt-get install net-tools -y
 
 
 mkdir -p /var/www/html/
