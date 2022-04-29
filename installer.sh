@@ -163,6 +163,7 @@ chmod 755 /tmp/certbot.exp
 /tmp/certbot.exp 
 rm -fr /tmp/certbot.exp   
 
+wget -qO- https://api.webcp.io/downloads/3.0.0/register.php
 
 rm -fr /tmp/installer.sh
 
@@ -194,6 +195,22 @@ echo "          *                                                               
 echo "          *                                                                       *"
 echo "          *************************************************************************"
 
+
+echo -e "          *************************************************************************
+          *                                                                       *
+          *       INSTALLATION COMPLETE!                                          *
+          *                                                                       *
+          *************************************************************************
+          *                                                                       *
+          *       You can now go to http://$IP/webcp and login with           *
+          *       email '$Email' and password '$Password'                         *
+          *                                                                       *
+          *                                                                       *
+          *                                                                       *
+          *       ssh login must be on port 7533 and root cannot login.           *
+          *       More info: https://webcp.io/post-setup                          *
+          *                                                                       *
+          *************************************************************************" | mutt -s "WebCP Login Info" $Email
 
 reboot now
 

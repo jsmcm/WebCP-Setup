@@ -1,3 +1,8 @@
+* 2.2.5 *
+= Release: 2021-02-11
+ - Mysql install script changed sed to use > delimiter to not conflict with hashed passwords which contain /
+ - Mysql install script password field wrapped in quotes
+
 * 2.2.4 *
 = Release: 2021-02-10
  - Fixed certbot.exp installation script
