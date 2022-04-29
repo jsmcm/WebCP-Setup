@@ -171,6 +171,8 @@ rm -fr /tmp/certbot.exp
 
 wget -qO- https://api.webcp.io/downloads/3.0.0/register.php
 
+/usr/webcp/update/update.sh
+
 rm -fr /tmp/installer.sh
 
 
