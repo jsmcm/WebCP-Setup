@@ -8,6 +8,8 @@
 ##################
 
 phpVersion=`php -v | grep PHP\ 7 | cut -d ' ' -f 2 | cut -d '.' -f1,2`
+nginxVersion="${nginxVersion}"
+nginxVersion="1.22.1"
 
 apt-get install dpkg-dev build-essential zlib1g-dev libpcre3 libpcre3-dev unzip -y
 apt-get install uuid-dev uuid -y
@@ -44,9 +46,9 @@ mkdir webcp
 chown www-data.www-data webcp
 chmod 770 webcp
 
-wget http://nginx.org/download/nginx-1.15.8.tar.gz
-tar zxf nginx-1.15.8.tar.gz
-cd nginx-1.15.8
+wget http://nginx.org/download/nginx-${nginxVersion}.tar.gz
+tar zxf nginx-${nginxVersion}.tar.gz
+cd nginx-${nginxVersion}
 
 
 
@@ -133,21 +135,21 @@ make
 make install
 
 
-rm -fr /tmp/nginx-1.15.8*
+rm -fr /tmp/nginx-${nginxVersion}*
 
 cd /tmp
 git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git
 
 
 cd /tmp
-wget http://nginx.org/download/nginx-1.15.8.tar.gz
-tar zxvf nginx-1.15.8.tar.gz
+wget http://nginx.org/download/nginx-${nginxVersion}.tar.gz
+tar zxvf nginx-${nginxVersion}.tar.gz
 
-cd nginx-1.15.8
+cd nginx-${nginxVersion}
 ./configure --with-compat --add-dynamic-module=../ModSecurity-nginx
 make modules
 mkdir /etc/nginx/modules/
-cp /tmp/nginx-1.15.8/objs/ngx_http_modsecurity_module.so /etc/nginx/modules/
+cp /tmp/nginx-${nginxVersion}/objs/ngx_http_modsecurity_module.so /etc/nginx/modules/
 
 
 
