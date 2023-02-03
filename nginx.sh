@@ -7,7 +7,7 @@
 #
 ##################
 
-phpVersion=`php -v | grep PHP\ 7 | cut -d ' ' -f 2 | cut -d '.' -f1,2`
+phpVersion=`php -v | grep PHP\ [78] | cut -d ' ' -f 2 | cut -d '.' -f1,2`
 nginxVersion="${nginxVersion}"
 nginxVersion="1.22.1"
 

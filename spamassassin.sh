@@ -1,5 +1,7 @@
 #!/bin/bash
 
+apt-get install spamassassin -y
+
 export PERL_MM_USE_DEFAULT=1
 perl -MCPAN -e 'install Mail::SpamAssassin'
 perl -MCPAN -e 'install Mail::SpamAssassin::Plugin'
@@ -7,7 +9,7 @@ perl -MCPAN -e 'install Mail::SpamAssassin::Plugin::Shortcircuit'
 perl -MCPAN -e 'install Mail::SpamAssassin::Conf'
 
 apt-get install spamassassin -y
-
+apt-get update
 
 mkdir -p /etc/mail/spamassassin
 cd /etc/mail/spamassassin
