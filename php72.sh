@@ -25,7 +25,7 @@ pear install Auth_SASL Net_SMTP Net_IDNA2-0.1.1 Mail_mime Mail_mimeDecode
 echo "[PHP]" > /etc/php/7.2/fpm/php.ini 
 echo "engine = On" >> /etc/php/7.2/fpm/php.ini 
 echo "expose_php = Off" >> /etc/php/7.2/fpm/php.ini 
-echo "zend_extension = /etc/php/7.2/ioncube_loader_lin_7.2.so" >> /etc/php/7.2/fpm/php.ini 
+#echo "zend_extension = /etc/php/7.2/ioncube_loader_lin_7.2.so" >> /etc/php/7.2/fpm/php.ini 
 echo "max_execution_time = 5" >> /etc/php/7.2/fpm/php.ini 
 echo "memory_limit = -1" >> /etc/php/7.2/fpm/php.ini 
 echo "error_reporting = E_ALL & ~E_DEPRECATED" >> /etc/php/7.2/fpm/php.ini 

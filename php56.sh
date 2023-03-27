@@ -26,7 +26,7 @@ apt-get install php5.6-mcrypt php5.6-opcache php5.6-auth -y
 echo "[PHP]" > /etc/php/5.6/fpm/php.ini 
 echo "engine = On" >> /etc/php/5.6/fpm/php.ini 
 echo "expose_php = Off" >> /etc/php/5.6/fpm/php.ini 
-echo "zend_extension = /etc/php/5.6/ioncube_loader_lin_5.6.so" >> /etc/php/5.6/fpm/php.ini 
+#echo "zend_extension = /etc/php/5.6/ioncube_loader_lin_5.6.so" >> /etc/php/5.6/fpm/php.ini 
 echo "max_execution_time = 5" >> /etc/php/5.6/fpm/php.ini 
 echo "memory_limit = -1" >> /etc/php/5.6/fpm/php.ini 
 echo "error_reporting = E_ALL & ~E_DEPRECATED" >> /etc/php/5.6/fpm/php.ini 

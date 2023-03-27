@@ -31,16 +31,16 @@ Password=`/usr/webcp/get_password.sh`
 Email=`cat /tmp/email.webcp`
 
 
-wget https://api.webcp.io/downloads/3.0.0/setup/php56.sh
-chmod 755 /tmp/php56.sh
-/tmp/php56.sh
-rm -fr /tmp/php56.sh
+#wget https://api.webcp.io/downloads/3.0.0/setup/php56.sh
+#chmod 755 /tmp/php56.sh
+#/tmp/php56.sh
+#rm -fr /tmp/php56.sh
 
 
-wget https://api.webcp.io/downloads/3.0.0/setup/php71.sh
-chmod 755 /tmp/php71.sh
-/tmp/php71.sh
-rm -fr /tmp/php71.sh
+#wget https://api.webcp.io/downloads/3.0.0/setup/php71.sh
+#chmod 755 /tmp/php71.sh
+#/tmp/php71.sh
+#rm -fr /tmp/php71.sh
 
 
 wget https://api.webcp.io/downloads/3.0.0/setup/php72.sh

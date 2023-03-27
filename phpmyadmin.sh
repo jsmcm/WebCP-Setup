@@ -1,7 +1,5 @@
 #!/bin/bash
 
-apt-get install composer -y
-
 
 cd /var/www/html/
 composer create-project phpmyadmin/phpmyadmin
