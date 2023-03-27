@@ -2,7 +2,7 @@
 
 mkdir -p /var/www/html/webcp
 cd /var/www/html/webcp
-git clone https://bitbucket.org/webcp/webcp.git ./
+git clone https://github.com/jsmcm/WebCP.git ./
 chown www-data.www-data /var/www/html/webcp -R
 
 
