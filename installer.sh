@@ -55,6 +55,18 @@ chmod 755 /tmp/php74.sh
 rm -fr /tmp/php74.sh
 
 
+wget https://api.webcp.io/downloads/3.0.0/setup/php81.sh
+chmod 755 /tmp/php81.sh
+/tmp/php81.sh
+rm -fr /tmp/php81.sh
+
+
+wget https://api.webcp.io/downloads/3.0.0/setup/php82.sh
+chmod 755 /tmp/php82.sh
+/tmp/php82.sh
+rm -fr /tmp/php82.sh
+
+
 wget https://api.webcp.io/downloads/3.0.0/setup/nginx.sh
 wget https://api.webcp.io/downloads/3.0.0/setup/nginx_conf.sh
 chmod 755 /tmp/nginx.sh
