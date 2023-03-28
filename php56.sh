@@ -59,7 +59,7 @@ echo "opcache.fast_shutdown=1" >> /etc/php/5.6/fpm/php.ini
 
 echo "[PHP]" > /etc/php/5.6/cli/php.ini
 echo "engine = On" >> /etc/php/5.6/cli/php.ini
-echo "zend_extension = /etc/php/5.6/ioncube_loader_lin_5.6.so" >> /etc/php/5.6/cli/php.ini
+#echo "zend_extension = /etc/php/5.6/ioncube_loader_lin_5.6.so" >> /etc/php/5.6/cli/php.ini
 echo "zlib.output_compression = Off" >> /etc/php/5.6/cli/php.ini
 echo "implicit_flush = Off" >> /etc/php/5.6/cli/php.ini
 echo "unserialize_callback_func =" >> /etc/php/5.6/cli/php.ini
